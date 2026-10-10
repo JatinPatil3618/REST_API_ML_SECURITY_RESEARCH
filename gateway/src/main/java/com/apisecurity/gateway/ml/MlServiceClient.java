@@ -32,10 +32,6 @@ public class MlServiceClient {
         } else {
             payload.put("atrdf_features", features);
         }
-        if (features != null && features.containsKey("test_case_id")) {
-            payload.put("test_case_id", features.get("test_case_id"));
-        }
-
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -55,8 +51,11 @@ public class MlServiceClient {
             return fallback;
         }
 
-        Map<String, Object> empty = new HashMap<>();
-        empty.put("decision", "ALLOW");
-        return empty;
+        Map<String, Object> errorResp = new HashMap<>();
+        errorResp.put("request_id", requestId);
+        errorResp.put("error", "ML service returned non-2xx or empty response");
+        errorResp.put("decision", "ALERT");
+        errorResp.put("mitigation", "ALERT (ML Unavailable Fail-Safe)");
+        return errorResp;
     }
 }

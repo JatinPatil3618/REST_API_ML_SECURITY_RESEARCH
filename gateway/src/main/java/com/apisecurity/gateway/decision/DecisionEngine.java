@@ -52,6 +52,26 @@ public class DecisionEngine {
         String mitigation = (String) mlResult.getOrDefault("mitigation", "ALLOW");
         String predictedClass = (String) mlResult.getOrDefault("predicted_class", "NORMAL");
 
+        double confidence = 0.0;
+        if (mlResult.get("confidence") instanceof Number) {
+            confidence = ((Number) mlResult.get("confidence")).doubleValue();
+        } else if (mlResult.get("multiclass_detection") instanceof Map) {
+            Map<?, ?> mDet = (Map<?, ?>) mlResult.get("multiclass_detection");
+            if (mDet.get("confidence") instanceof Number) {
+                confidence = ((Number) mDet.get("confidence")).doubleValue();
+            }
+        } else if (mlResult.get("binary_detection") instanceof Map) {
+            Map<?, ?> binDet = (Map<?, ?>) mlResult.get("binary_detection");
+            if (binDet.get("confidence") instanceof Number) {
+                confidence = ((Number) binDet.get("confidence")).doubleValue();
+            }
+        } else if (mlResult.get("detection") instanceof Map) {
+            Map<?, ?> det = (Map<?, ?>) mlResult.get("detection");
+            if (det.get("confidence") instanceof Number) {
+                confidence = ((Number) det.get("confidence")).doubleValue();
+            }
+        }
+
         if ("BLOCK".equalsIgnoreCase(decision)) {
             String userMsg;
             int status = 403;
@@ -91,7 +111,7 @@ public class DecisionEngine {
                 "BLOCK",
                 attackFamily,
                 predictedClass,
-                0.95,
+                confidence,
                 mitigation,
                 userMsg,
                 status
@@ -100,10 +120,10 @@ public class DecisionEngine {
 
         return new SecurityDecision(
             "ALLOW",
-            "BENIGN",
-            "BENIGN",
-            0.99,
-            "ALLOW",
+            attackFamily,
+            predictedClass,
+            confidence,
+            mitigation,
             "Request allowed",
             200
         );

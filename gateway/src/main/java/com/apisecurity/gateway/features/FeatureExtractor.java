@@ -78,13 +78,13 @@ public class FeatureExtractor {
         // 1. url_entropy
         features.put("url_entropy", calculateShannonEntropy(fullUrl));
 
-        // 2. header_count (Filter non-standard browser client hints and normalize to training distribution)
+        // 2. header_count (Filter non-standard browser client hints, test harness metadata, and normalize to training distribution)
         int headerCount = 0;
         Enumeration<String> headerNames = request.getHeaderNames();
         if (headerNames != null) {
             while (headerNames.hasMoreElements()) {
                 String h = headerNames.nextElement().toLowerCase();
-                if (!h.startsWith("sec-ch-") && !h.startsWith("sec-fetch-")) {
+                if (!h.startsWith("sec-ch-") && !h.startsWith("sec-fetch-") && !h.startsWith("x-test-") && !h.startsWith("x-experiment-") && !h.equals("x-ground-truth")) {
                     headerCount++;
                 }
             }

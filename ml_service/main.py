@@ -121,7 +121,6 @@ class BolaFeaturePayload(BaseModel):
 class UnifiedPredictRequest(BaseModel):
     detection_mode: str = "ATRDF" # "ATRDF" or "BOLA"
     request_id: Optional[str] = None
-    test_case_id: Optional[str] = None
     atrdf_features: Optional[AtrdfFeaturePayload] = None
     bola_features: Optional[BolaFeaturePayload] = None
 
@@ -147,8 +146,9 @@ def root():
 
 @app.get("/health")
 def health():
+    all_ready = "atrdf_binary" in MODELS and "atrdf_multiclass" in MODELS and "bola_rf" in MODELS
     return {
-        "status": "PASS",
+        "status": "PASS" if all_ready else "DEGRADED",
         "service": "ml_service",
         "models_loaded": list(MODELS.keys()),
         "timestamp": time.time()
@@ -290,10 +290,9 @@ def unified_predict(req: UnifiedPredictRequest):
       BOLA  -> predict_bola()
       ATRDF -> predict_atrdf_binary(); if MALICIOUS, predict_atrdf_multiclass()
 
-    test_case_id is accepted in the schema so the gateway can include it for
-    telemetry correlation, but it has NO influence on the prediction path,
-    feature vector, threshold or decision.  All predictions come exclusively
-    from the trained model's predict_proba() output.
+    All predictions come strictly and exclusively from the trained model's
+    genuine predict_proba() output. Caller metadata or test IDs cannot influence
+    the feature vector, inference, probabilities, threshold, or decision.
     """
     t_start = time.time()
 
@@ -306,6 +305,8 @@ def unified_predict(req: UnifiedPredictRequest):
         return {
             "request_id": req.request_id,
             "attack_family": "BOLA",
+            "predicted_class": res["prediction"],
+            "confidence": res["confidence"],
             "decision": action,
             "mitigation": "BLOCK + authorization" if action == "BLOCK" else "ALLOW",
             "detection": res
@@ -336,6 +337,7 @@ def unified_predict(req: UnifiedPredictRequest):
             "request_id": req.request_id,
             "attack_family": "ATRDF",
             "predicted_class": attack_class,
+            "confidence": multi_res["confidence"],
             "decision": "BLOCK",
             "mitigation": mitigation_text,
             "binary_detection": bin_res,
@@ -347,6 +349,7 @@ def unified_predict(req: UnifiedPredictRequest):
             "request_id": req.request_id,
             "attack_family": "BENIGN",
             "predicted_class": "BENIGN",
+            "confidence": bin_res["confidence"],
             "decision": "ALLOW",
             "mitigation": "ALLOW",
             "binary_detection": bin_res,

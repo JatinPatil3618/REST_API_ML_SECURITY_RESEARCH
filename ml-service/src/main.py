@@ -373,12 +373,13 @@ async def predict_bola(features: BOLAFeatures, request_id: Optional[str] = None)
 
 @app.post("/predict", response_model=PredictionResponse)
 async def predict_unified(req: UnifiedPredictRequest):
-    if req.detection_mode == 'bola':
+    mode = req.detection_mode.lower()
+    if mode == 'bola':
         if not req.bola_features:
             raise HTTPException(400, detail="bola_features required for BOLA detection")
         return await predict_bola(req.bola_features, req.request_id)
 
-    elif req.detection_mode == 'atrdf':
+    elif mode == 'atrdf':
         if not req.atrdf_features:
             raise HTTPException(400, detail="atrdf_features required for ATRDF detection")
         # Two-stage: binary first, then multiclass if malicious

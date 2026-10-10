@@ -142,8 +142,36 @@ public class SecurityGatewayFilter implements Filter {
         event.totalGatewayLatencyMs = totalLatencyMs;
         event.modelName = isBolaCandidate ? "bola_rf_behavioral" : "atrdf_binary_rf_request_only";
         event.modelVersion = "1.0.0";
-        event.groundTruth = testCaseId;
+        event.groundTruth = null; // Ground truth belongs to external test evaluation manifests only
         event.backendReached = "ALLOW".equalsIgnoreCase(decision.action);
+
+        if (mlResult != null) {
+            if (mlResult.get("multiclass_detection") instanceof Map) {
+                Map<?, ?> mDet = (Map<?, ?>) mlResult.get("multiclass_detection");
+                if (mDet.get("probabilities") instanceof Map) {
+                    event.probabilities = (Map<String, Double>) mDet.get("probabilities");
+                }
+                if (mDet.get("top_predictive_features") instanceof List) {
+                    event.topPredictiveFeatures = (List<String>) mDet.get("top_predictive_features");
+                }
+            } else if (mlResult.get("binary_detection") instanceof Map) {
+                Map<?, ?> bDet = (Map<?, ?>) mlResult.get("binary_detection");
+                if (bDet.get("probabilities") instanceof Map) {
+                    event.probabilities = (Map<String, Double>) bDet.get("probabilities");
+                }
+                if (bDet.get("top_predictive_features") instanceof List) {
+                    event.topPredictiveFeatures = (List<String>) bDet.get("top_predictive_features");
+                }
+            } else if (mlResult.get("detection") instanceof Map) {
+                Map<?, ?> det = (Map<?, ?>) mlResult.get("detection");
+                if (det.get("probabilities") instanceof Map) {
+                    event.probabilities = (Map<String, Double>) det.get("probabilities");
+                }
+                if (det.get("top_predictive_features") instanceof List) {
+                    event.topPredictiveFeatures = (List<String>) det.get("top_predictive_features");
+                }
+            }
+        }
 
         telemetryService.recordEvent(event);
 

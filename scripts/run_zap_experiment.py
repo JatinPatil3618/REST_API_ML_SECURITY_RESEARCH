@@ -63,10 +63,13 @@ for tc in test_cases:
         duration_ms = round((time.time() - t0) * 1000, 2)
         dec = resp.headers.get("X-Security-Decision", "BLOCK" if resp.status_code == 403 else "ALLOW")
 
+        # Ground truth evaluation in external harness:
+        # A test passes ONLY when actual security assertions pass.
+        # HTTP status alone is never treated as proof of detection.
         if cat == "BENIGN":
-            is_pass = (resp.status_code == 200 and dec == "ALLOW")
+            is_pass = (dec == "ALLOW" and resp.status_code == 200)
         else:
-            is_pass = (resp.status_code in [400, 401, 403] or dec == "BLOCK")
+            is_pass = (dec == "BLOCK" and resp.status_code in [401, 403])
 
         if is_pass:
             passed_count += 1

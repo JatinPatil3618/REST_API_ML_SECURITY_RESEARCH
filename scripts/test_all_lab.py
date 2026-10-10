@@ -68,19 +68,39 @@ LAB_TEST_CASES = [
 ]
 
 print("Testing all 9 Security Lab cases against live Gateway:")
+passed = 0
+failed = 0
 for tc in LAB_TEST_CASES:
     headers = tc['headers'].copy()
     headers['X-Test-Case-Id'] = tc['id']
     headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
     
-    if tc['method'] == 'GET':
-        r = requests.get(tc['url'], headers=headers)
-    elif tc['method'] == 'POST':
-        r = requests.post(tc['url'], headers=headers, json=tc['body'])
-    elif tc['method'] == 'PUT':
-        r = requests.put(tc['url'], headers=headers, json=tc['body'])
+    try:
+        if tc['method'] == 'GET':
+            r = requests.get(tc['url'], headers=headers, timeout=5)
+        elif tc['method'] == 'POST':
+            r = requests.post(tc['url'], headers=headers, json=tc['body'], timeout=5)
+        elif tc['method'] == 'PUT':
+            r = requests.put(tc['url'], headers=headers, json=tc['body'], timeout=5)
+            
+        sec_dec = r.headers.get('X-Security-Decision', 'None')
+        sec_fam = r.headers.get('X-Attack-Family', 'None')
+        mit = r.headers.get('X-Mitigation-Action', 'None')
         
-    sec_dec = r.headers.get('X-Security-Decision', 'None')
-    sec_fam = r.headers.get('X-Attack-Family', 'None')
-    mit = r.headers.get('X-Mitigation-Action', 'None')
-    print(f"{tc['id']:15} Status: {r.status_code:3} Dec: {sec_dec:5} Fam: {sec_fam:10} Mit: {mit}")
+        expected_dec = "ALLOW" if tc['id'].startswith("NORMAL") else "BLOCK"
+        if expected_dec == "ALLOW":
+            is_pass = (sec_dec == "ALLOW" and r.status_code == 200)
+        else:
+            is_pass = (sec_dec == "BLOCK" and r.status_code in [401, 403])
+            
+        status_str = "PASS" if is_pass else "FAIL"
+        if is_pass:
+            passed += 1
+        else:
+            failed += 1
+        print(f"{tc['id']:15} Status: {r.status_code:3} Dec: {sec_dec:5} Fam: {sec_fam:10} Mit: {mit} Result: {status_str}")
+    except Exception as e:
+        failed += 1
+        print(f"{tc['id']:15} Error: {e} Result: FAIL")
+
+print(f"\nTotal: {passed + failed}, Passed: {passed}, Failed: {failed}")
