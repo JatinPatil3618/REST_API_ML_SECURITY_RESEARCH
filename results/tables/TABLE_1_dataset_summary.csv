@@ -1,0 +1,3 @@
+Dataset,Total Records,Partitions,Classes,Duplicate Groups,Missing Values,Scope
+ATRDF Dataset 4 (Payload),182767,"Train: 146,213 | Test: 36,554",8,92861,0,Input/Payload Manipulation
+VAmPI (BOLA Behavioral),50000,Sessions: 5750 (80/10/10),2,0,0,Object-Level Access Control

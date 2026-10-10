@@ -1,0 +1,7 @@
+Feature Set,Feature Count,Model,Accuracy,Macro F1,Precision,Recall,Inference Latency (ms/req)
+FULL_25,25,Random Forest,0.9869,0.9801,1.0,0.939,0.0026
+FULL_25,25,Logistic Regression,0.9616,0.9402,0.974,0.8442,0.0
+REDUCED_18,18,Random Forest,0.9868,0.9801,1.0,0.9389,0.0032
+REDUCED_18,18,Logistic Regression,0.9378,0.8995,0.957,0.7444,0.0004
+REQUEST_ONLY_13,13,Random Forest,0.9869,0.9801,1.0,0.939,0.0022
+REQUEST_ONLY_13,13,Logistic Regression,0.9377,0.8993,0.9562,0.7445,0.0

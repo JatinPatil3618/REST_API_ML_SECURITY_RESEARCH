@@ -1,0 +1,15 @@
+[
+  "url_entropy",
+  "header_count",
+  "path_length",
+  "url_special_count",
+  "url_length",
+  "path_segment_count",
+  "cookie_present",
+  "query_length",
+  "url_digit_count",
+  "user_agent_entropy",
+  "query_parameter_count",
+  "request_body_entropy",
+  "request_body_digit_count"
+]

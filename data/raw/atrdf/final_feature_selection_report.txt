@@ -1,0 +1,58 @@
+ATRDF Dataset 4 - Final Feature Selection Report
+======================================================================
+
+Total records: 182,767
+Initial features: 28
+Constant features: 3
+Full usable features: 25
+Correlation-reduced features: 18
+Request-only features: 13
+
+Constant features removed:
+- request_body_special_count
+- authorization_present
+- content_type_present
+
+Correlation-reduced features:
+1. url_entropy
+2. header_count
+3. path_length
+4. url_special_count
+5. url_length
+6. response_body_entropy
+7. response_body_length
+8. path_segment_count
+9. cookie_present
+10. query_length
+11. response_status_code
+12. url_digit_count
+13. user_agent_entropy
+14. response_is_3xx
+15. query_parameter_count
+16. request_body_entropy
+17. request_body_digit_count
+18. response_is_5xx
+
+Redundant features removed by correlation rule:
+- combined_request_entropy (correlated with url_entropy, r=0.9592)
+- combined_request_length (correlated with url_length, r=0.9637)
+- decoded_url_length (correlated with url_entropy, r=0.9017)
+- user_agent_length (correlated with user_agent_entropy, r=0.9631)
+- request_body_length (correlated with request_body_entropy, r=0.9776)
+- response_is_2xx (correlated with response_status_code, r=-0.9780)
+- response_is_4xx (correlated with response_status_code, r=0.9740)
+
+Request-only features:
+1. url_entropy
+2. header_count
+3. path_length
+4. url_special_count
+5. url_length
+6. path_segment_count
+7. cookie_present
+8. query_length
+9. url_digit_count
+10. user_agent_entropy
+11. query_parameter_count
+12. request_body_entropy
+13. request_body_digit_count

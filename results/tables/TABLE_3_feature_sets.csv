@@ -1,0 +1,5 @@
+Feature Set,Target Pipeline,Count,Includes Response Data,Description
+REQUEST_ONLY_13,ATRDF Live Gateway,13,No (Pre-Response Safe),"Syntactic character-level entropy and token statistics from URL, headers, and request body"
+REDUCED_18,ATRDF Offline Ablation,18,Yes,Full set pruned of collinear variables (|r| > 0.90)
+FULL_25,ATRDF Offline Comparison,25,Yes,All unpruned syntactic request and response status/entropy attributes
+BOLA_BEHAVIORAL_14,BOLA Session Engine,14,No (Sequential Behavioral),"Rolling window W=10 session stats, switch rates, ownership ratios, and burst timing"

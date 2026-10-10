@@ -1,0 +1,8 @@
+Attack Class,Precision,Recall,F1-Score,Support
+Cookie Injection,1.0,1.0,1.0,1548
+Directory Traversal,1.0,1.0,1.0,788
+LOG4J,1.0,1.0,1.0,747
+Log Forging,1.0,1.0,1.0,807
+RCE,1.0,1.0,1.0,789
+SQL Injection,1.0,1.0,1.0,1585
+XSS,1.0,1.0,1.0,1603

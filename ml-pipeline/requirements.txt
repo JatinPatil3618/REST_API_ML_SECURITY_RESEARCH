@@ -1,0 +1,14 @@
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.5.1
+joblib==1.4.2
+matplotlib==3.9.1
+seaborn==0.13.2
+fastapi==0.111.0
+uvicorn==0.30.1
+pydantic==2.8.2
+python-dotenv==1.0.1
+pymongo==4.8.0
+requests==2.32.3
+scipy==1.14.0
+imbalanced-learn==0.12.3

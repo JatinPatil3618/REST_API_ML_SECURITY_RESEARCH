@@ -1,0 +1,8 @@
+Held-out Attack,Accuracy,Precision,Recall,F1,Test Samples,Held-Out Attack Count
+XSS,0.9999,1.0,0.9981,0.9991,30290,1603
+SQL Injection,0.9998,1.0,0.9968,0.9984,30272,1585
+Cookie Injection,1.0,1.0,1.0,1.0,30235,1548
+Log Forging,1.0,1.0,0.9988,0.9994,29494,807
+RCE,0.9999,1.0,0.9975,0.9987,29476,789
+Directory Traversal,1.0,1.0,1.0,1.0,29475,788
+LOG4J,0.9785,1.0,0.1513,0.2628,29434,747

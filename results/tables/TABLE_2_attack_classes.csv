@@ -1,0 +1,11 @@
+Dataset,Class Name,Mechanism,Sample Count,Proportion (%)
+ATRDF,Benign,Legitimate Traffic,143431,78.48
+ATRDF,XSS,Input Manipulation,8017,4.39
+ATRDF,SQL Injection,Input Manipulation,7924,4.34
+ATRDF,Cookie Injection,Input Manipulation,7742,4.24
+ATRDF,Log Forging,Input Manipulation,4037,2.21
+ATRDF,RCE,Input Manipulation,3944,2.16
+ATRDF,Directory Traversal,Input Manipulation,3939,2.16
+ATRDF,LOG4J,Input Manipulation,3733,2.04
+VAmPI,NORMAL,Legitimate Session,25000,50.0
+VAmPI,BOLA,Access Control,25000,50.0

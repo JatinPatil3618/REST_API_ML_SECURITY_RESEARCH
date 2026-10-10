@@ -1,0 +1,28 @@
+{
+  "experiment_id": "EXP-2026-FINAL",
+  "timestamp": "2026-10-08T16:52:45.810731",
+  "random_seed": 42,
+  "atrdf_binary_f1": 0.9686,
+  "atrdf_multiclass_macro_f1": 1.0,
+  "bola_f1": 1.0,
+  "table_outputs": [
+    "TABLE_1_dataset_summary.csv",
+    "TABLE_2_attack_classes.csv",
+    "TABLE_3_feature_sets.csv",
+    "TABLE_4_binary_classification.csv",
+    "TABLE_5_multiclass_classification.csv",
+    "TABLE_5b_per_class_metrics.csv",
+    "TABLE_6_bola_classification.csv",
+    "TABLE_7_ablation.csv",
+    "TABLE_8_unseen_attacks.csv"
+  ],
+  "figure_outputs": [
+    "fig1_atrdf_binary_confusion_matrix.png",
+    "fig2_atrdf_multiclass_confusion_matrix.png",
+    "fig3_bola_confusion_matrix.png",
+    "fig4_feature_importance_atrdf.png",
+    "fig5_feature_importance_bola.png",
+    "fig6_ablation_comparison.png",
+    "fig7_unseen_attack_generalization.png"
+  ]
+}

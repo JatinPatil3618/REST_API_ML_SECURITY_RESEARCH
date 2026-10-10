@@ -1,0 +1,14 @@
+Feature,Importance,Rank,Importance Score
+path_length,0.20888654151314248,1,0.2089
+url_special_count,0.13890018881685828,2,0.1389
+path_segment_count,0.1332052836019012,3,0.1332
+url_entropy,0.11753348355393241,4,0.1175
+url_length,0.10711794876797136,5,0.1071
+cookie_present,0.09367022433519141,6,0.0937
+header_count,0.07323887463267148,7,0.0732
+query_length,0.06569067789661781,8,0.0657
+url_digit_count,0.03486404790068234,9,0.0349
+query_parameter_count,0.02677898734579156,10,0.0268
+user_agent_entropy,0.0001137416352397381,11,0.0001
+request_body_entropy,0.0,12,0.0
+request_body_digit_count,0.0,13,0.0

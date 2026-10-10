@@ -1,0 +1,58 @@
+{
+  "model_name": "ATRDF Request-Only Security Detector",
+  "model_version": "1.0.0",
+  "algorithms": {
+    "binary_primary": "RandomForestClassifier(n_estimators=100, max_depth=16)",
+    "binary_baseline": "LogisticRegression(max_iter=1000)",
+    "multiclass_primary": "RandomForestClassifier(n_estimators=100, max_depth=16)",
+    "multiclass_baseline": "LogisticRegression(max_iter=1000)"
+  },
+  "features": [
+    "url_entropy",
+    "header_count",
+    "path_length",
+    "url_special_count",
+    "url_length",
+    "path_segment_count",
+    "cookie_present",
+    "query_length",
+    "url_digit_count",
+    "user_agent_entropy",
+    "query_parameter_count",
+    "request_body_entropy",
+    "request_body_digit_count"
+  ],
+  "feature_count": 13,
+  "classes_multiclass": [
+    "Cookie Injection",
+    "Directory Traversal",
+    "LOG4J",
+    "Log Forging",
+    "RCE",
+    "SQL Injection",
+    "XSS"
+  ],
+  "optimal_threshold": 0.50,
+  "dataset_version": "ATRDF Dataset 4 (182,767 records)",
+  "training_samples": 124241,
+  "validation_samples": 21972,
+  "test_samples": 36554,
+  "random_seed": 42,
+  "training_date": "2026-10-08T16:52:39.455598",
+  "python_version": "3.11.7",
+  "scikit_learn_version": "1.2.0",
+  "test_metrics": {
+    "binary_rf": {
+      "accuracy": 0.9869,
+      "precision": 1.0,
+      "recall": 0.9391,
+      "f1": 0.9686,
+      "roc_auc": 0.9796,
+      "pr_auc": 0.9703
+    },
+    "multiclass_rf": {
+      "accuracy": 1.0,
+      "macro_f1": 1.0
+    }
+  }
+}

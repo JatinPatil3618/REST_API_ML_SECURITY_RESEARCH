@@ -1,0 +1,8 @@
+feature,reason,correlated_with,correlation,common_rank
+combined_request_entropy,High correlation,url_entropy,0.9591876279033097,2
+combined_request_length,High correlation,url_length,0.9636518216749216,8
+decoded_url_length,High correlation,url_entropy,0.9017051782714613,9
+user_agent_length,High correlation,user_agent_entropy,0.9631382568030379,17
+request_body_length,High correlation,request_body_entropy,0.9776391457614988,21
+response_is_2xx,High correlation,response_status_code,-0.9779737415185548,22
+response_is_4xx,High correlation,response_status_code,0.9740007608324762,23

@@ -1,0 +1,48 @@
+{
+  "model_name": "BOLA Behavioral Session Detector",
+  "model_version": "1.0.0",
+  "algorithms": {
+    "primary": "RandomForestClassifier(n_estimators=100, max_depth=12)",
+    "baseline": "LogisticRegression(max_iter=1000)"
+  },
+  "features": [
+    "request_frequency",
+    "unique_objects_recent",
+    "object_switch",
+    "unique_owners_recent",
+    "owner_switch",
+    "cross_owner_count_recent",
+    "cross_owner_ratio_recent",
+    "same_owner_ratio_recent",
+    "same_object_repeat_ratio",
+    "time_since_previous_request",
+    "request_burst_rate",
+    "hour",
+    "session_length",
+    "request_index"
+  ],
+  "feature_count": 14,
+  "window_size": 10,
+  "classes": [
+    "NORMAL",
+    "BOLA"
+  ],
+  "dataset_version": "VAmPI v6.2 (50,000 records, 5,750 sessions)",
+  "splitting_method": "Strict Session-Level Grouping (80/10/10)",
+  "training_samples": 40010,
+  "validation_samples": 5030,
+  "test_samples": 4960,
+  "training_sessions": 4600,
+  "test_sessions": 575,
+  "random_seed": 42,
+  "training_date": "2026-10-08T16:52:39.571243",
+  "python_version": "3.11.7",
+  "test_metrics": {
+    "random_forest": {
+      "accuracy": 1.0,
+      "bola_f1": 1.0,
+      "normal_f1": 1.0,
+      "roc_auc": 1.0
+    }
+  }
+}
