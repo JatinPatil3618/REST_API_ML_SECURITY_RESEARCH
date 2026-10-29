@@ -1,692 +1,420 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from "react";
+import {
+  GATEWAY_URL, PAGE_SIZE, classCounts, hasRule, loadTelemetry, maliciousProbability,
+  matchesFilters, probe, sortEvents, summarize, trafficSource
+} from "./telemetry";
+import {
+  activeRules, historicalBola, historicalFamilies, modelComparison,
+  references, ruleOnlyExamples, scopedValidation
+} from "./evidence";
 
-const GATEWAY_URL = 'http://localhost:8080';
-const ML_URL = 'http://localhost:8000';
+const PAGES = [
+  ["overview", "Research Overview"],
+  ["live", "Live Telemetry"],
+  ["timeline", "Attack Timeline"],
+  ["atrdf", "ATRDF Detection & Mitigation"],
+  ["bola", "BOLA Detection & Authorization"],
+  ["zap", "OWASP ZAP Verification"],
+  ["models", "Model Comparison"],
+  ["health", "System Health & Reproducibility"]
+];
+
+const EMPTY_FILTERS = { window: "all", family: "all", decision: "all", ml: "all", source: "all", q: "" };
+
+function formatWhen(value) {
+  const time = Date.parse(value);
+  if (Number.isNaN(time)) return "Unavailable";
+  return new Date(time).toLocaleString();
+}
+
+function percent(value) {
+  return value === null || value === undefined ? "Unavailable" : `${(value * 100).toFixed(1)}%`;
+}
+
+function Badge({ value }) {
+  const name = (value || "unavailable").toLowerCase();
+  const tone = name === "block" ? "block" : name === "alert" ? "alert" : "allow";
+  return <span className={`badge ${tone}`}>{value || "Unavailable"}</span>;
+}
+
+function Filters({ filters, setFilters, families }) {
+  return (
+    <div className="filters">
+      <label>Time window
+        <select value={filters.window} onChange={(e) => setFilters({ ...filters, window: e.target.value })}>
+          <option value="all">Current buffer</option>
+          <option value="15m">Last 15 minutes</option>
+          <option value="1h">Last hour</option>
+          <option value="6h">Last 6 hours</option>
+          <option value="24h">Last 24 hours</option>
+        </select>
+      </label>
+      <label>Family
+        <select value={filters.family} onChange={(e) => setFilters({ ...filters, family: e.target.value })}>
+          <option value="all">All</option>
+          {families.map((name) => <option key={name} value={name}>{name}</option>)}
+        </select>
+      </label>
+      <label>Gateway decision
+        <select value={filters.decision} onChange={(e) => setFilters({ ...filters, decision: e.target.value })}>
+          <option value="all">All</option>
+          <option value="ALLOW">ALLOW</option>
+          <option value="ALERT">ALERT</option>
+          <option value="BLOCK">BLOCK</option>
+        </select>
+      </label>
+      <label>ML decision
+        <select value={filters.ml} onChange={(e) => setFilters({ ...filters, ml: e.target.value })}>
+          <option value="all">All</option>
+          <option value="ALLOW">ALLOW</option>
+          <option value="BLOCK">BLOCK</option>
+          <option value="unavailable">Unavailable</option>
+        </select>
+      </label>
+      <label>Source
+        <select value={filters.source} onChange={(e) => setFilters({ ...filters, source: e.target.value })}>
+          <option value="all">All</option>
+          <option value="ZAP">ZAP</option>
+          <option value="Browser">Browser</option>
+          <option value="Other">Other</option>
+          <option value="Unspecified">Unspecified</option>
+        </select>
+      </label>
+      <label>Search
+        <input value={filters.q} onChange={(e) => setFilters({ ...filters, q: e.target.value })} placeholder="Request id, route, rule" />
+      </label>
+    </div>
+  );
+}
+
+function EventTable({ rows, selected, onSelect, sort, setSort }) {
+  const header = (key, label) => (
+    <th><button type="button" onClick={() => setSort({ key, dir: sort.key === key && sort.dir === "desc" ? "asc" : "desc" })}>{label}</button></th>
+  );
+  return (
+    <div className="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            {header("timestamp", "Time")}
+            {header("requestId", "Request")}
+            {header("method", "Method")}
+            {header("endpoint", "Route")}
+            <th>Source</th>
+            <th>ML</th>
+            <th>Class</th>
+            <th>Malicious probability</th>
+            <th>Rule</th>
+            <th>Gateway</th>
+            <th>HTTP</th>
+            <th>Backend</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.length === 0 ? (
+            <tr><td colSpan="12">No review-gateway events match this filter.</td></tr>
+          ) : rows.map((event) => (
+            <tr key={event.requestId || event.timestamp} className={selected && selected.requestId === event.requestId ? "clickable selected" : "clickable"} onClick={() => onSelect(event)}>
+              <td>{formatWhen(event.timestamp)}</td>
+              <td><code>{event.requestId || "Unavailable"}</code></td>
+              <td>{event.method || "Unavailable"}</td>
+              <td><code>{event.endpoint || "Unavailable"}</code></td>
+              <td>{trafficSource(event)}</td>
+              <td><Badge value={event.mlDecision} /></td>
+              <td>{event.predictedClass || "Unavailable"}</td>
+              <td>{percent(maliciousProbability(event))}</td>
+              <td>{hasRule(event) ? event.ruleId : "None"}</td>
+              <td><Badge value={event.decision} /></td>
+              <td>{event.statusCode ?? "Unavailable"}</td>
+              <td>{event.backendReached === true ? "Yes" : event.backendReached === false ? "No" : "Unavailable"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function Trace({ event }) {
+  if (!event) return <p className="muted">Select a request. The trace uses only fields stored for that request.</p>;
+  const features = Array.isArray(event.topPredictiveFeatures) && event.topPredictiveFeatures.length > 0;
+  const multi = event.multiclassProbabilities && Object.keys(event.multiclassProbabilities).length > 0;
+  const steps = [
+    ["HTTP request", `${event.method || "Unavailable"} ${event.endpoint || "Unavailable"} · ${event.requestId || "request id unavailable"}`],
+    ["Feature extraction", features ? event.topPredictiveFeatures.join(", ") : "The gateway record does not include the extracted feature vector."],
+    ["Binary inference", event.modelName ? `${event.modelName} · ML ${event.mlDecision || "unavailable"} · malicious probability ${percent(maliciousProbability(event))}` : "Model identifier unavailable in this record."],
+    ["Multiclass inference", multi ? Object.entries(event.multiclassProbabilities).map(([name, value]) => `${name} ${percent(value)}`).join(" · ") : "Multiclass probabilities were not stored for this record."],
+    ["Deterministic rule", hasRule(event) ? `${event.ruleId} · outcome ${event.ruleOutcome || "recorded"}` : "No review rule matched."],
+    ["Gateway action", `${event.decision || "Unavailable"} · ${event.mitigation || event.finalReason || "mitigation text unavailable"} · HTTP ${event.statusCode ?? "unavailable"}`],
+    ["Backend", event.backendReached === true ? "The demo API returned a status." : event.backendReached === false ? "The demo API was not called." : "Backend status was not stored."]
+  ];
+  return (
+    <div className="trace">
+      {steps.map(([title, body], index) => (
+        <div key={title} className={body.includes("not ") || body.includes("unavailable") ? "step missing" : "step"}>
+          <strong>{index + 1}. {title}</strong>
+          <div>{body}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function MetricTable({ headers, rows }) {
+  return (
+    <div className="table-wrap">
+      <table>
+        <thead><tr>{headers.map((header) => <th key={header}>{header}</th>)}</tr></thead>
+        <tbody>{rows.map((row) => <tr key={row.join("|")}>{row.map((cell, index) => <td key={`${cell}-${index}`}>{cell}</td>)}</tr>)}</tbody>
+      </table>
+    </div>
+  );
+}
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [stats, setStats] = useState({
-    total_requests: 0,
-    normal: 0,
-    malicious: 0,
-    bola: 0,
-    atrdf: 0,
-    blocked: 0,
-    allowed: 0,
-    average_latency_ms: 0,
-    p95_latency_ms: 0,
-    p99_latency_ms: 0
-  });
-
+  const [page, setPage] = useState("overview");
   const [events, setEvents] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [mlInfo, setMlInfo] = useState(null);
-  const [autoRefresh, setAutoRefresh] = useState(true);
-
-  // Poll live telemetry from Gateway
-  const fetchTelemetry = async () => {
-    try {
-      const statsRes = await fetch(`${GATEWAY_URL}/api/telemetry/stats`);
-      if (statsRes.ok) {
-        const statsData = await statsRes.json();
-        setStats(statsData);
-      }
-      const eventsRes = await fetch(`${GATEWAY_URL}/api/telemetry/events?limit=50`);
-      if (eventsRes.ok) {
-        const eventsData = await eventsRes.json();
-        setEvents(eventsData);
-      }
-    } catch (err) {
-      console.warn('Gateway polling notice:', err.message);
-    }
-  };
-
-  const fetchMlInfo = async () => {
-    try {
-      const res = await fetch(`${ML_URL}/model-info`);
-      if (res.ok) {
-        const data = await res.json();
-        setMlInfo(data);
-      }
-    } catch (err) {
-      console.warn('ML Service notice:', err.message);
-    }
-  };
+  const [error, setError] = useState("");
+  const [updated, setUpdated] = useState(null);
+  const [filters, setFilters] = useState(EMPTY_FILTERS);
+  const [selected, setSelected] = useState(null);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [sort, setSort] = useState({ key: "timestamp", dir: "desc" });
+  const [health, setHealth] = useState({});
 
   useEffect(() => {
-    fetchTelemetry();
-    fetchMlInfo();
-    const interval = setInterval(() => {
-      if (autoRefresh) fetchTelemetry();
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [autoRefresh]);
+    let active = true;
+    const refresh = async () => {
+      try {
+        const next = await loadTelemetry();
+        if (!active) return;
+        setEvents(next);
+        setError("");
+        setUpdated(new Date());
+      } catch (err) {
+        if (active) setError(err.message);
+      }
+    };
+    refresh();
+    const timer = setInterval(refresh, 3000);
+    return () => { active = false; clearInterval(timer); };
+  }, []);
 
-  // Empirical Experimental Results & Evaluation Metrics
-  const BINARY_RESULTS = [
-    { model: 'Random Forest (Primary)', acc: 0.9869, prec: 1.0, rec: 0.9391, f1: 0.9686, roc: 0.9796, pr: 0.9703, thresh: 0.30 },
-    { model: 'Logistic Regression (Baseline)', acc: 0.9377, prec: 0.9562, rec: 0.7445, f1: 0.8372, roc: 0.9470, pr: 0.9157, thresh: 0.50 }
-  ];
+  useEffect(() => {
+    let active = true;
+    const check = async () => {
+      const [gateway, ml, zap, catalog, api] = await Promise.all([
+        probe(`${GATEWAY_URL}/health`),
+        probe("/probe/ml/health"),
+        probe("/probe/zap/JSON/core/view/version/"),
+        probe("/probe/catalog/"),
+        probe("/probe/api/api/health")
+      ]);
+      if (active) setHealth({ gateway, ml, zap, catalog, api, checked: new Date() });
+    };
+    check();
+    const timer = setInterval(check, 10000);
+    return () => { active = false; clearInterval(timer); };
+  }, []);
 
-  const MULTICLASS_PER_CLASS = [
-    { name: 'XSS', prec: 1.0, rec: 1.0, f1: 1.0, support: 1603 },
-    { name: 'SQL Injection', prec: 1.0, rec: 1.0, f1: 1.0, support: 1585 },
-    { name: 'Cookie Injection', prec: 1.0, rec: 1.0, f1: 1.0, support: 1548 },
-    { name: 'Log Forging', prec: 1.0, rec: 1.0, f1: 1.0, support: 807 },
-    { name: 'RCE', prec: 1.0, rec: 1.0, f1: 1.0, support: 789 },
-    { name: 'Directory Traversal', prec: 1.0, rec: 1.0, f1: 1.0, support: 788 },
-    { name: 'LOG4J', prec: 1.0, rec: 1.0, f1: 1.0, support: 747 }
-  ];
+  const now = updated ? updated.getTime() : Date.now();
+  const filtered = useMemo(
+    () => events.filter((event) => matchesFilters(event, filters, now)),
+    [events, filters, now]
+  );
+  const summary = useMemo(() => summarize(filtered), [filtered]);
+  const sorted = useMemo(() => sortEvents(filtered, sort), [filtered, sort]);
+  const visible = sorted.slice(pageIndex * PAGE_SIZE, (pageIndex + 1) * PAGE_SIZE);
+  const families = useMemo(() => {
+    const names = new Set(scopedValidation.families.map(([name]) => name));
+    names.add("BENIGN");
+    names.add("BOLA");
+    events.forEach((event) => { if (event.predictedClass) names.add(event.predictedClass); });
+    return [...names];
+  }, [events]);
+  const counts = classCounts(filtered);
+  const maxCount = counts[0]?.[1] || 1;
 
-  const BOLA_RESULTS = [
-    { model: 'Random Forest (Primary)', normalF1: 1.0, bolaF1: 1.0, acc: 1.0, roc: 1.0 },
-    { model: 'Logistic Regression (Baseline)', normalF1: 1.0, bolaF1: 1.0, acc: 1.0, roc: 1.0 }
-  ];
+  useEffect(() => { setPageIndex(0); }, [filters, sort]);
 
-  const ABLATION_RESULTS = [
-    { set: 'FULL_25', count: 25, model: 'Random Forest', acc: 0.9869, macroF1: 0.9801, prec: 1.0, rec: 0.9390, latency: '0.0026 ms' },
-    { set: 'REDUCED_18', count: 18, model: 'Random Forest', acc: 0.9868, macroF1: 0.9801, prec: 1.0, rec: 0.9389, latency: '0.0032 ms' },
-    { set: 'REQUEST_ONLY_13', count: 13, model: 'Random Forest', acc: 0.9869, macroF1: 0.9801, prec: 1.0, rec: 0.9390, latency: '0.0022 ms' }
-  ];
-
-  const UNSEEN_ATTACKS = [
-    { attack: 'XSS', acc: 0.9999, prec: 1.0, rec: 0.9981, f1: 0.9991, samples: 30290 },
-    { attack: 'SQL Injection', acc: 0.9998, prec: 1.0, rec: 0.9968, f1: 0.9984, samples: 30272 },
-    { attack: 'Cookie Injection', acc: 1.0, prec: 1.0, rec: 1.0, f1: 1.0, samples: 30235 },
-    { attack: 'Log Forging', acc: 1.0, prec: 1.0, rec: 0.9988, f1: 0.9994, samples: 29494 },
-    { attack: 'RCE', acc: 0.9999, prec: 1.0, rec: 0.9975, f1: 0.9987, samples: 29476 },
-    { attack: 'Directory Traversal', acc: 1.0, prec: 1.0, rec: 1.0, f1: 1.0, samples: 29475 },
-    { attack: 'LOG4J', acc: 0.9785, prec: 1.0, rec: 0.1513, f1: 0.2628, samples: 29434, outlier: true }
-  ];
+  const status = error
+    ? `Last error: ${error}. Last successful refresh: ${updated ? updated.toLocaleTimeString() : "none"}.`
+    : `Source: review gateway ${GATEWAY_URL}. Last refresh ${updated ? updated.toLocaleTimeString() : "pending"}. ${events.length} events in the buffer.`;
 
   return (
-    <div className="dashboard-layout">
-      {/* Left Navigation Sidebar */}
-      <aside className="sidebar">
-        <div className="sidebar-title">REST API Security</div>
-        <div className="sidebar-subtitle">Research Evaluation Platform</div>
-
-        <nav className="sidebar-menu">
-          <button
-            className={`sidebar-item ${activeTab === 'overview' ? 'active' : ''}`}
-            onClick={() => setActiveTab('overview')}
-          >
-            📊 Live Telemetry Overview
-          </button>
-          <button
-            className={`sidebar-item ${activeTab === 'stream' ? 'active' : ''}`}
-            onClick={() => setActiveTab('stream')}
-          >
-            ⏱️ Attack Timeline Monitor
-          </button>
-          <button
-            className={`sidebar-item ${activeTab === 'atrdf' ? 'active' : ''}`}
-            onClick={() => setActiveTab('atrdf')}
-          >
-            🛡️ ATRDF Payload Models
-          </button>
-          <button
-            className={`sidebar-item ${activeTab === 'bola' ? 'active' : ''}`}
-            onClick={() => setActiveTab('bola')}
-          >
-            🔑 BOLA Behavioral Models
-          </button>
-          <button
-            className={`sidebar-item ${activeTab === 'ablation' ? 'active' : ''}`}
-            onClick={() => setActiveTab('ablation')}
-          >
-            ⚖️ Feature Ablation Study
-          </button>
-          <button
-            className={`sidebar-item ${activeTab === 'unseen' ? 'active' : ''}`}
-            onClick={() => setActiveTab('unseen')}
-          >
-            🎯 Unseen Attack Generalization
-          </button>
-          <button
-            className={`sidebar-item ${activeTab === 'latency' ? 'active' : ''}`}
-            onClick={() => setActiveTab('latency')}
-          >
-            ⚡ Latency & Overhead
-          </button>
-        </nav>
-
-        <div className="sidebar-footer">
-          <div>Gateway: <strong>localhost:8080</strong></div>
-          <div>ML Service: <strong>localhost:8000</strong></div>
-          <div style={{ marginTop: '0.4rem' }}>Status: <span style={{ color: '#4ade80' }}>● Synchronized</span></div>
-        </div>
-      </aside>
-
-      {/* Main Content Dashboard */}
-      <main className="content-area">
-        <div className="top-bar">
+    <div className="shell">
+      <nav className="nav">
+        <h1>REST API Security</h1>
+        <p>Review evidence from port 8081. Production port 8080 is not this view.</p>
+        {PAGES.map(([id, label]) => (
+          <button key={id} className={page === id ? "active" : ""} type="button" onClick={() => setPage(id)}>{label}</button>
+        ))}
+      </nav>
+      <main className="main">
+        <div className="top">
           <div>
-            <h1 className="page-title">REST API Security Research Dashboard</h1>
-            <p className="page-description">
-              Mechanism-Aware Machine Learning Detection & Generalization Across Access-Control and Input Threats
-            </p>
+            <h2>{PAGES.find(([id]) => id === page)[1]}</h2>
+            <p className="muted">{status}</p>
           </div>
-          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-            <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-              <input
-                type="checkbox"
-                checked={autoRefresh}
-                onChange={e => setAutoRefresh(e.target.checked)}
+        </div>
+        {error && <div className="banner error">The review gateway could not be read. Counters stay at the last successful buffer. {error}</div>}
+        {!error && events.length === 0 && <div className="banner error">The review gateway responded, and its current buffer is empty.</div>}
+
+        {page === "overview" && (
+          <>
+            <Filters filters={filters} setFilters={setFilters} families={families} />
+            <div className="cards">
+              <div className="card"><span>Requests in filter</span><strong>{summary.total}</strong></div>
+              <div className="card"><span>ML allow</span><strong>{summary.benign}</strong></div>
+              <div className="card"><span>ML block</span><strong>{summary.mlMalicious}</strong></div>
+              <div className="card"><span>Gateway blocks</span><strong>{summary.gatewayBlocks}</strong></div>
+              <div className="card"><span>Rule-only blocks</span><strong>{summary.ruleOnlyBlocks}</strong></div>
+              <div className="card"><span>ATRDF events</span><strong>{summary.atrdf}</strong></div>
+              <div className="card"><span>BOLA model alerts</span><strong>{summary.bolaAlerts}</strong></div>
+              <div className="card"><span>Backend reached</span><strong>{summary.forwarded}</strong></div>
+            </div>
+            <div className="panel">
+              <h3>How these counters are defined</h3>
+              <p>ML allow and ML block come from <code>mlDecision</code>. A gateway block is <code>decision = BLOCK</code>. An ALERT is not a block. A rule-only block is a matched rule while the model stayed ALLOW and the gateway blocked. A BOLA model alert is <code>attackFamily = BOLA</code> with ML BLOCK. It is not, by itself, a confirmed authorization failure. The gateway’s own stats route counts every decision other than ALLOW as blocked, so this page does not use that route.</p>
+            </div>
+            <div className="panel" style={{ marginTop: "0.8rem" }}>
+              <h3>Predicted classes in this filter</h3>
+              <div className="bars">
+                {counts.length === 0 ? <p>No events in this filter.</p> : counts.map(([name, count]) => (
+                  <div className="bar-row" key={name}><span>{name}</span><div className="bar"><i style={{ width: `${(count / maxCount) * 100}%` }} /></div><span>{count}</span></div>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {(page === "live" || page === "timeline") && (
+          <>
+            <Filters filters={filters} setFilters={setFilters} families={families} />
+            <EventTable rows={visible} selected={selected} onSelect={setSelected} sort={sort} setSort={setSort} />
+            <div className="pager">
+              <button type="button" onClick={() => setPageIndex(Math.max(0, pageIndex - 1))} disabled={pageIndex === 0}>Previous</button>
+              <span>Page {pageIndex + 1} of {Math.max(1, Math.ceil(sorted.length / PAGE_SIZE))}</span>
+              <button type="button" onClick={() => setPageIndex(pageIndex + 1)} disabled={(pageIndex + 1) * PAGE_SIZE >= sorted.length}>Next</button>
+            </div>
+          </>
+        )}
+        {page === "timeline" && (
+          <div className="panel" style={{ marginTop: "0.8rem" }}>
+            <h3>Decision trace {selected ? selected.requestId : ""}</h3>
+            <Trace event={selected || sorted[0]} />
+          </div>
+        )}
+
+        {page === "atrdf" && (
+          <div className="split">
+            <div>
+              <Filters filters={{ ...filters, family: filters.family === "all" ? "all" : filters.family }} setFilters={setFilters} families={scopedValidation.families.map(([name]) => name)} />
+              <EventTable
+                rows={sorted.filter((event) => event.attackFamily === "ATRDF" || String(event.ruleId || "").startsWith("ATRDF-") || scopedValidation.families.some(([name]) => name === event.predictedClass)).slice(0, PAGE_SIZE)}
+                selected={selected}
+                onSelect={setSelected}
+                sort={sort}
+                setSort={setSort}
               />
-              Auto-poll (2s)
-            </label>
-            <a
-              href="http://localhost:5173"
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                fontSize: '0.85rem',
-                padding: '0.45rem 0.85rem',
-                background: '#ffffff',
-                border: '1px solid var(--border-color)',
-                borderRadius: '6px',
-                fontWeight: 600,
-                color: '#1e40af'
-              }}
-            >
-              Open SecureBook Lab ↗
-            </a>
-          </div>
-        </div>
-
-        {/* Live Counters Banner */}
-        <div className="stats-grid">
-          <div className="stat-card">
-            <div className="stat-label">Total Requests</div>
-            <div className="stat-value">{stats.total_requests}</div>
-            <div className="stat-sub">Processed through Gateway</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-label">Normal Traffic</div>
-            <div className="stat-value" style={{ color: 'var(--success)' }}>{stats.normal}</div>
-            <div className="stat-sub">Classified as Legitimate</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-label">Malicious Detected</div>
-            <div className="stat-value" style={{ color: 'var(--danger)' }}>{stats.malicious}</div>
-            <div className="stat-sub">Intercepted Attacks</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-label">BOLA Attacks</div>
-            <div className="stat-value" style={{ color: '#9333ea' }}>{stats.bola}</div>
-            <div className="stat-sub">Session Behavioral Abuse</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-label">ATRDF Attacks</div>
-            <div className="stat-value" style={{ color: '#0284c7' }}>{stats.atrdf}</div>
-            <div className="stat-sub">Input Payload Threats</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-label">Blocked Requests</div>
-            <div className="stat-value" style={{ color: 'var(--danger)' }}>{stats.blocked}</div>
-            <div className="stat-sub">HTTP 403 Forbidden</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-label">Average Latency</div>
-            <div className="stat-value">{stats.average_latency_ms} <span style={{ fontSize: '0.9rem' }}>ms</span></div>
-            <div className="stat-sub">P95: {stats.p95_latency_ms}ms | P99: {stats.p99_latency_ms}ms</div>
-          </div>
-        </div>
-
-        {/* 1. OVERVIEW & LIVE EVENTS TAB */}
-        {activeTab === 'overview' && (
-          <div>
-            <div className="card">
-              <div className="card-title">
-                <span>Recent Security Events Stream (Click any row for Prediction Breakdown)</span>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Showing last 50 events</span>
+              <div className="panel" style={{ marginTop: "0.8rem" }}>
+                <h3>Active review rules</h3>
+                <MetricTable headers={["Rule", "What the code matches"]} rows={activeRules} />
               </div>
-
-              <div className="table-responsive">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Timestamp</th>
-                      <th>Request ID</th>
-                      <th>Method</th>
-                      <th>Endpoint</th>
-                      <th>User</th>
-                      <th>Attack Family</th>
-                      <th>Predicted Class</th>
-                      <th>Confidence</th>
-                      <th>Decision</th>
-                      <th>HTTP</th>
-                      <th>Latency</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {events.length === 0 ? (
-                      <tr>
-                        <td colSpan="11" style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '2rem' }}>
-                          No telemetry events captured yet. Stimulate traffic via the SecureBook Lab or automated scripts.
-                        </td>
-                      </tr>
-                    ) : (
-                      events.map((e, idx) => (
-                        <tr
-                          key={idx}
-                          className="clickable-row"
-                          onClick={() => setSelectedEvent(e)}
-                          style={{
-                            backgroundColor: e.decision === 'BLOCK' ? 'rgba(254, 242, 242, 0.5)' : 'transparent'
-                          }}
-                        >
-                          <td>{new Date(e.timestamp).toLocaleTimeString()}</td>
-                          <td><code>{e.requestId}</code></td>
-                          <td><strong>{e.method}</strong></td>
-                          <td><code style={{ fontSize: '0.75rem' }}>{e.endpoint}</code></td>
-                          <td>{e.authenticatedUser}</td>
-                          <td>
-                            <span className={`badge ${e.attackFamily === 'BOLA' ? 'badge-bola' : e.attackFamily === 'ATRDF' ? 'badge-atrdf' : ''}`}>
-                              {e.attackFamily}
-                            </span>
-                          </td>
-                          <td><strong>{e.predictedClass}</strong></td>
-                          <td>{e.confidence ? `${(e.confidence * 100).toFixed(1)}%` : 'N/A'}</td>
-                          <td>
-                            <span className={`badge badge-${e.decision ? e.decision.toLowerCase() : 'allow'}`}>
-                              {e.decision}
-                            </span>
-                          </td>
-                          <td>{e.statusCode}</td>
-                          <td>{e.totalGatewayLatencyMs} ms</td>
-                        </tr>
-                      ))
-                    )}
-                  </tbody>
-                </table>
-              </div>
+            </div>
+            <div className="panel">
+              <h3>How a request is handled</h3>
+              <ol>
+                <li>The review gateway on port 8081 receives the HTTP request.</li>
+                <li>It builds 13 request statistics and 7 structural flags.</li>
+                <li>The ML service scores <code>candidate_binary_rf_payload_six</code> at threshold 0.50.</li>
+                <li>A malicious score asks <code>candidate_multiclass_rf_payload_six</code> for one of the six classes.</li>
+                <li>ReviewRequestGuard records a rule match independently.</li>
+                <li>An ATRDF model block returns before the demo API. Cookie Injection is HTTP 401. The other five classes are HTTP 403.</li>
+                <li>A rule can still block when the model stays ALLOW. That row is a rule mitigation.</li>
+              </ol>
+              <p className="muted">Historical rule-only examples from the bounded review scan, not the live buffer: {ruleOnlyExamples.map((row) => row[0]).join(", ")}.</p>
             </div>
           </div>
         )}
 
-        {/* 2. ATTACK TIMELINE MONITOR TAB */}
-        {activeTab === 'stream' && (
-          <div className="card">
-            <div className="card-title">
-              <span>Chronological Stream Timeline</span>
+        {page === "bola" && (
+          <>
+            <div className="panel">
+              <h3>Two layers</h3>
+              <p>The BOLA forest <code>bola_rf_behavioral</code> scores a window of 10 requests. ML BLOCK is stored as ALERT, and the demo API applies the JWT and the owner check.</p>
             </div>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
-              Real-time audit log illustrating alternation between legitimate user browsing and adversarial attacks.
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-              {events.length === 0 ? (
-                <p style={{ color: 'var(--text-muted)' }}>No chronological events available.</p>
-              ) : (
-                events.map((ev, i) => (
-                  <div
-                    key={i}
-                    onClick={() => setSelectedEvent(ev)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '1rem',
-                      padding: '0.75rem 1rem',
-                      background: ev.decision === 'BLOCK' ? '#fff1f2' : '#f8fafc',
-                      borderLeft: `4px solid ${ev.decision === 'BLOCK' ? '#e11d48' : '#10b981'}`,
-                      borderRadius: '4px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', width: '80px' }}>
-                      {new Date(ev.timestamp).toLocaleTimeString()}
-                    </span>
-                    <span className={`badge badge-${ev.decision ? ev.decision.toLowerCase() : 'allow'}`} style={{ width: '70px', textAlign: 'center' }}>
-                      {ev.decision}
-                    </span>
-                    <code style={{ fontSize: '0.8rem', fontWeight: 600 }}>{ev.method} {ev.endpoint}</code>
-                    <span style={{ marginLeft: 'auto', fontSize: '0.8rem' }}>
-                      <strong>{ev.predictedClass}</strong> ({ev.attackFamily}) | Latency: {ev.totalGatewayLatencyMs}ms
-                    </span>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
+            <h3 style={{ margin: "1rem 0 0.4rem" }}>Recorded ZAP scenarios</h3>
+            <MetricTable
+              headers={["Experiment", "ZAP message", "Request", "Scenario", "HTTP", "Recorded result"]}
+              rows={historicalBola}
+            />
+            <h3 style={{ margin: "1rem 0 0.4rem" }}>BOLA rows currently in the gateway buffer</h3>
+            <EventTable rows={sorted.filter((event) => event.attackFamily === "BOLA").slice(0, PAGE_SIZE)} selected={selected} onSelect={setSelected} sort={sort} setSort={setSort} />
+          </>
         )}
 
-        {/* 3. ATRDF PAYLOAD MODELS TAB */}
-        {activeTab === 'atrdf' && (
-          <div>
-            <div className="card">
-              <div className="card-title">
-                <span>ATRDF Binary Detection Performance (Test Split: 36,554 records)</span>
-              </div>
-              <div className="table-responsive">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Algorithm</th>
-                      <th>Accuracy</th>
-                      <th>Precision</th>
-                      <th>Recall</th>
-                      <th>F1-Score</th>
-                      <th>ROC-AUC</th>
-                      <th>PR-AUC</th>
-                      <th>Calibrated Threshold</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {BINARY_RESULTS.map((r, i) => (
-                      <tr key={i}>
-                        <td><strong>{r.model}</strong></td>
-                        <td>{(r.acc * 100).toFixed(2)}%</td>
-                        <td>{(r.prec * 100).toFixed(2)}%</td>
-                        <td>{(r.rec * 100).toFixed(2)}%</td>
-                        <td>{(r.f1 * 100).toFixed(2)}%</td>
-                        <td>{r.roc.toFixed(4)}</td>
-                        <td>{r.pr.toFixed(4)}</td>
-                        <td>{r.thresh}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+        {page === "zap" && (
+          <>
+            <div className="panel">
+              <h3>Recorded run EXP-ZAP-PREVIEW</h3>
+              <p>ZAP 2.17.0 <code>sendRequest</code> to http://127.0.0.1:8081. Each family was ML BLOCK at malicious probability 1.0, the matching rule also matched, and the backend was not reached. This table is historical. Opening this page does not start a scan.</p>
+              <MetricTable headers={["Family", "ZAP message", "Request", "Rule", "HTTP"]} rows={historicalFamilies} />
             </div>
-
-            <div className="card">
-              <div className="card-title">
-                <span>ATRDF Multiclass Classification Performance Across Attack Families</span>
-              </div>
-              <div className="table-responsive">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Attack Category</th>
-                      <th>Precision</th>
-                      <th>Recall</th>
-                      <th>F1-Score</th>
-                      <th>Test Set Support</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {MULTICLASS_PER_CLASS.map((c, i) => (
-                      <tr key={i}>
-                        <td><strong>{c.name}</strong></td>
-                        <td>{(c.prec * 100).toFixed(2)}%</td>
-                        <td>{(c.rec * 100).toFixed(2)}%</td>
-                        <td>{(c.f1 * 100).toFixed(2)}%</td>
-                        <td>{c.support.toLocaleString()}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+            <h3 style={{ margin: "1rem 0 0.4rem" }}>ZAP-tagged rows still in the live buffer</h3>
+            <EventTable rows={sorted.filter((event) => trafficSource(event) === "ZAP").slice(0, PAGE_SIZE)} selected={selected} onSelect={setSelected} sort={sort} setSort={setSort} />
+          </>
         )}
 
-        {/* 4. BOLA BEHAVIORAL MODELS TAB */}
-        {activeTab === 'bola' && (
-          <div>
-            <div className="card">
-              <div className="card-title">
-                <span>BOLA Behavioral Session Model Performance (W=10 Rolling Window)</span>
-              </div>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
-                Evaluated across 575 completely untouched test sessions (4,960 requests). Direct user identities and object IDs
-                were excluded from training to prevent memorization shortcuts.
-              </p>
-              <div className="table-responsive">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Model</th>
-                      <th>Normal F1</th>
-                      <th>BOLA F1</th>
-                      <th>Overall Accuracy</th>
-                      <th>ROC-AUC</th>
-                      <th>Splitting Scheme</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {BOLA_RESULTS.map((b, i) => (
-                      <tr key={i}>
-                        <td><strong>{b.model}</strong></td>
-                        <td>{(b.normalF1 * 100).toFixed(2)}%</td>
-                        <td>{(b.bolaF1 * 100).toFixed(2)}%</td>
-                        <td>{(b.acc * 100).toFixed(2)}%</td>
-                        <td>{b.roc.toFixed(4)}</td>
-                        <td>Strict Session-Level Split (80/10/10)</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+        {page === "models" && (
+          <>
+            <div className="panel">
+              <h3>ATRDF binary validation</h3>
+              <p>Grouped development validation, 19,621 rows, threshold 0.50. Gradient boosting is histogram gradient boosting. Random Forest and logistic regression are the two models this comparison supports. Isolation Forest is a binary anomaly detector.</p>
+              <MetricTable headers={["Model", "Accuracy", "Precision", "Recall", "F1", "FPR", "ROC-AUC", "PR-AUC", "ms/row"]} rows={modelComparison.atrdfBinary} />
+              <MetricTable headers={["Model", "TN", "FP", "FN", "TP"]} rows={modelComparison.atrdfConfusion} />
             </div>
-
-            <div className="card">
-              <div className="card-title">
-                <span>Key Behavioral Decision Signals</span>
-              </div>
-              <ul style={{ fontSize: '0.875rem', lineHeight: 1.8, paddingLeft: '1.25rem', color: '#334155' }}>
-                <li><strong>cross_owner_ratio_recent:</strong> Proportion of recent 10 requests targeting resources owned by other users.</li>
-                <li><strong>unique_owners_recent:</strong> Number of distinct resource owners accessed within the rolling session window.</li>
-                <li><strong>owner_switch:</strong> Frequency of consecutive switches between different resource owners.</li>
-                <li><strong>same_object_repeat_ratio:</strong> Baseline repeat frequency characteristic of legitimate user workflows.</li>
-                <li><strong>request_burst_rate:</strong> Frequency and inter-request timing distinguishing automated enumeration from human pacing.</li>
-              </ul>
+            <div className="panel" style={{ marginTop: "0.8rem" }}>
+              <h3>ATRDF multiclass validation</h3>
+              <p>The four supervised models share these family scores. Isolation Forest has no family label.</p>
+              <MetricTable headers={["Class", "Precision", "Recall", "F1", "Support"]} rows={modelComparison.atrdfFamilies} />
             </div>
-          </div>
+            <div className="panel" style={{ marginTop: "0.8rem" }}>
+              <h3>BOLA offline validation</h3>
+              <p>Session-disjoint validation, 5,030 rows. These columns are not the live session-window features, so this table does not measure the gateway.</p>
+              <MetricTable headers={["Model", "Accuracy", "Precision", "Recall", "F1", "FPR", "ROC-AUC", "PR-AUC", "ms/row"]} rows={modelComparison.bolaBinary} />
+              <MetricTable headers={["Model", "TN", "FP", "FN", "TP"]} rows={modelComparison.bolaConfusion} />
+              <MetricTable headers={["Model", "NORMAL rows", "Row FPR", "Legitimate sessions", "Sessions with a false positive", "Session FPR"]} rows={modelComparison.bolaLegitimate} />
+            </div>
+          </>
         )}
 
-        {/* 5. ABLATION STUDY TAB */}
-        {activeTab === 'ablation' && (
-          <div className="card">
-            <div className="card-title">
-              <span>Feature Set Ablation Trade-Off Analysis</span>
+        {page === "health" && (
+          <>
+            <div className="cards">
+              {[
+                ["Review gateway 8081", health.gateway],
+                ["ML service 8000", health.ml],
+                ["Catalog 4173", health.catalog],
+                ["Demo API 5001", health.api],
+                ["ZAP 8091", health.zap]
+              ].map(([label, item]) => (
+                <div className="card" key={label}>
+                  <span>{label}</span>
+                  <strong>{item ? (item.ok ? "Reachable" : `HTTP ${item.status || "down"}`) : "Checking"}</strong>
+                </div>
+              ))}
             </div>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
-              Comparison proving that the deployable 13-feature Request-Only set achieves equivalent detection capability
-              as richer offline feature sets without requiring post-response attributes.
-            </p>
-            <div className="table-responsive">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Feature Set</th>
-                    <th>Feature Count</th>
-                    <th>Model</th>
-                    <th>Accuracy</th>
-                    <th>Macro F1</th>
-                    <th>Precision</th>
-                    <th>Recall</th>
-                    <th>Inference Latency</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {ABLATION_RESULTS.map((a, i) => (
-                    <tr key={i} style={{ backgroundColor: a.set === 'REQUEST_ONLY_13' ? '#f0fdf4' : 'transparent' }}>
-                      <td><strong>{a.set}</strong> {a.set === 'REQUEST_ONLY_13' ? '(Operational Live)' : ''}</td>
-                      <td>{a.count}</td>
-                      <td>{a.model}</td>
-                      <td>{(a.acc * 100).toFixed(2)}%</td>
-                      <td><strong>{(a.macroF1 * 100).toFixed(2)}%</strong></td>
-                      <td>{(a.prec * 100).toFixed(2)}%</td>
-                      <td>{(a.rec * 100).toFixed(2)}%</td>
-                      <td>{a.latency}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="panel">
+              <h3>Review configuration that this dashboard is reading</h3>
+              <p>Profile <code>experimental-payload</code> on port 8081. ATRDF model <code>candidate_binary_rf_payload_six</code> and <code>candidate_multiclass_rf_payload_six</code>. Classes: Cookie Injection, Directory Traversal, LOG4J, Log Forging, RCE, SQL Injection. Threshold 0.50. BOLA model <code>bola_rf_behavioral</code>. The health JSON from the gateway can still display <code>"port": 8080</code> while the process is bound to 8081. Confirm the listener command line. Production port 8080 is outside this page.</p>
+              <p className="muted">Health checked {health.checked ? health.checked.toLocaleTimeString() : "not yet"}.</p>
             </div>
-          </div>
-        )}
-
-        {/* 6. UNSEEN ATTACK GENERALIZATION TAB */}
-        {activeTab === 'unseen' && (
-          <div className="card">
-            <div className="card-title">
-              <span>Leave-One-Attack-Out Zero-Day Generalization</span>
+            <div className="panel" style={{ marginTop: "0.8rem" }}>
+              <h3>Reproducibility references</h3>
+              <ul>{references.map((path) => <li key={path}><code>{path}</code></li>)}</ul>
             </div>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
-              In accordance with Research Question 3, each attack family was systematically held out during training
-              and tested as an unrepresented zero-day attack.
-            </p>
-            <div className="table-responsive">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Held-Out Attack</th>
-                    <th>Overall Accuracy</th>
-                    <th>Precision</th>
-                    <th>Malicious Recall (Detection)</th>
-                    <th>F1-Score</th>
-                    <th>Test Evaluation Samples</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {UNSEEN_ATTACKS.map((u, i) => (
-                    <tr
-                      key={i}
-                      style={{
-                        backgroundColor: u.outlier ? '#fff1f2' : 'transparent',
-                        fontWeight: u.outlier ? 600 : 400
-                      }}
-                    >
-                      <td><strong>{u.attack}</strong> {u.outlier ? '⚠️ Key Empirical Finding' : ''}</td>
-                      <td>{(u.acc * 100).toFixed(2)}%</td>
-                      <td>{(u.prec * 100).toFixed(2)}%</td>
-                      <td style={{ color: u.outlier ? '#dc2626' : 'var(--text-main)' }}>
-                        <strong>{(u.rec * 100).toFixed(2)}%</strong>
-                      </td>
-                      <td>{(u.f1 * 100).toFixed(2)}%</td>
-                      <td>{u.samples.toLocaleString()}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <div style={{ background: '#f8fafc', padding: '1rem', borderRadius: '6px', marginTop: '1.25rem', border: '1px solid var(--border-color)', fontSize: '0.85rem' }}>
-              <h4 style={{ fontWeight: 600, color: '#0f172a', marginBottom: '0.35rem' }}>Methodological Research Finding:</h4>
-              <p style={{ color: '#475569' }}>
-                When <strong>LOG4J</strong> is excluded from training, detection recall drops to <strong>15.13%</strong>.
-                This confirms Hypothesis H3: generalization to fundamentally novel attack syntaxes is bounded by the representation space
-                rather than universally successful. In contrast, injection families sharing syntactic character distributions (XSS, SQLi, Directory Traversal)
-                generalize with recall exceeding 99.6%.
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* 7. LATENCY & OVERHEAD TAB */}
-        {activeTab === 'latency' && (
-          <div className="card">
-            <div className="card-title">
-              <span>Gateway Processing Overhead & Latency Profile</span>
-            </div>
-            <div className="meta-grid" style={{ marginBottom: '1.5rem' }}>
-              <div className="meta-item">
-                <span>Feature Extraction Latency</span>
-                ~0.15 ms / request (High-performance Java parser)
-              </div>
-              <div className="meta-item">
-                <span>ML Inference Latency</span>
-                ~2.20 ms / request (FastAPI Random Forest CPU execution)
-              </div>
-              <div className="meta-item">
-                <span>Decision & Policy Overhead</span>
-                ~0.05 ms / request
-              </div>
-              <div className="meta-item">
-                <span>Total Gateway Overhead</span>
-                ~3.40 ms mean latency
-              </div>
-            </div>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-              Quantifies Research Question 4: Request-only feature extraction inside a pre-response Java gateway introduces negligible
-              overhead (&lt;5 ms), making real-time inline mitigation practical for high-throughput production microservices.
-            </p>
-          </div>
-        )}
-
-        {/* PREDICTION DETAILS MODAL */}
-        {selectedEvent && (
-          <div className="modal-overlay" onClick={() => setSelectedEvent(null)}>
-            <div className="modal-card" onClick={e => e.stopPropagation()}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem', marginBottom: '1rem' }}>
-                <div>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: 700 }}>Telemetry Event Deep Dive</h3>
-                  <code style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{selectedEvent.requestId}</code>
-                </div>
-                <button
-                  onClick={() => setSelectedEvent(null)}
-                  style={{ background: 'none', border: 'none', fontSize: '1.25rem', cursor: 'pointer' }}
-                >
-                  ✕
-                </button>
-              </div>
-
-              <div className="meta-grid">
-                <div className="meta-item">
-                  <span>Timestamp</span>
-                  {selectedEvent.timestamp}
-                </div>
-                <div className="meta-item">
-                  <span>Client IP / Source</span>
-                  {selectedEvent.source}
-                </div>
-                <div className="meta-item">
-                  <span>HTTP Request</span>
-                  <strong>{selectedEvent.method}</strong> {selectedEvent.endpoint}
-                </div>
-                <div className="meta-item">
-                  <span>Authenticated User</span>
-                  {selectedEvent.authenticatedUser}
-                </div>
-                <div className="meta-item">
-                  <span>Attack Family</span>
-                  {selectedEvent.attackFamily}
-                </div>
-                <div className="meta-item">
-                  <span>Predicted Class</span>
-                  <strong>{selectedEvent.predictedClass}</strong>
-                </div>
-                <div className="meta-item">
-                  <span>Classifier Confidence</span>
-                  {selectedEvent.confidence ? `${(selectedEvent.confidence * 100).toFixed(1)}%` : 'N/A'}
-                </div>
-                <div className="meta-item">
-                  <span>Security Decision</span>
-                  <span className={`badge badge-${selectedEvent.decision ? selectedEvent.decision.toLowerCase() : 'allow'}`}>
-                    {selectedEvent.decision}
-                  </span>
-                </div>
-                <div className="meta-item">
-                  <span>Mitigation Policy</span>
-                  {selectedEvent.mitigation}
-                </div>
-                <div className="meta-item">
-                  <span>HTTP Response Status</span>
-                  {selectedEvent.statusCode}
-                </div>
-                <div className="meta-item">
-                  <span>Model Executed</span>
-                  {selectedEvent.modelName} (v{selectedEvent.modelVersion})
-                </div>
-                <div className="meta-item">
-                  <span>Backend Reached?</span>
-                  {selectedEvent.backendReached ? 'YES (Allowed)' : 'NO (Blocked at Gateway)'}
-                </div>
-              </div>
-
-              <div style={{ marginTop: '1.25rem' }}>
-                <h4 style={{ fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.5rem' }}>Latency Breakdown:</h4>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                  Detection: {selectedEvent.detectionLatencyMs} ms |
-                  Mitigation: {selectedEvent.mitigationLatencyMs} ms |
-                  Total Gateway Overhead: {selectedEvent.totalGatewayLatencyMs} ms
-                </p>
-              </div>
-            </div>
-          </div>
+          </>
         )}
       </main>
     </div>
