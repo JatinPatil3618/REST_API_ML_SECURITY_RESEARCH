@@ -19,13 +19,18 @@ public class MlServiceClient {
         this.restTemplate = restTemplate;
     }
 
-    @SuppressWarnings("unchecked")
     public Map<String, Object> predict(String mode, String requestId, Map<String, Object> features) {
+        return predict(mode, requestId, features, "production");
+    }
+
+    @SuppressWarnings("unchecked")
+    public Map<String, Object> predict(String mode, String requestId, Map<String, Object> features, String modelProfile) {
         String endpoint = mlServiceUrl + "/predict";
         
         Map<String, Object> payload = new HashMap<>();
         payload.put("detection_mode", mode);
         payload.put("request_id", requestId);
+        payload.put("model_profile", modelProfile == null || modelProfile.isBlank() ? "production" : modelProfile);
         
         if ("BOLA".equalsIgnoreCase(mode)) {
             payload.put("bola_features", features);
@@ -48,6 +53,7 @@ public class MlServiceClient {
             fallback.put("exception", e.getMessage());
             fallback.put("decision", "ALERT");
             fallback.put("mitigation", "ALERT (ML Unavailable Fail-Safe)");
+            fallback.put("mitigation_techniques", List.of("fail_safe_alert"));
             return fallback;
         }
 
@@ -56,6 +62,26 @@ public class MlServiceClient {
         errorResp.put("error", "ML service returned non-2xx or empty response");
         errorResp.put("decision", "ALERT");
         errorResp.put("mitigation", "ALERT (ML Unavailable Fail-Safe)");
+        errorResp.put("mitigation_techniques", List.of("fail_safe_alert"));
         return errorResp;
+    }
+
+    public void sendFeedback(String mode, String requestId, Map<String, Object> features, String label) {
+        try {
+            Map<String, Object> payload = new HashMap<>();
+            payload.put("detection_mode", mode);
+            payload.put("request_id", requestId);
+            payload.put("label", label);
+            if ("BOLA".equalsIgnoreCase(mode)) {
+                payload.put("bola_features", features);
+            } else {
+                payload.put("atrdf_features", features);
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            restTemplate.postForEntity(mlServiceUrl + "/feedback", new HttpEntity<>(payload, headers), Map.class);
+        } catch (Exception ignored) {
+            // Feedback must not change the request outcome.
+        }
     }
 }

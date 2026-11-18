@@ -1,0 +1,651 @@
+{
+  "validation_rows": 14622,
+  "log4j_missed": 203,
+  "missed_feature_flags": {
+    "cookie_present_values": {
+      "0": 203
+    },
+    "header_count_values": {
+      "15": 203
+    }
+  },
+  "missed_marker_header_combinations": {
+    "set-cookie": 142,
+    "sec-fetch-dest": 61
+  },
+  "groups": {
+    "log4j_missed": {
+      "rows": 203,
+      "both_tokens_in_any_header": {
+        "count": 203,
+        "percent_of_group": 100.0
+      },
+      "jndi_without_interpolation": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "interpolation_without_jndi": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "header_present": {
+        "set-cookie": {
+          "count": 203,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-dest": {
+          "count": 203,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-site": {
+          "count": 203,
+          "percent_of_group": 100.0
+        },
+        "accept-encoding": {
+          "count": 203,
+          "percent_of_group": 100.0
+        },
+        "cookie": {
+          "count": 0,
+          "percent_of_group": 0.0
+        },
+        "user-agent": {
+          "count": 203,
+          "percent_of_group": 100.0
+        }
+      },
+      "both_tokens_by_header": {
+        "sec-fetch-dest": {
+          "count": 61,
+          "percent_of_group": 30.049261083743843
+        },
+        "set-cookie": {
+          "count": 142,
+          "percent_of_group": 69.95073891625616
+        }
+      },
+      "jndi_only_by_header": {},
+      "shapes": {
+        "interpolation_jndi_scheme": 65,
+        "both_tokens_other_shape": 138
+      },
+      "schemes": {
+        "ldaphttp": 58,
+        "ldaphttps": 7
+      },
+      "both_token_value_length": {
+        "min": 34,
+        "median": 577.0,
+        "max": 1068,
+        "unique_lengths": 174
+      }
+    },
+    "log4j_detected": {
+      "rows": 116,
+      "both_tokens_in_any_header": {
+        "count": 116,
+        "percent_of_group": 100.0
+      },
+      "jndi_without_interpolation": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "interpolation_without_jndi": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "header_present": {
+        "set-cookie": {
+          "count": 116,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-dest": {
+          "count": 116,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-site": {
+          "count": 116,
+          "percent_of_group": 100.0
+        },
+        "accept-encoding": {
+          "count": 116,
+          "percent_of_group": 100.0
+        },
+        "cookie": {
+          "count": 0,
+          "percent_of_group": 0.0
+        },
+        "user-agent": {
+          "count": 116,
+          "percent_of_group": 100.0
+        }
+      },
+      "both_tokens_by_header": {
+        "accept-encoding": {
+          "count": 41,
+          "percent_of_group": 35.3448275862069
+        },
+        "sec-fetch-dest": {
+          "count": 3,
+          "percent_of_group": 2.586206896551724
+        },
+        "sec-fetch-site": {
+          "count": 65,
+          "percent_of_group": 56.03448275862069
+        },
+        "set-cookie": {
+          "count": 7,
+          "percent_of_group": 6.0344827586206895
+        }
+      },
+      "jndi_only_by_header": {},
+      "shapes": {
+        "both_tokens_other_shape": 77,
+        "interpolation_jndi_scheme": 39
+      },
+      "schemes": {
+        "ldaphttp": 34,
+        "ldaphttps": 5
+      },
+      "both_token_value_length": {
+        "min": 29,
+        "median": 68.0,
+        "max": 760,
+        "unique_lengths": 76
+      }
+    },
+    "benign": {
+      "rows": 11475,
+      "both_tokens_in_any_header": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "jndi_without_interpolation": {
+        "count": 3,
+        "percent_of_group": 0.026143790849673203
+      },
+      "interpolation_without_jndi": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "header_present": {
+        "set-cookie": {
+          "count": 9799,
+          "percent_of_group": 85.39433551198258
+        },
+        "sec-fetch-dest": {
+          "count": 9799,
+          "percent_of_group": 85.39433551198258
+        },
+        "sec-fetch-site": {
+          "count": 9799,
+          "percent_of_group": 85.39433551198258
+        },
+        "accept-encoding": {
+          "count": 11475,
+          "percent_of_group": 100.0
+        },
+        "cookie": {
+          "count": 0,
+          "percent_of_group": 0.0
+        },
+        "user-agent": {
+          "count": 11475,
+          "percent_of_group": 100.0
+        }
+      },
+      "both_tokens_by_header": {},
+      "jndi_only_by_header": {
+        "set-cookie": {
+          "count": 3,
+          "percent_of_group": 0.026143790849673203
+        }
+      },
+      "shapes": {
+        "jndi_without_interpolation:inside_larger_token": 3
+      },
+      "schemes": {},
+      "both_token_value_length": null
+    },
+    "Cookie Injection": {
+      "rows": 614,
+      "both_tokens_in_any_header": {
+        "count": 4,
+        "percent_of_group": 0.6514657980456026
+      },
+      "jndi_without_interpolation": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "interpolation_without_jndi": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "header_present": {
+        "set-cookie": {
+          "count": 614,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-dest": {
+          "count": 614,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-site": {
+          "count": 614,
+          "percent_of_group": 100.0
+        },
+        "accept-encoding": {
+          "count": 614,
+          "percent_of_group": 100.0
+        },
+        "cookie": {
+          "count": 610,
+          "percent_of_group": 99.3485342019544
+        },
+        "user-agent": {
+          "count": 614,
+          "percent_of_group": 100.0
+        }
+      },
+      "both_tokens_by_header": {
+        "sec-fetch-dest": {
+          "count": 2,
+          "percent_of_group": 0.3257328990228013
+        },
+        "set-cookie": {
+          "count": 2,
+          "percent_of_group": 0.3257328990228013
+        }
+      },
+      "jndi_only_by_header": {},
+      "shapes": {
+        "both_tokens_other_shape": 4
+      },
+      "schemes": {},
+      "both_token_value_length": {
+        "min": 49,
+        "median": 240.5,
+        "max": 926,
+        "unique_lengths": 4
+      }
+    },
+    "Directory Traversal": {
+      "rows": 323,
+      "both_tokens_in_any_header": {
+        "count": 4,
+        "percent_of_group": 1.238390092879257
+      },
+      "jndi_without_interpolation": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "interpolation_without_jndi": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "header_present": {
+        "set-cookie": {
+          "count": 323,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-dest": {
+          "count": 323,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-site": {
+          "count": 323,
+          "percent_of_group": 100.0
+        },
+        "accept-encoding": {
+          "count": 323,
+          "percent_of_group": 100.0
+        },
+        "cookie": {
+          "count": 0,
+          "percent_of_group": 0.0
+        },
+        "user-agent": {
+          "count": 323,
+          "percent_of_group": 100.0
+        }
+      },
+      "both_tokens_by_header": {
+        "accept-encoding": {
+          "count": 1,
+          "percent_of_group": 0.30959752321981426
+        },
+        "sec-fetch-site": {
+          "count": 1,
+          "percent_of_group": 0.30959752321981426
+        },
+        "set-cookie": {
+          "count": 2,
+          "percent_of_group": 0.6191950464396285
+        }
+      },
+      "jndi_only_by_header": {},
+      "shapes": {
+        "both_tokens_other_shape": 4
+      },
+      "schemes": {},
+      "both_token_value_length": {
+        "min": 57,
+        "median": 271.5,
+        "max": 654,
+        "unique_lengths": 4
+      }
+    },
+    "Log Forging": {
+      "rows": 304,
+      "both_tokens_in_any_header": {
+        "count": 1,
+        "percent_of_group": 0.32894736842105265
+      },
+      "jndi_without_interpolation": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "interpolation_without_jndi": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "header_present": {
+        "set-cookie": {
+          "count": 304,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-dest": {
+          "count": 304,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-site": {
+          "count": 304,
+          "percent_of_group": 100.0
+        },
+        "accept-encoding": {
+          "count": 304,
+          "percent_of_group": 100.0
+        },
+        "cookie": {
+          "count": 0,
+          "percent_of_group": 0.0
+        },
+        "user-agent": {
+          "count": 304,
+          "percent_of_group": 100.0
+        }
+      },
+      "both_tokens_by_header": {
+        "sec-fetch-dest": {
+          "count": 1,
+          "percent_of_group": 0.32894736842105265
+        }
+      },
+      "jndi_only_by_header": {},
+      "shapes": {
+        "interpolation_jndi_scheme": 1
+      },
+      "schemes": {
+        "ldaphttp": 1
+      },
+      "both_token_value_length": {
+        "min": 76,
+        "median": 76.0,
+        "max": 76,
+        "unique_lengths": 1
+      }
+    },
+    "RCE": {
+      "rows": 333,
+      "both_tokens_in_any_header": {
+        "count": 1,
+        "percent_of_group": 0.3003003003003003
+      },
+      "jndi_without_interpolation": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "interpolation_without_jndi": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "header_present": {
+        "set-cookie": {
+          "count": 333,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-dest": {
+          "count": 333,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-site": {
+          "count": 333,
+          "percent_of_group": 100.0
+        },
+        "accept-encoding": {
+          "count": 333,
+          "percent_of_group": 100.0
+        },
+        "cookie": {
+          "count": 0,
+          "percent_of_group": 0.0
+        },
+        "user-agent": {
+          "count": 333,
+          "percent_of_group": 100.0
+        }
+      },
+      "both_tokens_by_header": {
+        "sec-fetch-dest": {
+          "count": 1,
+          "percent_of_group": 0.3003003003003003
+        }
+      },
+      "jndi_only_by_header": {},
+      "shapes": {
+        "interpolation_jndi_scheme": 1
+      },
+      "schemes": {
+        "ldaphttp": 1
+      },
+      "both_token_value_length": {
+        "min": 165,
+        "median": 165.0,
+        "max": 165,
+        "unique_lengths": 1
+      }
+    },
+    "SQL Injection": {
+      "rows": 614,
+      "both_tokens_in_any_header": {
+        "count": 6,
+        "percent_of_group": 0.9771986970684039
+      },
+      "jndi_without_interpolation": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "interpolation_without_jndi": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "header_present": {
+        "set-cookie": {
+          "count": 614,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-dest": {
+          "count": 614,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-site": {
+          "count": 614,
+          "percent_of_group": 100.0
+        },
+        "accept-encoding": {
+          "count": 614,
+          "percent_of_group": 100.0
+        },
+        "cookie": {
+          "count": 0,
+          "percent_of_group": 0.0
+        },
+        "user-agent": {
+          "count": 614,
+          "percent_of_group": 100.0
+        }
+      },
+      "both_tokens_by_header": {
+        "accept-encoding": {
+          "count": 1,
+          "percent_of_group": 0.16286644951140064
+        },
+        "sec-fetch-dest": {
+          "count": 1,
+          "percent_of_group": 0.16286644951140064
+        },
+        "set-cookie": {
+          "count": 4,
+          "percent_of_group": 0.6514657980456026
+        }
+      },
+      "jndi_only_by_header": {},
+      "shapes": {
+        "interpolation_jndi_scheme": 4,
+        "both_tokens_other_shape": 2
+      },
+      "schemes": {
+        "ldaphttps": 1,
+        "ldaphttp": 3
+      },
+      "both_token_value_length": {
+        "min": 51,
+        "median": 591.5,
+        "max": 939,
+        "unique_lengths": 6
+      }
+    },
+    "XSS": {
+      "rows": 640,
+      "both_tokens_in_any_header": {
+        "count": 3,
+        "percent_of_group": 0.46875
+      },
+      "jndi_without_interpolation": {
+        "count": 1,
+        "percent_of_group": 0.15625
+      },
+      "interpolation_without_jndi": {
+        "count": 0,
+        "percent_of_group": 0.0
+      },
+      "header_present": {
+        "set-cookie": {
+          "count": 640,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-dest": {
+          "count": 640,
+          "percent_of_group": 100.0
+        },
+        "sec-fetch-site": {
+          "count": 640,
+          "percent_of_group": 100.0
+        },
+        "accept-encoding": {
+          "count": 640,
+          "percent_of_group": 100.0
+        },
+        "cookie": {
+          "count": 0,
+          "percent_of_group": 0.0
+        },
+        "user-agent": {
+          "count": 640,
+          "percent_of_group": 100.0
+        }
+      },
+      "both_tokens_by_header": {
+        "accept-encoding": {
+          "count": 1,
+          "percent_of_group": 0.15625
+        },
+        "sec-fetch-dest": {
+          "count": 1,
+          "percent_of_group": 0.15625
+        },
+        "set-cookie": {
+          "count": 1,
+          "percent_of_group": 0.15625
+        }
+      },
+      "jndi_only_by_header": {
+        "set-cookie": {
+          "count": 1,
+          "percent_of_group": 0.15625
+        }
+      },
+      "shapes": {
+        "interpolation_jndi_scheme": 2,
+        "both_tokens_other_shape": 1,
+        "jndi_without_interpolation:inside_larger_token": 1
+      },
+      "schemes": {
+        "ldaphttp": 2
+      },
+      "both_token_value_length": {
+        "min": 92,
+        "median": 113.0,
+        "max": 865,
+        "unique_lengths": 3
+      }
+    }
+  },
+  "sanitized_examples": [
+    {
+      "group": "log4j_missed",
+      "header": "set-cookie",
+      "redacted_value": "set-cookie: ${jndi:ldaphttp://[redacted]}",
+      "value_length": 854,
+      "starts_with_interpolation": false
+    },
+    {
+      "group": "log4j_missed",
+      "header": "set-cookie",
+      "redacted_value": "set-cookie: ${jndi:ldaphttp://[redacted]}",
+      "value_length": 675,
+      "starts_with_interpolation": false
+    },
+    {
+      "group": "log4j_missed",
+      "header": "set-cookie",
+      "redacted_value": "set-cookie: ${jndi:ldaphttp://[redacted]}",
+      "value_length": 572,
+      "starts_with_interpolation": false
+    },
+    {
+      "group": "log4j_missed",
+      "header": "set-cookie",
+      "redacted_value": "set-cookie: ${jndi:ldaphttp://[redacted]}",
+      "value_length": 663,
+      "starts_with_interpolation": false
+    },
+    {
+      "group": "log4j_missed",
+      "header": "set-cookie",
+      "redacted_value": "set-cookie: ${jndi:ldaphttp://[redacted]}",
+      "value_length": 669,
+      "starts_with_interpolation": false
+    },
+    {
+      "group": "log4j_missed",
+      "header": "sec-fetch-dest",
+      "redacted_value": "sec-fetch-dest: ${jndi:ldaphttp://[redacted]}",
+      "value_length": 137,
+      "starts_with_interpolation": false
+    }
+  ],
+  "files_not_opened": [
+    "data/raw/atrdf/REQUEST_ONLY_test.csv"
+  ]
+}

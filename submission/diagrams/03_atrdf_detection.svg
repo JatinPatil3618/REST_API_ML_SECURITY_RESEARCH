@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520">
+  <rect width="1100" height="520" fill="#ffffff"/>
+  <text x="32" y="36" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">ATRDF detection and mitigation</text>
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#111827">
+    <rect x="40" y="70" width="240" height="80" rx="8" fill="#eff6ff" stroke="#1d4ed8"/>
+    <text x="160" y="102" text-anchor="middle" font-weight="700">Request text</text>
+    <text x="160" y="124" text-anchor="middle">path, query, body, headers</text>
+    <rect x="360" y="60" width="280" height="100" rx="8" fill="#fff7ed" stroke="#c2410c"/>
+    <text x="500" y="92" text-anchor="middle" font-weight="700">20 features</text>
+    <text x="500" y="114" text-anchor="middle">13 request statistics</text>
+    <text x="500" y="134" text-anchor="middle">plus 7 structural flags</text>
+    <rect x="720" y="60" width="330" height="100" rx="8" fill="#ecfdf5" stroke="#047857"/>
+    <text x="885" y="92" text-anchor="middle" font-weight="700">candidate_binary_rf_payload_six</text>
+    <text x="885" y="114" text-anchor="middle">threshold 0.50</text>
+    <text x="885" y="134" text-anchor="middle">then six-class forest</text>
+    <rect x="80" y="230" width="420" height="120" rx="8" fill="#fef2f2" stroke="#b91c1c"/>
+    <text x="290" y="262" text-anchor="middle" font-weight="700">ML BLOCK</text>
+    <text x="290" y="286" text-anchor="middle">Cookie Injection returns HTTP 401</text>
+    <text x="290" y="308" text-anchor="middle">other ATRDF classes return HTTP 403</text>
+    <text x="290" y="330" text-anchor="middle">backendReached stays false</text>
+    <rect x="560" y="230" width="480" height="120" rx="8" fill="#fefce8" stroke="#a16207"/>
+    <text x="800" y="262" text-anchor="middle" font-weight="700">ML ALLOW, review rule MATCH</text>
+    <text x="800" y="286" text-anchor="middle">Rule id is the mitigation text</text>
+    <text x="800" y="308" text-anchor="middle">Model class remains BENIGN</text>
+    <text x="800" y="330" text-anchor="middle">This is not an ML detection</text>
+    <rect x="220" y="400" width="660" height="80" rx="8" fill="#f0fdf4" stroke="#15803d"/>
+    <text x="550" y="432" text-anchor="middle" font-weight="700">ML ALLOW and rule NONE</text>
+    <text x="550" y="456" text-anchor="middle">Forward to the demo API. backendReached is set from that response.</text>
+  </g>
+  <g stroke="#111827" fill="none" stroke-width="1.4">
+    <line x1="280" y1="110" x2="360" y2="110"/>
+    <line x1="640" y1="110" x2="720" y2="110"/>
+    <path d="M885 160 V200 H290 V230"/>
+    <path d="M885 160 V200 H800 V230"/>
+    <path d="M290 350 V376 H550 V400"/>
+    <path d="M800 350 V376 H550 V400"/>
+  </g>
+</svg>

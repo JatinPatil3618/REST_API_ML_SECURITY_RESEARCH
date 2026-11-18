@@ -1,0 +1,413 @@
+{
+  "sklearn": "1.2.2",
+  "test_csv": "not read",
+  "threshold": 0.5,
+  "fit_rows": 131591,
+  "attack_only_fit_rows": 28322,
+  "validation_rows": 14622,
+  "multiclass_label_encoding": {
+    "Cookie Injection": 0,
+    "Directory Traversal": 1,
+    "LOG4J": 2,
+    "Log Forging": 3,
+    "RCE": 4,
+    "SQL Injection": 5,
+    "XSS": 6
+  },
+  "benign_included_in_multiclass_fit": false,
+  "random_state": 42,
+  "stratify": "is_malicious",
+  "active_multiclass_classes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "temporary_multiclass_classes": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6"
+  ],
+  "candidate_params": {
+    "n_estimators": 100,
+    "max_depth": 16,
+    "min_samples_split": 5,
+    "min_samples_leaf": 1,
+    "class_weight": null,
+    "max_features": "sqrt",
+    "random_state": 42
+  },
+  "pipeline_rule": "Benign when binary probability < 0.50; otherwise ATTACK_CLASSES[argmax], indices 0-6",
+  "validation": {
+    "A": {
+      "binary": {
+        "threshold": 0.5,
+        "precision": 1.0,
+        "recall": 0.9351763584366063,
+        "f1": 0.9665024630541872,
+        "false_positive_rate": 0.0,
+        "confusion_matrix": {
+          "tn": 11475,
+          "fp": 0,
+          "fn": 204,
+          "tp": 2943
+        }
+      },
+      "combined": {
+        "class_order": [
+          "Benign",
+          "Cookie Injection",
+          "Directory Traversal",
+          "LOG4J",
+          "Log Forging",
+          "RCE",
+          "SQL Injection",
+          "XSS"
+        ],
+        "confusion_matrix": [
+          [
+            11475,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            614,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            323,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            203,
+            0,
+            0,
+            116,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            303,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            333,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            614,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            640
+          ]
+        ],
+        "per_class": [
+          {
+            "label": "Benign",
+            "precision": 0.982532751091703,
+            "recall": 1.0,
+            "f1": 0.9911894273127753,
+            "support": 11475
+          },
+          {
+            "label": "Cookie Injection",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 614
+          },
+          {
+            "label": "Directory Traversal",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 323
+          },
+          {
+            "label": "LOG4J",
+            "precision": 1.0,
+            "recall": 0.36363636363636365,
+            "f1": 0.5333333333333333,
+            "support": 319
+          },
+          {
+            "label": "Log Forging",
+            "precision": 1.0,
+            "recall": 0.9967105263157895,
+            "f1": 0.9983525535420099,
+            "support": 304
+          },
+          {
+            "label": "RCE",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 333
+          },
+          {
+            "label": "SQL Injection",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 614
+          },
+          {
+            "label": "XSS",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 640
+          }
+        ],
+        "attacks_missed_at_binary_stage": 204,
+        "attacks_missed_at_binary_stage_by_label": {
+          "Cookie Injection": 0,
+          "Directory Traversal": 0,
+          "LOG4J": 203,
+          "Log Forging": 1,
+          "RCE": 0,
+          "SQL Injection": 0,
+          "XSS": 0
+        },
+        "attacks_blocked_then_labeled_benign_by_multiclass": 0
+      }
+    },
+    "B": {
+      "binary": {
+        "threshold": 0.5,
+        "precision": 1.0,
+        "recall": 0.9046711153479504,
+        "f1": 0.94994994994995,
+        "false_positive_rate": 0.0,
+        "confusion_matrix": {
+          "tn": 11475,
+          "fp": 0,
+          "fn": 300,
+          "tp": 2847
+        }
+      },
+      "combined": {
+        "class_order": [
+          "Benign",
+          "Cookie Injection",
+          "Directory Traversal",
+          "LOG4J",
+          "Log Forging",
+          "RCE",
+          "SQL Injection",
+          "XSS"
+        ],
+        "confusion_matrix": [
+          [
+            11475,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            614,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            323,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            299,
+            0,
+            0,
+            20,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            303,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            333,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            614,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            640
+          ]
+        ],
+        "per_class": [
+          {
+            "label": "Benign",
+            "precision": 0.9745222929936306,
+            "recall": 1.0,
+            "f1": 0.9870967741935484,
+            "support": 11475
+          },
+          {
+            "label": "Cookie Injection",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 614
+          },
+          {
+            "label": "Directory Traversal",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 323
+          },
+          {
+            "label": "LOG4J",
+            "precision": 1.0,
+            "recall": 0.06269592476489028,
+            "f1": 0.11799410029498525,
+            "support": 319
+          },
+          {
+            "label": "Log Forging",
+            "precision": 1.0,
+            "recall": 0.9967105263157895,
+            "f1": 0.9983525535420099,
+            "support": 304
+          },
+          {
+            "label": "RCE",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 333
+          },
+          {
+            "label": "SQL Injection",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 614
+          },
+          {
+            "label": "XSS",
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 640
+          }
+        ],
+        "attacks_missed_at_binary_stage": 300,
+        "attacks_missed_at_binary_stage_by_label": {
+          "Cookie Injection": 0,
+          "Directory Traversal": 0,
+          "LOG4J": 299,
+          "Log Forging": 1,
+          "RCE": 0,
+          "SQL Injection": 0,
+          "XSS": 0
+        },
+        "attacks_blocked_then_labeled_benign_by_multiclass": 0
+      }
+    }
+  },
+  "controlled_suite": {
+    "note": "35 specification-benign reads; not population metrics",
+    "A_false_positives": 34,
+    "A_false_positive_rate": 0.9714285714285714,
+    "B_false_positives": 3,
+    "B_false_positive_rate": 0.08571428571428572
+  }
+}

@@ -1,0 +1,177 @@
+{
+  "sklearn": "1.2.2",
+  "threshold": 0.5,
+  "features": [
+    "url_entropy",
+    "path_length",
+    "url_length",
+    "path_segment_count",
+    "query_length",
+    "url_digit_count",
+    "user_agent_entropy",
+    "query_parameter_count",
+    "request_body_entropy",
+    "request_body_digit_count"
+  ],
+  "classes": [
+    "Cookie Injection",
+    "Directory Traversal",
+    "LOG4J",
+    "Log Forging",
+    "RCE",
+    "SQL Injection"
+  ],
+  "xss_dropped_not_relabeled": true,
+  "synthetic_flag_rows": 0,
+  "structural_flags_in_model": false,
+  "family_proxy_features_in_model": false,
+  "train_rows": 139799,
+  "test_rows": 34951,
+  "official_test": {
+    "rows": 34951,
+    "accuracy": 0.9789133358129953,
+    "precision": 0.9981972237245358,
+    "recall": 0.8839399744572158,
+    "f1": 0.9376005418677504,
+    "fpr": 0.0003485899536375362,
+    "confusion": {
+      "tn": 28677,
+      "fp": 10,
+      "fn": 727,
+      "tp": 5537
+    },
+    "per_family": {
+      "Cookie Injection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1548
+      },
+      "Directory Traversal": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 788
+      },
+      "LOG4J": {
+        "precision": 1.0,
+        "recall": 0.03614457831325301,
+        "f1": 0.06976744186046512,
+        "support": 747
+      },
+      "Log Forging": {
+        "precision": 0.9876543209876543,
+        "recall": 0.9913258983890955,
+        "f1": 0.9894867037724182,
+        "support": 807
+      },
+      "RCE": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 789
+      },
+      "SQL Injection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1585
+      }
+    },
+    "binary_misses_by_family": {
+      "Cookie Injection": 0,
+      "Directory Traversal": 0,
+      "LOG4J": 720,
+      "Log Forging": 7,
+      "RCE": 0,
+      "SQL Injection": 0
+    },
+    "importances": {
+      "url_entropy": 0.19556591062835163,
+      "path_length": 0.1526204311122454,
+      "url_length": 0.1853403033301606,
+      "path_segment_count": 0.13912631087608132,
+      "query_length": 0.13187237032504528,
+      "url_digit_count": 0.10409983450467214,
+      "user_agent_entropy": 0.020347699753665863,
+      "query_parameter_count": 0.05578642303825047,
+      "request_body_entropy": 0.013398777290676006,
+      "request_body_digit_count": 0.001841939140851449
+    }
+  },
+  "unseen_10_vector_test": {
+    "rows": 14840,
+    "accuracy": 0.9743935309973046,
+    "precision": 0.9941383352872216,
+    "recall": 0.8209099709583737,
+    "f1": 0.8992576882290563,
+    "fpr": 0.0007828401440425865,
+    "confusion": {
+      "tn": 12764,
+      "fp": 10,
+      "fn": 370,
+      "tp": 1696
+    },
+    "per_family": {
+      "Cookie Injection": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "Directory Traversal": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 21
+      },
+      "LOG4J": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 363
+      },
+      "Log Forging": {
+        "precision": 0.9874213836477987,
+        "recall": 0.9911616161616161,
+        "f1": 0.9892879647132955,
+        "support": 792
+      },
+      "RCE": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      },
+      "SQL Injection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 890
+      }
+    },
+    "binary_misses_by_family": {
+      "Cookie Injection": 0,
+      "Directory Traversal": 0,
+      "LOG4J": 363,
+      "Log Forging": 7,
+      "RCE": 0,
+      "SQL Injection": 0
+    },
+    "importances": {
+      "url_entropy": 0.19556591062835163,
+      "path_length": 0.1526204311122454,
+      "url_length": 0.1853403033301606,
+      "path_segment_count": 0.13912631087608132,
+      "query_length": 0.13187237032504528,
+      "url_digit_count": 0.10409983450467214,
+      "user_agent_entropy": 0.020347699753665863,
+      "query_parameter_count": 0.05578642303825047,
+      "request_body_entropy": 0.013398777290676006,
+      "request_body_digit_count": 0.001841939140851449
+    }
+  },
+  "held_out_test_csv": "opened_for_scoring_after_fit",
+  "models_dir_written": true,
+  "production_atrdf_untouched": true
+}

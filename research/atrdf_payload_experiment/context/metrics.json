@@ -1,0 +1,233 @@
+{
+  "sklearn": "1.2.2",
+  "threshold": 0.5,
+  "max_features": "all",
+  "features": [
+    "url_entropy",
+    "header_count",
+    "path_length",
+    "url_special_count",
+    "url_length",
+    "path_segment_count",
+    "cookie_present",
+    "query_length",
+    "url_digit_count",
+    "user_agent_entropy",
+    "query_parameter_count",
+    "request_body_entropy",
+    "request_body_digit_count",
+    "sql_structure",
+    "markup_script",
+    "path_traversal",
+    "command_chain",
+    "cookie_signal",
+    "log_control",
+    "jndi_lookup"
+  ],
+  "real_train_rows_in_fit": 118941,
+  "unflagged_attacks_left_out_of_fit": 5300,
+  "synthetic_flagged_rows_per_family": 4000,
+  "synthetic_flagged_weight": 4,
+  "synthetic_benign_shift_rows": 12000,
+  "validation_rows": 21972,
+  "held_out_test_csv": "not_opened",
+  "lab_requests_in_training": false,
+  "accuracy": 0.9591753140360458,
+  "precision": 1.0,
+  "recall": 0.8091895341416719,
+  "f1": 0.8945326278659612,
+  "false_positive_rate": 0.0,
+  "confusion": {
+    "tn": 17271,
+    "fp": 0,
+    "fn": 897,
+    "tp": 3804
+  },
+  "family_recall": {
+    "Cookie Injection": {
+      "rows": 968,
+      "flagged_rows": 968,
+      "binary_recall": 1.0,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "Directory Traversal": {
+      "rows": 464,
+      "flagged_rows": 464,
+      "binary_recall": 1.0,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "LOG4J": {
+      "rows": 435,
+      "flagged_rows": 0,
+      "binary_recall": 0.0,
+      "flagged_binary_recall": null,
+      "multiclass_recall_when_detected": null
+    },
+    "Log Forging": {
+      "rows": 459,
+      "flagged_rows": 459,
+      "binary_recall": 1.0,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "RCE": {
+      "rows": 488,
+      "flagged_rows": 488,
+      "binary_recall": 1.0,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "SQL Injection": {
+      "rows": 956,
+      "flagged_rows": 956,
+      "binary_recall": 1.0,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "XSS": {
+      "rows": 931,
+      "flagged_rows": 469,
+      "binary_recall": 0.5037593984962406,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    }
+  },
+  "binary_importances": {
+    "url_entropy": 0.0,
+    "header_count": 0.0,
+    "path_length": 0.0,
+    "url_special_count": 0.0,
+    "url_length": 0.0,
+    "path_segment_count": 0.0,
+    "cookie_present": 0.0,
+    "query_length": 0.0,
+    "url_digit_count": 0.0,
+    "user_agent_entropy": 0.0,
+    "query_parameter_count": 0.0,
+    "request_body_entropy": 0.0,
+    "request_body_digit_count": 0.0,
+    "sql_structure": 0.08784178495724704,
+    "markup_script": 0.11072698909065667,
+    "path_traversal": 0.1402126022602162,
+    "command_chain": 0.19328224151624485,
+    "cookie_signal": 0.08743078172498917,
+    "log_control": 0.1486885933270948,
+    "jndi_lookup": 0.23181700712355147
+  },
+  "deployment_check": [
+    {
+      "case": "SQLI",
+      "expected": "SQL Injection",
+      "malicious": 1.0,
+      "family": "SQL Injection",
+      "flags": {
+        "sql_structure": 1
+      }
+    },
+    {
+      "case": "XSS",
+      "expected": "XSS",
+      "malicious": 1.0,
+      "family": "XSS",
+      "flags": {
+        "markup_script": 1
+      }
+    },
+    {
+      "case": "COOKIE",
+      "expected": "Cookie Injection",
+      "malicious": 1.0,
+      "family": "Cookie Injection",
+      "flags": {
+        "cookie_signal": 1
+      }
+    },
+    {
+      "case": "LOGFORGE",
+      "expected": "Log Forging",
+      "malicious": 1.0,
+      "family": "Log Forging",
+      "flags": {
+        "log_control": 1
+      }
+    },
+    {
+      "case": "RCE",
+      "expected": "RCE",
+      "malicious": 1.0,
+      "family": "RCE",
+      "flags": {
+        "command_chain": 1
+      }
+    },
+    {
+      "case": "TRAVERSAL",
+      "expected": "Directory Traversal",
+      "malicious": 1.0,
+      "family": "Directory Traversal",
+      "flags": {
+        "path_traversal": 1
+      }
+    },
+    {
+      "case": "LOG4J",
+      "expected": "LOG4J",
+      "malicious": 1.0,
+      "family": "LOG4J",
+      "flags": {
+        "jndi_lookup": 1
+      }
+    },
+    {
+      "case": "BOOKS",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "BROWSER",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "HEALTH",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "ROOT",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "COMMENTS",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "SCIENCE",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "SEMI",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    }
+  ]
+}

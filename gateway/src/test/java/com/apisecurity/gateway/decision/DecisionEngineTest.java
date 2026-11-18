@@ -27,6 +27,7 @@ public class DecisionEngineTest {
         mlResult.put("predicted_class", "SQL Injection");
         mlResult.put("confidence", 0.7845);
         mlResult.put("mitigation", "BLOCK + parameterized query path");
+        mlResult.put("mitigation_techniques", java.util.List.of("hard_block", "no_sql_execution"));
 
         DecisionEngine.SecurityDecision dec = decisionEngine.evaluate(mlResult, "ATRDF");
 
@@ -35,6 +36,8 @@ public class DecisionEngineTest {
         assertEquals(0.7845, dec.confidence, 0.0001, "Confidence must match genuine model probability");
         assertNotEquals(0.95, dec.confidence, "Confidence must not be fabricated to 0.95");
         assertEquals(403, dec.httpStatusCode);
+        assertEquals("BLOCK + parameterized query path", dec.mitigation);
+        assertEquals(java.util.List.of("hard_block", "no_sql_execution"), dec.mitigationTechniques);
     }
 
     @Test

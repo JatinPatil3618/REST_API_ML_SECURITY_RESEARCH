@@ -1,0 +1,501 @@
+{
+  "sklearn": "1.2.2",
+  "fit_rows": 131591,
+  "added_benign_rows": 23,
+  "validation_rows": 14622,
+  "current_14": {
+    "binary": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0,
+      "confusion_matrix": {
+        "tn": 11475,
+        "fp": 0,
+        "fn": 0,
+        "tp": 3147
+      }
+    },
+    "per_class": [
+      {
+        "label": "Benign",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 11475,
+        "missed": 0
+      },
+      {
+        "label": "Cookie Injection",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 614,
+        "missed": 0
+      },
+      {
+        "label": "Directory Traversal",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 323,
+        "missed": 0
+      },
+      {
+        "label": "LOG4J",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 319,
+        "missed": 0
+      },
+      {
+        "label": "Log Forging",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 304,
+        "missed": 0
+      },
+      {
+        "label": "RCE",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 333,
+        "missed": 0
+      },
+      {
+        "label": "SQL Injection",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 614,
+        "missed": 0
+      },
+      {
+        "label": "XSS",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 640,
+        "missed": 0
+      }
+    ],
+    "log4j_missed_at_binary_stage": 0
+  },
+  "augmented_14": {
+    "binary": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0,
+      "confusion_matrix": {
+        "tn": 11475,
+        "fp": 0,
+        "fn": 0,
+        "tp": 3147
+      }
+    },
+    "per_class": [
+      {
+        "label": "Benign",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 11475,
+        "missed": 0
+      },
+      {
+        "label": "Cookie Injection",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 614,
+        "missed": 0
+      },
+      {
+        "label": "Directory Traversal",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 323,
+        "missed": 0
+      },
+      {
+        "label": "LOG4J",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 319,
+        "missed": 0
+      },
+      {
+        "label": "Log Forging",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 304,
+        "missed": 0
+      },
+      {
+        "label": "RCE",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 333,
+        "missed": 0
+      },
+      {
+        "label": "SQL Injection",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 614,
+        "missed": 0
+      },
+      {
+        "label": "XSS",
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 640,
+        "missed": 0
+      }
+    ],
+    "log4j_missed_at_binary_stage": 0
+  },
+  "previously_missed_log4j": {
+    "count": 203,
+    "detected_by_augmented_binary": 203,
+    "labeled_log4j_by_augmented_pipeline": 203
+  },
+  "suite_current_blocked": 12,
+  "suite_augmented_blocked": 0,
+  "suite_marker_positive": 0,
+  "suite_comparison": [
+    {
+      "case_id": "C01",
+      "route": "/api/books",
+      "header_profile": "H2",
+      "current_score": 0.32,
+      "current_label": "Benign",
+      "augmented_score": 0.01,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C02",
+      "route": "/api/comments/book/101",
+      "header_profile": "H2",
+      "current_score": 0.54,
+      "current_label": "LOG4J",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C03",
+      "route": "/api/health",
+      "header_profile": "H2",
+      "current_score": 0.39,
+      "current_label": "Benign",
+      "augmented_score": 0.16,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C04",
+      "route": "/api/books",
+      "header_profile": "H3",
+      "current_score": 0.32,
+      "current_label": "Benign",
+      "augmented_score": 0.01,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C05",
+      "route": "/api/comments/book/101",
+      "header_profile": "H3",
+      "current_score": 0.54,
+      "current_label": "LOG4J",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C06",
+      "route": "/api/health",
+      "header_profile": "H3",
+      "current_score": 0.39,
+      "current_label": "Benign",
+      "augmented_score": 0.16,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C07",
+      "route": "/api/books",
+      "header_profile": "H4",
+      "current_score": 0.32,
+      "current_label": "Benign",
+      "augmented_score": 0.01,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C08",
+      "route": "/api/comments/book/101",
+      "header_profile": "H4",
+      "current_score": 0.54,
+      "current_label": "LOG4J",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C09",
+      "route": "/api/health",
+      "header_profile": "H4",
+      "current_score": 0.39,
+      "current_label": "Benign",
+      "augmented_score": 0.16,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C10",
+      "route": "/api/books",
+      "header_profile": "H5",
+      "current_score": 0.32,
+      "current_label": "Benign",
+      "augmented_score": 0.01,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C11",
+      "route": "/api/comments/book/101",
+      "header_profile": "H5",
+      "current_score": 0.54,
+      "current_label": "LOG4J",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C12",
+      "route": "/api/health",
+      "header_profile": "H5",
+      "current_score": 0.39,
+      "current_label": "Benign",
+      "augmented_score": 0.16,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C13",
+      "route": "/api/books",
+      "header_profile": "H6",
+      "current_score": 0.32,
+      "current_label": "Benign",
+      "augmented_score": 0.01,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C14",
+      "route": "/api/comments/book/101",
+      "header_profile": "H6",
+      "current_score": 0.54,
+      "current_label": "LOG4J",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C15",
+      "route": "/api/health",
+      "header_profile": "H6",
+      "current_score": 0.39,
+      "current_label": "Benign",
+      "augmented_score": 0.16,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C16",
+      "route": "/",
+      "header_profile": "H2",
+      "current_score": 0.6525,
+      "current_label": "XSS",
+      "augmented_score": 0.068,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C17",
+      "route": "/",
+      "header_profile": "H3",
+      "current_score": 0.6525,
+      "current_label": "XSS",
+      "augmented_score": 0.068,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C18",
+      "route": "/",
+      "header_profile": "H6",
+      "current_score": 0.6525,
+      "current_label": "XSS",
+      "augmented_score": 0.068,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C19",
+      "route": "/api/books",
+      "header_profile": "H3",
+      "current_score": 0.43,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C20",
+      "route": "/api/books",
+      "header_profile": "H3",
+      "current_score": 0.43,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C21",
+      "route": "/api/books",
+      "header_profile": "H3",
+      "current_score": 0.44,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C22",
+      "route": "/api/books",
+      "header_profile": "H3",
+      "current_score": 0.43,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C23",
+      "route": "/api/books",
+      "header_profile": "H3",
+      "current_score": 0.43,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C24",
+      "route": "/api/books",
+      "header_profile": "H3",
+      "current_score": 0.43,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C25",
+      "route": "/api/books",
+      "header_profile": "H3",
+      "current_score": 0.46,
+      "current_label": "Benign",
+      "augmented_score": 0.03777777777777778,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C26",
+      "route": "/api/books",
+      "header_profile": "H3",
+      "current_score": 0.43,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C27",
+      "route": "/api/books",
+      "header_profile": "H3",
+      "current_score": 0.43,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C28",
+      "route": "/api/comments/book/201",
+      "header_profile": "H3",
+      "current_score": 0.54,
+      "current_label": "LOG4J",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C29",
+      "route": "/api/comments/book/302",
+      "header_profile": "H3",
+      "current_score": 0.54,
+      "current_label": "LOG4J",
+      "augmented_score": 0.01,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C30",
+      "route": "/api/books",
+      "header_profile": "H2",
+      "current_score": 0.43,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C31",
+      "route": "/api/books",
+      "header_profile": "H6",
+      "current_score": 0.43,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C32",
+      "route": "/api/books",
+      "header_profile": "H5",
+      "current_score": 0.44,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C33",
+      "route": "/api/comments/book/201",
+      "header_profile": "H4",
+      "current_score": 0.54,
+      "current_label": "LOG4J",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C34",
+      "route": "/api/comments/book/302",
+      "header_profile": "H6",
+      "current_score": 0.54,
+      "current_label": "LOG4J",
+      "augmented_score": 0.01,
+      "augmented_label": "Benign"
+    },
+    {
+      "case_id": "C35",
+      "route": "/api/books",
+      "header_profile": "H4",
+      "current_score": 0.43,
+      "current_label": "Benign",
+      "augmented_score": 0.0,
+      "augmented_label": "Benign"
+    }
+  ],
+  "remaining_false_positives": [],
+  "checks": [
+    "23 retained augmentation rows use profiles H2-H6 and none of those header values match the JNDI pattern.",
+    "jndi_lookup_marker was set to 0 on those 23 rows after that check.",
+    "None of the 23 vectors matches a 35-case suite vector on the original 13 features.",
+    "Previously missed LOG4J validation rows: 203. Augmented binary detections among them: 203. Augmented pipeline LOG4J labels among them: 203.",
+    "Held-out test CSV was not opened. Active model files were loaded and not written."
+  ]
+}

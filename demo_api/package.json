@@ -4,7 +4,8 @@
   "description": "SecureBook API Lab - Realistic Book Platform Backend for REST API Security Research",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test"
   },
   "dependencies": {
     "cors": "^2.8.5",

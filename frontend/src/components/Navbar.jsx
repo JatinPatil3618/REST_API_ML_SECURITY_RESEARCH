@@ -21,7 +21,6 @@ export default function Navbar() {
           {isLoggedIn && <>
             <NavLink to="/dashboard" className={({isActive})=>`nav-link${isActive?' active':''}`}>My Dashboard</NavLink>
             <NavLink to="/profile" className={({isActive})=>`nav-link${isActive?' active':''}`}>Profile</NavLink>
-            <NavLink to="/security-lab" className={({isActive})=>`nav-link${isActive?' active':''}`}>Security Lab</NavLink>
             <NavLink to="/history" className={({isActive})=>`nav-link${isActive?' active':''}`}>Request History</NavLink>
           </>}
           <NavLink to="/about" className={({isActive})=>`nav-link${isActive?' active':''}`}>About</NavLink>

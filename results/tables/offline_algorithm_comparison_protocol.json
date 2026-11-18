@@ -1,0 +1,67 @@
+{
+  "random_seed": 42,
+  "threshold": 0.5,
+  "atrdf": {
+    "protocol": "Train on REQUEST_ONLY_train.csv; score only test rows whose 12-feature vector (header_count removed) does not appear in train.",
+    "features": [
+      "url_entropy",
+      "path_length",
+      "url_special_count",
+      "url_length",
+      "path_segment_count",
+      "cookie_present",
+      "query_length",
+      "url_digit_count",
+      "user_agent_entropy",
+      "query_parameter_count",
+      "request_body_entropy",
+      "request_body_digit_count"
+    ],
+    "dropped_feature": "header_count",
+    "train_rows": 146213,
+    "official_test_rows": 36554,
+    "unseen_test_rows": 14846,
+    "official_test_overlap_fraction": 0.5938611369480769,
+    "unseen_label_counts": {
+      "Benign": 12778,
+      "SQL Injection": 890,
+      "Log Forging": 792,
+      "LOG4J": 363,
+      "Directory Traversal": 21,
+      "Cookie Injection": 2
+    }
+  },
+  "bola": {
+    "protocol": "Session-disjoint 80/10/10 split. Owner-proxy features removed because cross_owner_ratio>0 has precision 1.0 on the corpus.",
+    "features": [
+      "request_frequency",
+      "unique_objects_recent",
+      "object_switch",
+      "same_object_repeat_ratio",
+      "time_since_previous_request",
+      "request_burst_rate",
+      "hour",
+      "session_length",
+      "request_index"
+    ],
+    "dropped_features": [
+      "unique_owners_recent",
+      "owner_switch",
+      "cross_owner_count_recent",
+      "cross_owner_ratio_recent",
+      "same_owner_ratio_recent"
+    ],
+    "train_sessions": 4600,
+    "val_sessions": 575,
+    "test_sessions": 575,
+    "test_rows": 5065,
+    "owner_proxy_rule_on_test": {
+      "accuracy": 0.9220138203356367,
+      "precision": 1.0,
+      "recall": 0.8414291449217182,
+      "f1": 0.9138870721604535,
+      "fpr": 0.0
+    }
+  },
+  "note": "Production joblib files under models/ were not modified."
+}

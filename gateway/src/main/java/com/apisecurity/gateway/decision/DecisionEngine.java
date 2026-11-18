@@ -3,6 +3,8 @@ package com.apisecurity.gateway.decision;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -20,6 +22,7 @@ public class DecisionEngine {
         public String predictedClass;
         public double confidence;
         public String mitigation;
+        public List<String> mitigationTechniques;
         public String userMessage;
         public int httpStatusCode;
 
@@ -36,7 +39,7 @@ public class DecisionEngine {
 
     public SecurityDecision evaluate(Map<String, Object> mlResult, String mode) {
         if (mlResult == null || mlResult.containsKey("error")) {
-            return new SecurityDecision(
+            SecurityDecision failSafe = new SecurityDecision(
                 failSafeMode,
                 "UNKNOWN",
                 "UNAVAILABLE",
@@ -45,12 +48,15 @@ public class DecisionEngine {
                 "Security verification temporarily unavailable",
                 200
             );
+            failSafe.mitigationTechniques = List.of("fail_safe_alert");
+            return failSafe;
         }
 
         String decision = (String) mlResult.getOrDefault("decision", "ALLOW");
         String attackFamily = (String) mlResult.getOrDefault("attack_family", "BENIGN");
         String mitigation = (String) mlResult.getOrDefault("mitigation", "ALLOW");
         String predictedClass = (String) mlResult.getOrDefault("predicted_class", "NORMAL");
+        List<String> techniques = readTechniques(mlResult);
 
         double confidence = 0.0;
         if (mlResult.get("confidence") instanceof Number) {
@@ -107,7 +113,7 @@ public class DecisionEngine {
                 }
             }
 
-            return new SecurityDecision(
+            SecurityDecision blocked = new SecurityDecision(
                 "BLOCK",
                 attackFamily,
                 predictedClass,
@@ -116,9 +122,11 @@ public class DecisionEngine {
                 userMsg,
                 status
             );
+            blocked.mitigationTechniques = techniques;
+            return blocked;
         }
 
-        return new SecurityDecision(
+        SecurityDecision allowed = new SecurityDecision(
             "ALLOW",
             attackFamily,
             predictedClass,
@@ -127,5 +135,21 @@ public class DecisionEngine {
             "Request allowed",
             200
         );
+        allowed.mitigationTechniques = techniques;
+        return allowed;
+    }
+
+    private static List<String> readTechniques(Map<String, Object> mlResult) {
+        Object raw = mlResult.get("mitigation_techniques");
+        if (!(raw instanceof List)) {
+            return null;
+        }
+        List<String> out = new ArrayList<>();
+        for (Object item : (List<?>) raw) {
+            if (item != null) {
+                out.add(String.valueOf(item));
+            }
+        }
+        return out.isEmpty() ? null : out;
     }
 }

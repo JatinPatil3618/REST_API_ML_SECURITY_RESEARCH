@@ -1,0 +1,370 @@
+{
+  "sklearn": "1.2.2",
+  "threshold": 0.5,
+  "max_features": "all",
+  "features": [
+    "url_entropy",
+    "header_count",
+    "path_length",
+    "url_special_count",
+    "url_length",
+    "path_segment_count",
+    "cookie_present",
+    "query_length",
+    "url_digit_count",
+    "user_agent_entropy",
+    "query_parameter_count",
+    "request_body_entropy",
+    "request_body_digit_count",
+    "sql_structure",
+    "markup_script",
+    "path_traversal",
+    "command_chain",
+    "cookie_signal",
+    "log_control",
+    "jndi_lookup"
+  ],
+  "real_train_rows_in_fit": 118758,
+  "unflagged_attacks_left_out_of_fit": 0,
+  "synthetic_flagged_rows_per_family": 4000,
+  "synthetic_flagged_weight": 4,
+  "synthetic_benign_shift_rows": 12000,
+  "classes": [
+    "Cookie Injection",
+    "Directory Traversal",
+    "LOG4J",
+    "Log Forging",
+    "RCE",
+    "SQL Injection"
+  ],
+  "xss_excluded": {
+    "train": 5483,
+    "validation": 931,
+    "relabeled_as_benign": 0
+  },
+  "markup_script_column": "retained; it is the only flag on part of the RCE class",
+  "validation_rows": 21041,
+  "validation_rows_before_xss_exclusion": 21972,
+  "held_out_test_csv": "not_opened",
+  "lab_requests_in_training": false,
+  "header_values": "raw request headers; Set-Cookie scanned for markup and jndi only",
+  "accuracy": 1.0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "false_positive_rate": 0.0,
+  "confusion": {
+    "tn": 17271,
+    "fp": 0,
+    "fn": 0,
+    "tp": 3770
+  },
+  "multiclass_confusion": {
+    "labels": [
+      "Benign",
+      "Cookie Injection",
+      "Directory Traversal",
+      "LOG4J",
+      "Log Forging",
+      "RCE",
+      "SQL Injection"
+    ],
+    "matrix": [
+      [
+        17271,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        968,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        464,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        435,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        459,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        488,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        956
+      ]
+    ]
+  },
+  "per_family": {
+    "Cookie Injection": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 968
+    },
+    "Directory Traversal": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 464
+    },
+    "LOG4J": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 435
+    },
+    "Log Forging": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 459
+    },
+    "RCE": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 488
+    },
+    "SQL Injection": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 956
+    }
+  },
+  "family_recall": {
+    "Cookie Injection": {
+      "rows": 968,
+      "flagged_rows": 968,
+      "binary_recall": 1.0,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "Directory Traversal": {
+      "rows": 464,
+      "flagged_rows": 464,
+      "binary_recall": 1.0,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "LOG4J": {
+      "rows": 435,
+      "flagged_rows": 435,
+      "binary_recall": 1.0,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "Log Forging": {
+      "rows": 459,
+      "flagged_rows": 459,
+      "binary_recall": 1.0,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "RCE": {
+      "rows": 488,
+      "flagged_rows": 488,
+      "binary_recall": 1.0,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "SQL Injection": {
+      "rows": 956,
+      "flagged_rows": 956,
+      "binary_recall": 1.0,
+      "flagged_binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    }
+  },
+  "binary_importances": {
+    "url_entropy": 0.0,
+    "header_count": 0.0,
+    "path_length": 0.0,
+    "url_special_count": 0.0,
+    "url_length": 0.0,
+    "path_segment_count": 0.0,
+    "cookie_present": 0.0,
+    "query_length": 0.0,
+    "url_digit_count": 0.0,
+    "user_agent_entropy": 0.0,
+    "query_parameter_count": 0.0,
+    "request_body_entropy": 0.0,
+    "request_body_digit_count": 0.0,
+    "sql_structure": 0.10986261225669906,
+    "markup_script": 0.023556284507270785,
+    "path_traversal": 0.16056932475983887,
+    "command_chain": 0.2580813798573212,
+    "cookie_signal": 0.10704183484534294,
+    "log_control": 0.16886755062910247,
+    "jndi_lookup": 0.17202101314442458
+  },
+  "deployment_check": [
+    {
+      "case": "SQLI",
+      "scope": "evaluated",
+      "expected": "SQL Injection",
+      "malicious": 1.0,
+      "family": "SQL Injection",
+      "flags": {
+        "sql_structure": 1
+      }
+    },
+    {
+      "case": "XSS",
+      "scope": "out_of_scope",
+      "expected": "OUT_OF_SCOPE",
+      "malicious": 1.0,
+      "family": "RCE",
+      "flags": {
+        "markup_script": 1
+      }
+    },
+    {
+      "case": "COOKIE",
+      "scope": "evaluated",
+      "expected": "Cookie Injection",
+      "malicious": 1.0,
+      "family": "Cookie Injection",
+      "flags": {
+        "cookie_signal": 1
+      }
+    },
+    {
+      "case": "LOGFORGE",
+      "scope": "evaluated",
+      "expected": "Log Forging",
+      "malicious": 1.0,
+      "family": "Log Forging",
+      "flags": {
+        "log_control": 1
+      }
+    },
+    {
+      "case": "RCE",
+      "scope": "evaluated",
+      "expected": "RCE",
+      "malicious": 1.0,
+      "family": "RCE",
+      "flags": {
+        "command_chain": 1
+      }
+    },
+    {
+      "case": "TRAVERSAL",
+      "scope": "evaluated",
+      "expected": "Directory Traversal",
+      "malicious": 1.0,
+      "family": "Directory Traversal",
+      "flags": {
+        "path_traversal": 1
+      }
+    },
+    {
+      "case": "LOG4J",
+      "scope": "evaluated",
+      "expected": "LOG4J",
+      "malicious": 1.0,
+      "family": "LOG4J",
+      "flags": {
+        "jndi_lookup": 1
+      }
+    },
+    {
+      "case": "BOOKS",
+      "scope": "evaluated",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "BROWSER",
+      "scope": "evaluated",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "HEALTH",
+      "scope": "evaluated",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "ROOT",
+      "scope": "evaluated",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "COMMENTS",
+      "scope": "evaluated",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "SCIENCE",
+      "scope": "evaluated",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    },
+    {
+      "case": "SEMI",
+      "scope": "evaluated",
+      "expected": "BENIGN",
+      "malicious": 0.0,
+      "family": null,
+      "flags": {}
+    }
+  ]
+}

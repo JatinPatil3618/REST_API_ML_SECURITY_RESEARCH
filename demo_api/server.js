@@ -77,7 +77,6 @@ async function initDatabase() {
     logSecurityEvent('warn', 'MongoDB not connected; using in-memory store with sync', { error: err.message });
   }
 }
-initDatabase();
 
 // -------------------------------------------------------------
 // Authentication Middleware
@@ -85,17 +84,8 @@ initDatabase();
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  
+
   if (!token) {
-    // Also check header forwarded by Gateway
-    const gwUser = req.headers['x-authenticated-user'];
-    if (gwUser) {
-      const user = USERS.find(u => u.username === gwUser);
-      if (user) {
-        req.user = { id: user.id, username: user.username, role: user.role };
-        return next();
-      }
-    }
     return res.status(401).json({ error: 'Authentication required. Please log in.' });
   }
 
@@ -112,17 +102,12 @@ function authenticateToken(req, res, next) {
 function optionalAuth(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  const gwUser = req.headers['x-authenticated-user'];
 
   if (token) {
     jwt.verify(token, JWT_SECRET, (err, user) => {
       if (!err) req.user = user;
       next();
     });
-  } else if (gwUser) {
-    const user = USERS.find(u => u.username === gwUser);
-    if (user) req.user = { id: user.id, username: user.username, role: user.role };
-    next();
   } else {
     next();
   }
@@ -226,8 +211,14 @@ app.get('/api/books', optionalAuth, (req, res) => {
   });
 });
 
-// Catalog: Get Book By ID (Object-Level Authorization Enforcement)
-app.get('/api/books/:id', optionalAuth, (req, res) => {
+function isManagementView(query) {
+  return query.view === 'manage' || query.access === 'edit';
+}
+
+// Catalog: Get Book By ID.
+// A normal GET is the public catalog record.
+// view=manage and access=edit require a verified JWT and the book owner.
+app.get('/api/books/:id', (req, res) => {
   const bookId = String(req.params.id);
   const book = BOOKS.find(b => b.id === bookId);
 
@@ -235,24 +226,35 @@ app.get('/api/books/:id', optionalAuth, (req, res) => {
     return res.status(404).json({ error: 'Book not found.' });
   }
 
-  // BOLA Check:
-  // If request contains an intent for owner-private access, or if gateway flags cross-owner access:
-  const isPrivateAccess = req.query.view === 'manage' || req.query.access === 'edit';
-  if (isPrivateAccess && req.user && req.user.username !== book.owner) {
-    logSecurityEvent('security_alert', 'BOLA access denied: cross-user book management attempt', {
-      user: req.user.username,
-      requested_book: bookId,
-      book_owner: book.owner
-    });
-    return res.status(403).json({
-      error: 'Access denied. This book belongs to another user.',
-      code: 'BOLA_AUTHORIZATION_DENIED',
-      bookId,
-      owner: book.owner
-    });
+  if (!isManagementView(req.query)) {
+    return res.json(book);
   }
 
-  res.json(book);
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ error: 'Authentication required. Please log in.' });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) {
+      logSecurityEvent('warn', 'Invalid JWT token supplied', { error: err.message });
+      return res.status(403).json({ error: 'Session invalid or expired. Reauthentication required.' });
+    }
+    if (user.username !== book.owner) {
+      logSecurityEvent('security_alert', 'BOLA access denied: cross-user book management attempt', {
+        user: user.username,
+        requested_book: bookId,
+        book_owner: book.owner
+      });
+      return res.status(403).json({
+        error: 'Access denied. This book belongs to another user.',
+        code: 'BOLA_AUTHORIZATION_DENIED',
+        bookId
+      });
+    }
+    return res.json(book);
+  });
 });
 
 // Catalog: Create Book
@@ -403,8 +405,12 @@ app.get('/api/users/me', authenticateToken, (req, res) => {
   res.redirect('/api/profile');
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`[+] SecureBook Demo API running on http://localhost:${PORT}`);
-  logSecurityEvent('info', `Server listening on port ${PORT}`);
-});
+if (require.main === module) {
+  initDatabase();
+  app.listen(PORT, () => {
+    console.log(`[+] SecureBook Demo API running on http://localhost:${PORT}`);
+    logSecurityEvent('info', `Server listening on port ${PORT}`);
+  });
+}
+
+module.exports = { app };

@@ -1,0 +1,483 @@
+{
+  "test_csv": "not read",
+  "threshold": 0.5,
+  "random_state": 42,
+  "original_fit_rows": 131591,
+  "removed_overlap_rows": [
+    "A06",
+    "A19",
+    "A24"
+  ],
+  "retained_augmentation_rows": 23,
+  "validation_rows": 14622,
+  "exact_feature_vector_overlaps": [
+    {
+      "augmentation_case_id": "A06",
+      "route": "/api/books",
+      "query": "search=database",
+      "header_profile": "H2",
+      "suite_matches": [
+        {
+          "suite_case_id": "C30",
+          "route": "/api/books",
+          "query": "search=protocol",
+          "header_profile": "H2",
+          "equal_on_all_13": true
+        }
+      ]
+    },
+    {
+      "augmentation_case_id": "A19",
+      "route": "/api/comments/book/202",
+      "query": null,
+      "header_profile": "H3",
+      "suite_matches": [
+        {
+          "suite_case_id": "C28",
+          "route": "/api/comments/book/201",
+          "query": null,
+          "header_profile": "H3",
+          "equal_on_all_13": true
+        }
+      ]
+    },
+    {
+      "augmentation_case_id": "A24",
+      "route": "/api/comments/book/502",
+      "query": null,
+      "header_profile": "H6",
+      "suite_matches": [
+        {
+          "suite_case_id": "C34",
+          "route": "/api/comments/book/302",
+          "query": null,
+          "header_profile": "H6",
+          "equal_on_all_13": true
+        }
+      ]
+    }
+  ],
+  "validation_binary": {
+    "threshold": 0.5,
+    "precision": 1.0,
+    "recall": 0.9351763584366063,
+    "f1": 0.9665024630541872,
+    "false_positive_rate": 0.0,
+    "confusion_matrix": {
+      "tn": 11475,
+      "fp": 0,
+      "fn": 204,
+      "tp": 2943
+    }
+  },
+  "validation_per_attack_recall": [
+    {
+      "label": "Cookie Injection",
+      "support": 614,
+      "recall": 1.0,
+      "missed_at_binary_stage": 0
+    },
+    {
+      "label": "Directory Traversal",
+      "support": 323,
+      "recall": 1.0,
+      "missed_at_binary_stage": 0
+    },
+    {
+      "label": "LOG4J",
+      "support": 319,
+      "recall": 0.36363636363636365,
+      "missed_at_binary_stage": 203
+    },
+    {
+      "label": "Log Forging",
+      "support": 304,
+      "recall": 0.9967105263157895,
+      "missed_at_binary_stage": 1
+    },
+    {
+      "label": "RCE",
+      "support": 333,
+      "recall": 1.0,
+      "missed_at_binary_stage": 0
+    },
+    {
+      "label": "SQL Injection",
+      "support": 614,
+      "recall": 1.0,
+      "missed_at_binary_stage": 0
+    },
+    {
+      "label": "XSS",
+      "support": 640,
+      "recall": 1.0,
+      "missed_at_binary_stage": 0
+    }
+  ],
+  "controlled_suite_false_positives": 0,
+  "controlled_suite_cases": 35,
+  "focus_routes": [
+    {
+      "case_id": "C01",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H2",
+      "binary_p_malicious": 0.1,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C02",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H2",
+      "binary_p_malicious": 0.03031828184667733,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C04",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.1,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C05",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.03031828184667733,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C07",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H4",
+      "binary_p_malicious": 0.1,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C08",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H4",
+      "binary_p_malicious": 0.03031828184667733,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C10",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H5",
+      "binary_p_malicious": 0.1,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C11",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H5",
+      "binary_p_malicious": 0.03031828184667733,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C13",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.1,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C14",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.03031828184667733,
+      "binary_decision": "BENIGN"
+    }
+  ],
+  "controlled_suite_results": [
+    {
+      "case_id": "C01",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H2",
+      "binary_p_malicious": 0.1,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C02",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H2",
+      "binary_p_malicious": 0.03031828184667733,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C03",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H2",
+      "binary_p_malicious": 0.16,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C04",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.1,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C05",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.03031828184667733,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C06",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.16,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C07",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H4",
+      "binary_p_malicious": 0.1,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C08",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H4",
+      "binary_p_malicious": 0.03031828184667733,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C09",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H4",
+      "binary_p_malicious": 0.16,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C10",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H5",
+      "binary_p_malicious": 0.1,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C11",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H5",
+      "binary_p_malicious": 0.03031828184667733,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C12",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H5",
+      "binary_p_malicious": 0.16,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C13",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.1,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C14",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.03031828184667733,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C15",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.16,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C16",
+      "route": "/",
+      "query": null,
+      "header_profile": "H2",
+      "binary_p_malicious": 0.09133333333333332,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C17",
+      "route": "/",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.09133333333333332,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C18",
+      "route": "/",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.09133333333333332,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C19",
+      "route": "/api/books",
+      "query": "search=protocol",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.0008664809058257159,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C20",
+      "route": "/api/books",
+      "query": "search=maths",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.0008664809058257159,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C21",
+      "route": "/api/books",
+      "query": "category=Technology",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.0014947093017492114,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C22",
+      "route": "/api/books",
+      "query": "category=Science",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.0014947093017492114,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C23",
+      "route": "/api/books",
+      "query": "category=Engineering",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.011494709301749211,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C24",
+      "route": "/api/books",
+      "query": "category=Mathematics",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.011494709301749211,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C25",
+      "route": "/api/books",
+      "query": "category=Computer%20Science",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.13844025157232703,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C26",
+      "route": "/api/books",
+      "query": "search=gateway&category=Technology",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.000440251572327044,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C27",
+      "route": "/api/books",
+      "query": "category=All",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.0014947093017492114,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C28",
+      "route": "/api/comments/book/201",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 5.404547162362419e-05,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C29",
+      "route": "/api/comments/book/302",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.010284667130990197,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C30",
+      "route": "/api/books",
+      "query": "search=protocol",
+      "header_profile": "H2",
+      "binary_p_malicious": 0.0008664809058257159,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C31",
+      "route": "/api/books",
+      "query": "search=protocol",
+      "header_profile": "H6",
+      "binary_p_malicious": 0.0008664809058257159,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C32",
+      "route": "/api/books",
+      "query": "category=Technology",
+      "header_profile": "H5",
+      "binary_p_malicious": 0.0014947093017492114,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C33",
+      "route": "/api/comments/book/201",
+      "query": null,
+      "header_profile": "H4",
+      "binary_p_malicious": 5.404547162362419e-05,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C34",
+      "route": "/api/comments/book/302",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.010284667130990197,
+      "binary_decision": "BENIGN"
+    },
+    {
+      "case_id": "C35",
+      "route": "/api/books",
+      "query": "search=anomaly",
+      "header_profile": "H4",
+      "binary_p_malicious": 0.0014947093017492114,
+      "binary_decision": "BENIGN"
+    }
+  ]
+}

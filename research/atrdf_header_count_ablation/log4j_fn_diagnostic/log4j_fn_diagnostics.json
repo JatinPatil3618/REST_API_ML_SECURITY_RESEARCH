@@ -1,0 +1,1005 @@
+{
+  "files_opened": [
+    "data/raw/atrdf/REQUEST_ONLY_train.csv",
+    "research/atrdf_header_count_ablation/candidate_a_binary_rf.joblib",
+    "models/atrdf/atrdf_binary_rf_request_only.joblib",
+    "dataset_4_train.json"
+  ],
+  "files_not_opened": [
+    "data/raw/atrdf/REQUEST_ONLY_test.csv"
+  ],
+  "threshold": 0.5,
+  "validation_rows": 14622,
+  "fit_rows_not_scored": 131591,
+  "candidate_a_validation_log4j": {
+    "support": 319,
+    "true_positives": 116,
+    "false_negatives": 203,
+    "score_min_tp": 0.5625866298078149,
+    "score_max_fn": 0.07520063216390965,
+    "score_median_tp": 0.94117965103047,
+    "score_median_fn": 0.020673004018910934
+  },
+  "production_on_same_validation_rows": {
+    "log4j_false_negatives": 203,
+    "false_negative_ids_equal_to_candidate_a": true
+  },
+  "class_counts_train_csv": {
+    "rows": 146213,
+    "benign": 114744,
+    "LOG4J": 2986
+  },
+  "feature_comparison": {
+    "candidate_a_log4j_true_positive": {
+      "count": 116,
+      "distributions": {
+        "url_entropy": {
+          "min": 3.852928475043366,
+          "p05": 3.9664589875437235,
+          "p25": 4.111367136356229,
+          "median": 4.283067112606661,
+          "p75": 4.655015472427408,
+          "p95": 5.418876809164088,
+          "max": 5.461815631520463,
+          "mean": 4.473733419063409
+        },
+        "header_count": {
+          "min": 14.0,
+          "p05": 14.0,
+          "p25": 14.0,
+          "median": 16.0,
+          "p75": 16.0,
+          "p95": 16.0,
+          "max": 16.0,
+          "mean": 15.206896551724139
+        },
+        "path_length": {
+          "min": 1.0,
+          "p05": 11.0,
+          "p25": 16.0,
+          "median": 19.5,
+          "p75": 26.0,
+          "p95": 38.0,
+          "max": 124.0,
+          "mean": 22.129310344827587
+        },
+        "url_special_count": {
+          "min": 9.0,
+          "p05": 9.0,
+          "p25": 9.0,
+          "median": 11.0,
+          "p75": 13.0,
+          "p95": 19.0,
+          "max": 21.0,
+          "mean": 11.922413793103448
+        },
+        "url_length": {
+          "min": 33.0,
+          "p05": 34.75,
+          "p25": 37.0,
+          "median": 47.0,
+          "p75": 73.5,
+          "p95": 119.25,
+          "max": 145.0,
+          "mean": 59.69827586206897
+        },
+        "path_segment_count": {
+          "min": 0.0,
+          "p05": 1.0,
+          "p25": 2.0,
+          "median": 3.0,
+          "p75": 4.0,
+          "p95": 4.0,
+          "max": 5.0,
+          "mean": 2.75
+        },
+        "cookie_present": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "query_length": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 20.0,
+          "p95": 76.0,
+          "max": 96.0,
+          "mean": 16.25
+        },
+        "url_digit_count": {
+          "min": 10.0,
+          "p05": 10.0,
+          "p25": 10.0,
+          "median": 11.0,
+          "p75": 16.0,
+          "p95": 34.0,
+          "max": 42.0,
+          "mean": 15.129310344827585
+        },
+        "user_agent_entropy": {
+          "min": 4.664433416030824,
+          "p05": 4.763450316072885,
+          "p25": 4.829500378837017,
+          "median": 5.0988984439152905,
+          "p75": 5.149608319955555,
+          "p95": 5.164435779105303,
+          "max": 5.205504473966468,
+          "mean": 4.996231034212279
+        },
+        "query_parameter_count": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 1.0,
+          "p95": 2.0,
+          "max": 3.0,
+          "mean": 0.5431034482758621
+        },
+        "request_body_entropy": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "request_body_digit_count": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        }
+      },
+      "header_count": {
+        "14": 41,
+        "15": 10,
+        "16": 65
+      },
+      "cookie_present": {
+        "0": 116
+      },
+      "query_length_zero": 79,
+      "body_entropy_zero": 116,
+      "body_digits_zero": 116,
+      "fraction_inside_benign_p05_p95": {
+        "url_entropy": 0.9396551724137931,
+        "header_count": 1.0,
+        "path_length": 0.9310344827586207,
+        "url_special_count": 0.9741379310344828,
+        "url_length": 0.9655172413793104,
+        "path_segment_count": 0.9568965517241379,
+        "cookie_present": 1.0,
+        "query_length": 0.9655172413793104,
+        "url_digit_count": 0.9741379310344828,
+        "user_agent_entropy": 0.9741379310344828,
+        "query_parameter_count": 1.0,
+        "request_body_entropy": 1.0,
+        "request_body_digit_count": 1.0
+      },
+      "fraction_inside_full_benign_minmax_box": 1.0
+    },
+    "candidate_a_log4j_false_negative": {
+      "count": 203,
+      "distributions": {
+        "url_entropy": {
+          "min": 3.7444412590858023,
+          "p05": 3.9110321256635214,
+          "p25": 4.179074278351152,
+          "median": 4.463981820580905,
+          "p75": 5.204714680393887,
+          "p95": 5.393200811323946,
+          "max": 5.500380833759462,
+          "mean": 4.592571244968387
+        },
+        "header_count": {
+          "min": 15.0,
+          "p05": 15.0,
+          "p25": 15.0,
+          "median": 15.0,
+          "p75": 15.0,
+          "p95": 15.0,
+          "max": 15.0,
+          "mean": 15.0
+        },
+        "path_length": {
+          "min": 1.0,
+          "p05": 1.0,
+          "p25": 13.5,
+          "median": 20.0,
+          "p75": 26.0,
+          "p95": 49.79999999999973,
+          "max": 129.0,
+          "mean": 23.600985221674875
+        },
+        "url_special_count": {
+          "min": 9.0,
+          "p05": 9.0,
+          "p25": 11.0,
+          "median": 12.0,
+          "p75": 14.0,
+          "p95": 18.0,
+          "max": 22.0,
+          "mean": 12.699507389162562
+        },
+        "url_length": {
+          "min": 31.0,
+          "p05": 35.0,
+          "p25": 44.5,
+          "median": 56.0,
+          "p75": 90.5,
+          "p95": 126.89999999999998,
+          "max": 150.0,
+          "mean": 67.6847290640394
+        },
+        "path_segment_count": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 2.0,
+          "median": 3.0,
+          "p75": 4.0,
+          "p95": 4.0,
+          "max": 5.0,
+          "mean": 2.9753694581280787
+        },
+        "cookie_present": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "query_length": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 50.5,
+          "p95": 85.89999999999998,
+          "max": 94.0,
+          "mean": 22.64039408866995
+        },
+        "url_digit_count": {
+          "min": 10.0,
+          "p05": 10.0,
+          "p25": 10.0,
+          "median": 12.0,
+          "p75": 25.0,
+          "p95": 38.0,
+          "max": 43.0,
+          "mean": 17.374384236453203
+        },
+        "user_agent_entropy": {
+          "min": 4.664433416030824,
+          "p05": 4.763122952304586,
+          "p25": 4.785462931667423,
+          "median": 5.105220517647684,
+          "p75": 5.149608319955555,
+          "p95": 5.172640034410791,
+          "max": 5.205504473966468,
+          "mean": 4.995154856373017
+        },
+        "query_parameter_count": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 1.0,
+          "p95": 3.0,
+          "max": 3.0,
+          "mean": 0.7586206896551724
+        },
+        "request_body_entropy": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "request_body_digit_count": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        }
+      },
+      "header_count": {
+        "15": 203
+      },
+      "cookie_present": {
+        "0": 203
+      },
+      "query_length_zero": 113,
+      "body_entropy_zero": 203,
+      "body_digits_zero": 203,
+      "fraction_inside_benign_p05_p95": {
+        "url_entropy": 0.9408866995073891,
+        "header_count": 1.0,
+        "path_length": 0.8620689655172413,
+        "url_special_count": 0.9802955665024631,
+        "url_length": 0.9458128078817734,
+        "path_segment_count": 0.9064039408866995,
+        "cookie_present": 1.0,
+        "query_length": 0.9310344827586207,
+        "url_digit_count": 0.9408866995073891,
+        "user_agent_entropy": 0.9753694581280788,
+        "query_parameter_count": 1.0,
+        "request_body_entropy": 1.0,
+        "request_body_digit_count": 1.0
+      },
+      "fraction_inside_full_benign_minmax_box": 1.0
+    },
+    "validation_benign": {
+      "count": 11475,
+      "distributions": {
+        "url_entropy": {
+          "min": 3.6277635530073993,
+          "p05": 3.837125649642014,
+          "p25": 4.104281809855788,
+          "median": 4.412016252639433,
+          "p75": 5.177198210931092,
+          "p95": 5.414261269098515,
+          "max": 5.590263181112638,
+          "mean": 4.54184735888432
+        },
+        "header_count": {
+          "min": 5.0,
+          "p05": 5.0,
+          "p25": 15.0,
+          "median": 15.0,
+          "p75": 15.0,
+          "p95": 16.0,
+          "max": 16.0,
+          "mean": 13.68
+        },
+        "path_length": {
+          "min": 1.0,
+          "p05": 10.0,
+          "p25": 15.0,
+          "median": 19.0,
+          "p75": 23.0,
+          "p95": 38.0,
+          "max": 137.0,
+          "mean": 22.003834422657953
+        },
+        "url_special_count": {
+          "min": 8.0,
+          "p05": 9.0,
+          "p25": 11.0,
+          "median": 12.0,
+          "p75": 13.0,
+          "p95": 19.0,
+          "max": 26.0,
+          "mean": 12.449411764705882
+        },
+        "url_length": {
+          "min": 30.0,
+          "p05": 32.0,
+          "p25": 41.0,
+          "median": 55.0,
+          "p75": 88.0,
+          "p95": 127.0,
+          "max": 158.0,
+          "mean": 65.53969498910675
+        },
+        "path_segment_count": {
+          "min": 0.0,
+          "p05": 1.0,
+          "p25": 2.0,
+          "median": 3.0,
+          "p75": 4.0,
+          "p95": 4.0,
+          "max": 5.0,
+          "mean": 2.7233115468409586
+        },
+        "cookie_present": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 0.0,
+          "p95": 0.0,
+          "max": 0.0,
+          "mean": 0.0
+        },
+        "query_length": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 46.0,
+          "p95": 83.0,
+          "max": 105.0,
+          "mean": 22.08732026143791
+        },
+        "url_digit_count": {
+          "min": 10.0,
+          "p05": 10.0,
+          "p25": 10.0,
+          "median": 11.0,
+          "p75": 20.0,
+          "p95": 37.0,
+          "max": 52.0,
+          "mean": 16.267015250544663
+        },
+        "user_agent_entropy": {
+          "min": 4.004886164091842,
+          "p05": 4.004886164091842,
+          "p25": 4.7635594373289845,
+          "median": 4.883367027881554,
+          "p75": 5.147173198796351,
+          "p95": 5.172640034410791,
+          "max": 5.205504473966468,
+          "mean": 4.843253820591718
+        },
+        "query_parameter_count": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 2.0,
+          "p95": 3.0,
+          "max": 3.0,
+          "mean": 0.7737690631808278
+        },
+        "request_body_entropy": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 0.0,
+          "p95": 4.321928094887363,
+          "max": 4.900711588373535,
+          "mean": 0.5849209267653219
+        },
+        "request_body_digit_count": {
+          "min": 0.0,
+          "p05": 0.0,
+          "p25": 0.0,
+          "median": 0.0,
+          "p75": 0.0,
+          "p95": 4.0,
+          "max": 10.0,
+          "mean": 0.4359912854030501
+        }
+      },
+      "header_count": {
+        "5": 1676,
+        "15": 8186,
+        "16": 1613
+      },
+      "cookie_present": {
+        "0": 11475
+      },
+      "query_length_zero": 6328,
+      "body_entropy_zero": 9862,
+      "body_digits_zero": 9976,
+      "fraction_inside_benign_p05_p95": {
+        "url_entropy": 0.9329847494553377,
+        "header_count": 1.0,
+        "path_length": 0.9074509803921569,
+        "url_special_count": 0.9218300653594771,
+        "url_length": 0.9089324618736383,
+        "path_segment_count": 0.9438779956427015,
+        "cookie_present": 1.0,
+        "query_length": 0.950239651416122,
+        "url_digit_count": 0.9518082788671024,
+        "user_agent_entropy": 0.9738562091503268,
+        "query_parameter_count": 1.0,
+        "request_body_entropy": 0.9518954248366013,
+        "request_body_digit_count": 0.972723311546841
+      },
+      "fraction_inside_full_benign_minmax_box": 1.0
+    }
+  },
+  "engineered_request_features_excluded_from_the_13": {
+    "candidate_a_log4j_true_positive": {
+      "request_body_length": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "request_body_special_count": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "user_agent_length": {
+        "min": 65.0,
+        "median": 100.0,
+        "max": 121.0,
+        "mean": 91.59482758620689
+      },
+      "content_type_present": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "authorization_present": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "decoded_url_length": {
+        "min": 33.0,
+        "median": 47.0,
+        "max": 138.0,
+        "mean": 59.508620689655174
+      }
+    },
+    "candidate_a_log4j_false_negative": {
+      "request_body_length": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "request_body_special_count": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "user_agent_length": {
+        "min": 65.0,
+        "median": 100.0,
+        "max": 121.0,
+        "mean": 92.57635467980296
+      },
+      "content_type_present": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "authorization_present": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "decoded_url_length": {
+        "min": 31.0,
+        "median": 56.0,
+        "max": 140.0,
+        "mean": 67.33990147783251
+      }
+    },
+    "validation_benign": {
+      "request_body_length": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 38.0,
+        "mean": 3.4592592592592593
+      },
+      "request_body_special_count": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "user_agent_length": {
+        "min": 22.0,
+        "median": 81.0,
+        "max": 121.0,
+        "mean": 80.91023965141612
+      },
+      "content_type_present": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "authorization_present": {
+        "min": 0.0,
+        "median": 0.0,
+        "max": 0.0,
+        "mean": 0.0
+      },
+      "decoded_url_length": {
+        "min": 30.0,
+        "median": 55.0,
+        "max": 148.0,
+        "mean": 65.24583877995643
+      }
+    }
+  },
+  "raw_record_markers": {
+    "candidate_a_log4j_true_positive": {
+      "records": 116,
+      "method": {
+        "GET": 116
+      },
+      "empty_body": 116,
+      "marker_any": 116,
+      "marker_by_needle": {
+        "jndi": 116,
+        "${": 116,
+        "%24%7b": 0,
+        "ldap:": 0,
+        "rmi:": 0,
+        "dns:": 0
+      },
+      "marker_in_url": 0,
+      "marker_in_user_agent": 0,
+      "marker_in_other_header_value": 116,
+      "marker_in_header_name": 0,
+      "marker_in_body": 0,
+      "marker_only_outside_url_ua_body": 116,
+      "no_marker": 0,
+      "common_header_names": [
+        {
+          "name": "accept",
+          "count": 116
+        },
+        {
+          "name": "accept-encoding",
+          "count": 116
+        },
+        {
+          "name": "accept-language",
+          "count": 116
+        },
+        {
+          "name": "cache-control",
+          "count": 116
+        },
+        {
+          "name": "connection",
+          "count": 116
+        },
+        {
+          "name": "date",
+          "count": 116
+        },
+        {
+          "name": "host",
+          "count": 116
+        },
+        {
+          "name": "sec-ch-ua-mobile",
+          "count": 116
+        },
+        {
+          "name": "sec-fetch-dest",
+          "count": 116
+        },
+        {
+          "name": "sec-fetch-mode",
+          "count": 116
+        },
+        {
+          "name": "sec-fetch-site",
+          "count": 116
+        },
+        {
+          "name": "sec-fetch-user",
+          "count": 116
+        }
+      ]
+    },
+    "candidate_a_log4j_false_negative": {
+      "records": 203,
+      "method": {
+        "GET": 203
+      },
+      "empty_body": 203,
+      "marker_any": 203,
+      "marker_by_needle": {
+        "jndi": 203,
+        "${": 203,
+        "%24%7b": 0,
+        "ldap:": 0,
+        "rmi:": 0,
+        "dns:": 0
+      },
+      "marker_in_url": 0,
+      "marker_in_user_agent": 0,
+      "marker_in_other_header_value": 203,
+      "marker_in_header_name": 0,
+      "marker_in_body": 0,
+      "marker_only_outside_url_ua_body": 203,
+      "no_marker": 0,
+      "common_header_names": [
+        {
+          "name": "accept",
+          "count": 203
+        },
+        {
+          "name": "accept-encoding",
+          "count": 203
+        },
+        {
+          "name": "accept-language",
+          "count": 203
+        },
+        {
+          "name": "cache-control",
+          "count": 203
+        },
+        {
+          "name": "connection",
+          "count": 203
+        },
+        {
+          "name": "date",
+          "count": 203
+        },
+        {
+          "name": "host",
+          "count": 203
+        },
+        {
+          "name": "sec-ch-ua-mobile",
+          "count": 203
+        },
+        {
+          "name": "sec-fetch-dest",
+          "count": 203
+        },
+        {
+          "name": "sec-fetch-mode",
+          "count": 203
+        },
+        {
+          "name": "sec-fetch-site",
+          "count": 203
+        },
+        {
+          "name": "sec-fetch-user",
+          "count": 203
+        }
+      ]
+    },
+    "validation_benign": {
+      "records": 11475,
+      "method": {
+        "GET": 9862,
+        "POST": 1613
+      },
+      "empty_body": 9862,
+      "marker_any": 3,
+      "marker_by_needle": {
+        "jndi": 3,
+        "${": 0,
+        "%24%7b": 0,
+        "ldap:": 0,
+        "rmi:": 0,
+        "dns:": 0
+      },
+      "marker_in_url": 0,
+      "marker_in_user_agent": 0,
+      "marker_in_other_header_value": 3,
+      "marker_in_header_name": 0,
+      "marker_in_body": 0,
+      "marker_only_outside_url_ua_body": 3,
+      "no_marker": 11472,
+      "common_header_names": [
+        {
+          "name": "accept",
+          "count": 11475
+        },
+        {
+          "name": "accept-encoding",
+          "count": 11475
+        },
+        {
+          "name": "connection",
+          "count": 11475
+        },
+        {
+          "name": "host",
+          "count": 11475
+        },
+        {
+          "name": "user-agent",
+          "count": 11475
+        },
+        {
+          "name": "accept-language",
+          "count": 9799
+        },
+        {
+          "name": "cache-control",
+          "count": 9799
+        },
+        {
+          "name": "date",
+          "count": 9799
+        },
+        {
+          "name": "sec-ch-ua-mobile",
+          "count": 9799
+        },
+        {
+          "name": "sec-ch-ua-platform",
+          "count": 9799
+        },
+        {
+          "name": "sec-fetch-dest",
+          "count": 9799
+        },
+        {
+          "name": "sec-fetch-mode",
+          "count": 9799
+        }
+      ]
+    },
+    "train_csv_log4j": {
+      "records": 2986,
+      "method": {
+        "GET": 2986
+      },
+      "empty_body": 2986,
+      "marker_any": 2986,
+      "marker_by_needle": {
+        "jndi": 2986,
+        "${": 2986,
+        "%24%7b": 0,
+        "ldap:": 0,
+        "rmi:": 0,
+        "dns:": 0
+      },
+      "marker_in_url": 0,
+      "marker_in_user_agent": 0,
+      "marker_in_other_header_value": 2986,
+      "marker_in_header_name": 0,
+      "marker_in_body": 0,
+      "marker_only_outside_url_ua_body": 2986,
+      "no_marker": 0,
+      "common_header_names": [
+        {
+          "name": "accept",
+          "count": 2986
+        },
+        {
+          "name": "accept-encoding",
+          "count": 2986
+        },
+        {
+          "name": "accept-language",
+          "count": 2986
+        },
+        {
+          "name": "cache-control",
+          "count": 2986
+        },
+        {
+          "name": "connection",
+          "count": 2986
+        },
+        {
+          "name": "date",
+          "count": 2986
+        },
+        {
+          "name": "host",
+          "count": 2986
+        },
+        {
+          "name": "sec-ch-ua-mobile",
+          "count": 2986
+        },
+        {
+          "name": "sec-fetch-dest",
+          "count": 2986
+        },
+        {
+          "name": "sec-fetch-mode",
+          "count": 2986
+        },
+        {
+          "name": "sec-fetch-site",
+          "count": 2986
+        },
+        {
+          "name": "sec-fetch-user",
+          "count": 2986
+        }
+      ]
+    },
+    "train_csv_benign": {
+      "records": 114744,
+      "method": {
+        "GET": 99198,
+        "POST": 15546
+      },
+      "empty_body": 99198,
+      "marker_any": 24,
+      "marker_by_needle": {
+        "jndi": 24,
+        "${": 0,
+        "%24%7b": 0,
+        "ldap:": 0,
+        "rmi:": 0,
+        "dns:": 0
+      },
+      "marker_in_url": 0,
+      "marker_in_user_agent": 0,
+      "marker_in_other_header_value": 24,
+      "marker_in_header_name": 0,
+      "marker_in_body": 0,
+      "marker_only_outside_url_ua_body": 24,
+      "no_marker": 114720,
+      "common_header_names": [
+        {
+          "name": "accept",
+          "count": 114744
+        },
+        {
+          "name": "accept-encoding",
+          "count": 114744
+        },
+        {
+          "name": "connection",
+          "count": 114744
+        },
+        {
+          "name": "host",
+          "count": 114744
+        },
+        {
+          "name": "user-agent",
+          "count": 114744
+        },
+        {
+          "name": "accept-language",
+          "count": 97684
+        },
+        {
+          "name": "cache-control",
+          "count": 97684
+        },
+        {
+          "name": "date",
+          "count": 97684
+        },
+        {
+          "name": "sec-ch-ua-mobile",
+          "count": 97684
+        },
+        {
+          "name": "sec-ch-ua-platform",
+          "count": 97684
+        },
+        {
+          "name": "sec-fetch-dest",
+          "count": 97684
+        },
+        {
+          "name": "sec-fetch-mode",
+          "count": 97684
+        }
+      ]
+    }
+  },
+  "raw_records_missing": 0,
+  "note": "Marker counts are presence checks. No request body, URL, or header value is stored."
+}

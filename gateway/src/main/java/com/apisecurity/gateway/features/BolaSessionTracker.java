@@ -54,7 +54,7 @@ public class BolaSessionTracker {
             sessionKey = "sess_default";
         }
         if (user == null || user.isEmpty()) {
-            user = "anonymous";
+            user = "unknown";
         }
 
         SessionHistory history = sessionMap.computeIfAbsent(sessionKey, k -> new SessionHistory());

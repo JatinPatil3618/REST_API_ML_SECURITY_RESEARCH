@@ -1,0 +1,399 @@
+{
+  "test_csv": "not read",
+  "threshold": 0.5,
+  "original_fit_rows": 131591,
+  "augmentation_rows": 26,
+  "augmented_fit_rows": 131617,
+  "validation_rows": 14622,
+  "health_route": "excluded from augmentation because H2-H6 on /api/health are already the 35-case suite",
+  "feature_vector_overlaps_with_suite": [
+    {
+      "augmentation_case_id": "A06",
+      "same_request_identity": false,
+      "same_feature_vector_as": "C30"
+    },
+    {
+      "augmentation_case_id": "A19",
+      "same_request_identity": false,
+      "same_feature_vector_as": "C28"
+    },
+    {
+      "augmentation_case_id": "A24",
+      "same_request_identity": false,
+      "same_feature_vector_as": "C34"
+    }
+  ],
+  "overlap_count": 3,
+  "validation_binary": {
+    "threshold": 0.5,
+    "precision": 1.0,
+    "recall": 0.9351763584366063,
+    "f1": 0.9665024630541872,
+    "false_positive_rate": 0.0,
+    "confusion_matrix": {
+      "tn": 11475,
+      "fp": 0,
+      "fn": 204,
+      "tp": 2943
+    }
+  },
+  "validation_attacks_missed_at_binary_stage": {
+    "Cookie Injection": {
+      "support": 614,
+      "missed_at_binary_stage": 0,
+      "recall": 1.0
+    },
+    "Directory Traversal": {
+      "support": 323,
+      "missed_at_binary_stage": 0,
+      "recall": 1.0
+    },
+    "LOG4J": {
+      "support": 319,
+      "missed_at_binary_stage": 203,
+      "recall": 0.36363636363636365
+    },
+    "Log Forging": {
+      "support": 304,
+      "missed_at_binary_stage": 1,
+      "recall": 0.9967105263157895
+    },
+    "RCE": {
+      "support": 333,
+      "missed_at_binary_stage": 0,
+      "recall": 1.0
+    },
+    "SQL Injection": {
+      "support": 614,
+      "missed_at_binary_stage": 0,
+      "recall": 1.0
+    },
+    "XSS": {
+      "support": 640,
+      "missed_at_binary_stage": 0,
+      "recall": 1.0
+    }
+  },
+  "validation_pipeline_attack_recall": [
+    {
+      "label": "Cookie Injection",
+      "support": 614,
+      "recall": 1.0
+    },
+    {
+      "label": "Directory Traversal",
+      "support": 323,
+      "recall": 1.0
+    },
+    {
+      "label": "LOG4J",
+      "support": 319,
+      "recall": 0.36363636363636365
+    },
+    {
+      "label": "Log Forging",
+      "support": 304,
+      "recall": 0.9967105263157895
+    },
+    {
+      "label": "RCE",
+      "support": 333,
+      "recall": 1.0
+    },
+    {
+      "label": "SQL Injection",
+      "support": 614,
+      "recall": 1.0
+    },
+    {
+      "label": "XSS",
+      "support": 640,
+      "recall": 1.0
+    }
+  ],
+  "validation_benign_blocked": 0,
+  "controlled_suite_false_positives": 0,
+  "controlled_suite_false_positive_rate": 0.0,
+  "controlled_suite_results": [
+    {
+      "case_id": "C01",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H2",
+      "binary_p_malicious": 0.10068702290076337,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C02",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H2",
+      "binary_p_malicious": 0.05904168443610478,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C03",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H2",
+      "binary_p_malicious": 0.19,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C04",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.10068702290076337,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C05",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.05904168443610478,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C06",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.19,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C07",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H4",
+      "binary_p_malicious": 0.10068702290076337,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C08",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H4",
+      "binary_p_malicious": 0.05904168443610478,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C09",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H4",
+      "binary_p_malicious": 0.19,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C10",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H5",
+      "binary_p_malicious": 0.10068702290076337,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C11",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H5",
+      "binary_p_malicious": 0.05904168443610478,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C12",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H5",
+      "binary_p_malicious": 0.19,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C13",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.10068702290076337,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C14",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.05904168443610478,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C15",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.19,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C16",
+      "route": "/",
+      "query": null,
+      "header_profile": "H2",
+      "binary_p_malicious": 0.11571428571428571,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C17",
+      "route": "/",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.11571428571428571,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C18",
+      "route": "/",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.11571428571428571,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C19",
+      "route": "/api/books",
+      "query": "search=protocol",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.0004420760569101493,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C20",
+      "route": "/api/books",
+      "query": "search=maths",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.0004420760569101493,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C21",
+      "route": "/api/books",
+      "query": "category=Technology",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.0029420760569101494,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C22",
+      "route": "/api/books",
+      "query": "category=Science",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.0029420760569101494,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C23",
+      "route": "/api/books",
+      "query": "category=Engineering",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.020442076056910147,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C24",
+      "route": "/api/books",
+      "query": "category=Mathematics",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.020442076056910147,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C25",
+      "route": "/api/books",
+      "query": "category=Computer%20Science",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.10044025157232704,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C26",
+      "route": "/api/books",
+      "query": "search=gateway&category=Technology",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.010440251572327044,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C27",
+      "route": "/api/books",
+      "query": "category=All",
+      "header_profile": "H3",
+      "binary_p_malicious": 0.0029420760569101494,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C28",
+      "route": "/api/comments/book/201",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.0087775163216016,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C29",
+      "route": "/api/comments/book/302",
+      "query": null,
+      "header_profile": "H3",
+      "binary_p_malicious": 0.029008069720417654,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C30",
+      "route": "/api/books",
+      "query": "search=protocol",
+      "header_profile": "H2",
+      "binary_p_malicious": 0.0004420760569101493,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C31",
+      "route": "/api/books",
+      "query": "search=protocol",
+      "header_profile": "H6",
+      "binary_p_malicious": 0.0004420760569101493,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C32",
+      "route": "/api/books",
+      "query": "category=Technology",
+      "header_profile": "H5",
+      "binary_p_malicious": 0.0029420760569101494,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C33",
+      "route": "/api/comments/book/201",
+      "query": null,
+      "header_profile": "H4",
+      "binary_p_malicious": 0.0087775163216016,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C34",
+      "route": "/api/comments/book/302",
+      "query": null,
+      "header_profile": "H6",
+      "binary_p_malicious": 0.029008069720417654,
+      "combined_label": "Benign"
+    },
+    {
+      "case_id": "C35",
+      "route": "/api/books",
+      "query": "search=anomaly",
+      "header_profile": "H4",
+      "binary_p_malicious": 0.0004420760569101493,
+      "combined_label": "Benign"
+    }
+  ]
+}

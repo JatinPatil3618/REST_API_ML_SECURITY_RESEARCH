@@ -1,0 +1,235 @@
+[ {
+  "case_id" : "A01",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=network",
+  "header_profile" : "H2",
+  "header_names" : [ "Host", "User-Agent" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "search=network matches seeded title Foundations of Network Protocol Security"
+}, {
+  "case_id" : "A02",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=network",
+  "header_profile" : "H6",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "same supported catalog search with six ordinary headers"
+}, {
+  "case_id" : "A03",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=cloud",
+  "header_profile" : "H3",
+  "header_names" : [ "Host", "User-Agent", "Accept" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "search=cloud matches seeded title Zero Trust Architecture in Cloud Systems"
+}, {
+  "case_id" : "A04",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=cryptography",
+  "header_profile" : "H4",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "search=cryptography matches seeded title Cryptography and Public Key Infrastructure"
+}, {
+  "case_id" : "A05",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=consensus",
+  "header_profile" : "H5",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "search=consensus matches seeded title Distributed Systems Consensus Algorithms"
+}, {
+  "case_id" : "A06",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=database",
+  "header_profile" : "H2",
+  "header_names" : [ "Host", "User-Agent" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "search=database matches seeded title Database Internals and Query Optimization"
+}, {
+  "case_id" : "A07",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=forest",
+  "header_profile" : "H3",
+  "header_names" : [ "Host", "User-Agent", "Accept" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "search=forest matches seeded description text Random Forests"
+}, {
+  "case_id" : "A08",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=defect",
+  "header_profile" : "H6",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "search=defect matches seeded description text defect prediction"
+}, {
+  "case_id" : "A09",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=network&category=Technology",
+  "header_profile" : "H4",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "book 101 is category Technology and its title contains Network"
+}, {
+  "case_id" : "A10",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=cloud&category=Technology",
+  "header_profile" : "H2",
+  "header_names" : [ "Host", "User-Agent" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "book 102 is category Technology and its title contains Cloud"
+}, {
+  "case_id" : "A11",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=cryptography&category=Mathematics",
+  "header_profile" : "H5",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "book 301 is category Mathematics and its title contains Cryptography"
+}, {
+  "case_id" : "A12",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=consensus&category=Computer%20Science",
+  "header_profile" : "H3",
+  "header_names" : [ "Host", "User-Agent", "Accept" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "book 401 is category Computer Science and its title contains Consensus"
+}, {
+  "case_id" : "A13",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=database&category=Computer%20Science",
+  "header_profile" : "H6",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "book 402 is category Computer Science and its title contains Database"
+}, {
+  "case_id" : "A14",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=forest&category=Science",
+  "header_profile" : "H4",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "book 201 is category Science and its description contains Forests"
+}, {
+  "case_id" : "A15",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=defect&category=Engineering",
+  "header_profile" : "H5",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "book 202 is category Engineering and its description contains defect"
+}, {
+  "case_id" : "A16",
+  "method" : "GET",
+  "route" : "/api/books",
+  "query" : "search=defensive&category=Technology",
+  "header_profile" : "H2",
+  "header_names" : [ "Host", "User-Agent" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "book 501 is category Technology and its title contains Defensive"
+}, {
+  "case_id" : "A17",
+  "method" : "GET",
+  "route" : "/api/comments/book/102",
+  "query" : null,
+  "header_profile" : "H2",
+  "header_names" : [ "Host", "User-Agent" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "GET comments for seeded book 102; the route returns the comment list"
+}, {
+  "case_id" : "A18",
+  "method" : "GET",
+  "route" : "/api/comments/book/102",
+  "query" : null,
+  "header_profile" : "H6",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "same comments route for book 102 with six ordinary headers"
+}, {
+  "case_id" : "A19",
+  "method" : "GET",
+  "route" : "/api/comments/book/202",
+  "query" : null,
+  "header_profile" : "H3",
+  "header_names" : [ "Host", "User-Agent", "Accept" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "GET comments for seeded book 202"
+}, {
+  "case_id" : "A20",
+  "method" : "GET",
+  "route" : "/api/comments/book/301",
+  "query" : null,
+  "header_profile" : "H4",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "GET comments for seeded book 301"
+}, {
+  "case_id" : "A21",
+  "method" : "GET",
+  "route" : "/api/comments/book/401",
+  "query" : null,
+  "header_profile" : "H5",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "GET comments for seeded book 401"
+}, {
+  "case_id" : "A22",
+  "method" : "GET",
+  "route" : "/api/comments/book/402",
+  "query" : null,
+  "header_profile" : "H2",
+  "header_names" : [ "Host", "User-Agent" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "GET comments for seeded book 402"
+}, {
+  "case_id" : "A23",
+  "method" : "GET",
+  "route" : "/api/comments/book/501",
+  "query" : null,
+  "header_profile" : "H3",
+  "header_names" : [ "Host", "User-Agent", "Accept" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "GET comments for seeded book 501"
+}, {
+  "case_id" : "A24",
+  "method" : "GET",
+  "route" : "/api/comments/book/502",
+  "query" : null,
+  "header_profile" : "H6",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding", "Connection" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "GET comments for seeded book 502"
+}, {
+  "case_id" : "A25",
+  "method" : "GET",
+  "route" : "/",
+  "query" : null,
+  "header_profile" : "H4",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "GET / is the unauthenticated demo API status document; this header profile is not in the 35-case suite"
+}, {
+  "case_id" : "A26",
+  "method" : "GET",
+  "route" : "/",
+  "query" : null,
+  "header_profile" : "H5",
+  "header_names" : [ "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding" ],
+  "specification_label" : "BENIGN",
+  "benign_reason" : "same status route with five ordinary headers; H2, H3, and H6 for / are reserved for the suite"
+} ]

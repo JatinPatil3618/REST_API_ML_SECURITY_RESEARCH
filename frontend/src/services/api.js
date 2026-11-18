@@ -1,8 +1,9 @@
 import axios from 'axios'
 
-// All requests go through Gateway (port 8080), not directly to demo API
+// All requests go through the security gateway, not directly to the demo API.
+// VITE_GATEWAY_URL overrides the production default for local review only.
 const api = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: import.meta.env.VITE_GATEWAY_URL || 'http://localhost:8080',
   timeout: 10000,
 })
 

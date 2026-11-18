@@ -1,7 +1,37 @@
 node_modules/
+.env.local
 target/
 __pycache__/
 *.pyc
 .DS_Store
 dist/
 build/
+
+
+# Python virtual environments
+.venv/
+.venv-repair/
+venv/
+
+# Local editor settings
+.cursor/
+
+# Temporary verification logs
+tmp-verify-logs/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Node.js dependencies
+node_modules/
+
+# Build outputs
+target/
+build/
+dist/

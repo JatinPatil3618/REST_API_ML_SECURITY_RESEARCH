@@ -1,0 +1,112 @@
+{
+  "threshold": 0.5,
+  "xss_dropped_not_relabeled": true,
+  "raw_json_headers_scanned": false,
+  "development_mask_1_0_withdrawn": true,
+  "official_test_six_family": {
+    "split": "official_test_xss_dropped",
+    "rows": 34951,
+    "accuracy": 0.9786272209664959,
+    "precision": 1.0,
+    "recall": 0.8807471264367817,
+    "f1": 0.9365928189457602,
+    "fpr": 0.0,
+    "confusion": {
+      "tn": 28687,
+      "fp": 0,
+      "fn": 747,
+      "tp": 5517
+    },
+    "per_family": {
+      "Cookie Injection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1548
+      },
+      "Directory Traversal": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 788
+      },
+      "LOG4J": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 747
+      },
+      "Log Forging": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 807
+      },
+      "RCE": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 789
+      },
+      "SQL Injection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 1585
+      }
+    }
+  },
+  "unseen_13_vector_six_family": {
+    "split": "official_test_unseen_13_vector",
+    "rows": 14984,
+    "accuracy": 0.9684997330485852,
+    "precision": 1.0,
+    "recall": 0.7846715328467153,
+    "f1": 0.8793456032719836,
+    "fpr": 0.0,
+    "confusion": {
+      "tn": 12792,
+      "fp": 0,
+      "fn": 472,
+      "tp": 1720
+    },
+    "per_family": {
+      "Cookie Injection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 3
+      },
+      "Directory Traversal": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 30
+      },
+      "LOG4J": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 472
+      },
+      "Log Forging": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 792
+      },
+      "RCE": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 2
+      },
+      "SQL Injection": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 893
+      }
+    }
+  }
+}

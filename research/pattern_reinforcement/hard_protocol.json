@@ -1,0 +1,134 @@
+{
+  "atrdf_features": [
+    "url_entropy",
+    "path_length",
+    "url_length",
+    "path_segment_count",
+    "query_length",
+    "url_digit_count",
+    "user_agent_entropy",
+    "query_parameter_count",
+    "request_body_entropy",
+    "request_body_digit_count"
+  ],
+  "bola_features": [
+    "request_frequency",
+    "object_switch",
+    "time_since_previous_request",
+    "request_burst_rate",
+    "hour"
+  ],
+  "target_fpr": 0.01,
+  "atrdf_macro": [
+    {
+      "model": "Logistic regression",
+      "accuracy": 0.9372690088689554,
+      "precision": 0.4602955741321191,
+      "recall": 0.34046973743628633,
+      "f1": 0.3624356805314302,
+      "fpr": 0.009729190005357753,
+      "roc_auc": 0.8603630734694498,
+      "latency_ms_per_row": 0.0001798847168617806
+    },
+    {
+      "model": "Random Forest",
+      "accuracy": 0.883935030283656,
+      "precision": 0.3703564152737133,
+      "recall": 0.31310058421853776,
+      "f1": 0.27132797542928333,
+      "fpr": 0.0101675515074765,
+      "roc_auc": 0.8775181428803422,
+      "latency_ms_per_row": 0.004037852789642078
+    },
+    {
+      "model": "Extra Trees",
+      "accuracy": 0.894778712368548,
+      "precision": 0.29377808671292877,
+      "recall": 0.0855018883184776,
+      "f1": 0.12962890394948698,
+      "fpr": 0.009741366713749939,
+      "roc_auc": 0.7158135474597257,
+      "latency_ms_per_row": 0.004001724434576021
+    },
+    {
+      "model": "Gradient boosting",
+      "accuracy": 0.8801863888446076,
+      "precision": 0.24675392801462617,
+      "recall": 0.06780970169718765,
+      "f1": 0.10219082853055224,
+      "fpr": 0.010752033510301495,
+      "roc_auc": 0.7937380109483207,
+      "latency_ms_per_row": 0.00258130961356106
+    },
+    {
+      "model": "Pattern reinforcement",
+      "accuracy": 0.8737529828274209,
+      "precision": 0.1722015918516531,
+      "recall": 0.1513678883329519,
+      "f1": 0.09800586899001892,
+      "fpr": 0.01069114996834056,
+      "roc_auc": 0.7623524033217232,
+      "latency_ms_per_row": 0.003735649131113079
+    },
+    {
+      "model": "Isolation Forest",
+      "accuracy": 0.87184429595937,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "fpr": 0.009376065461984317,
+      "roc_auc": 0.5881748245946152,
+      "latency_ms_per_row": 0.0047804648056915386
+    }
+  ],
+  "bola": [
+    {
+      "model": "Random Forest",
+      "precision": 0.9744842562432139,
+      "recall": 0.4799465240641711,
+      "f1": 0.6431386599785023,
+      "fpr": 0.012450331125827815,
+      "roc_auc": 0.8668022452810145
+    },
+    {
+      "model": "Gradient boosting",
+      "precision": 0.9808342728297632,
+      "recall": 0.46524064171123,
+      "f1": 0.6311207834602829,
+      "fpr": 0.009006622516556291,
+      "roc_auc": 0.858257003222722
+    },
+    {
+      "model": "Extra Trees",
+      "precision": 0.9702627939142462,
+      "recall": 0.3751336898395722,
+      "f1": 0.5410721172387196,
+      "fpr": 0.011390728476821193,
+      "roc_auc": 0.8194106314410172
+    },
+    {
+      "model": "Logistic regression",
+      "precision": 0.7338709677419355,
+      "recall": 0.024331550802139036,
+      "f1": 0.04710144927536232,
+      "fpr": 0.008741721854304637,
+      "roc_auc": 0.6869993979530403
+    },
+    {
+      "model": "Isolation Forest",
+      "precision": 0.8746987951807229,
+      "recall": 0.09705882352941177,
+      "f1": 0.17472924187725633,
+      "fpr": 0.013774834437086093,
+      "roc_auc": 0.7661384708007224
+    },
+    {
+      "model": "Pattern reinforcement",
+      "precision": 0.978441127694859,
+      "recall": 0.4732620320855615,
+      "f1": 0.6379527842854569,
+      "fpr": 0.01033112582781457,
+      "roc_auc": 0.866446931331232
+    }
+  ]
+}

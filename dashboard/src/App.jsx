@@ -145,7 +145,7 @@ function Trace({ event }) {
     ["Binary inference", event.modelName ? `${event.modelName} · ML ${event.mlDecision || "unavailable"} · malicious probability ${percent(maliciousProbability(event))}` : "Model identifier unavailable in this record."],
     ["Multiclass inference", multi ? Object.entries(event.multiclassProbabilities).map(([name, value]) => `${name} ${percent(value)}`).join(" · ") : "Multiclass probabilities were not stored for this record."],
     ["Deterministic rule", hasRule(event) ? `${event.ruleId} · outcome ${event.ruleOutcome || "recorded"}` : "No review rule matched."],
-    ["Gateway action", `${event.decision || "Unavailable"} · ${event.mitigation || event.finalReason || "mitigation text unavailable"} · HTTP ${event.statusCode ?? "unavailable"}`],
+    ["Gateway action", `${event.decision || "Unavailable"} · ${event.mitigation || event.finalReason || "mitigation text unavailable"}${Array.isArray(event.mitigationTechniques) && event.mitigationTechniques.length ? ` · techniques ${event.mitigationTechniques.join(", ")}` : ""} · HTTP ${event.statusCode ?? "unavailable"}`],
     ["Backend", event.backendReached === true ? "The demo API returned a status." : event.backendReached === false ? "The demo API was not called." : "Backend status was not stored."]
   ];
   return (

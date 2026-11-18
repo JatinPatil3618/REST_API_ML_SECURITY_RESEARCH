@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="480" viewBox="0 0 1100 480">
+  <rect width="1100" height="480" fill="#ffffff"/>
+  <text x="32" y="36" font-family="Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">BOLA alert and backend authorization</text>
+  <g font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#111827" text-anchor="middle">
+    <rect x="40" y="70" width="230" height="80" rx="8" fill="#fff7ed" stroke="#c2410c"/>
+    <text x="155" y="102" font-weight="700">bola_rf_behavioral</text>
+    <text x="155" y="124">14 window features, W=10</text>
+    <rect x="340" y="70" width="250" height="80" rx="8" fill="#fef2f2" stroke="#b91c1c"/>
+    <text x="465" y="102" font-weight="700">Model action BLOCK</text>
+    <text x="465" y="124">family BOLA, kept in telemetry</text>
+    <rect x="660" y="60" width="390" height="100" rx="8" fill="#ecfdf5" stroke="#047857"/>
+    <text x="855" y="96" font-weight="700">Review gateway decision ALERT</text>
+    <text x="855" y="118">management, mutation, or public book read</text>
+    <text x="855" y="140">only if no review rule matched</text>
+    <rect x="80" y="230" width="420" height="110" rx="8" fill="#eff6ff" stroke="#1d4ed8"/>
+    <text x="290" y="266" font-weight="700">Demo API authorization</text>
+    <text x="290" y="290">JWT subject and book owner</text>
+    <text x="290" y="312">HTTP 200, 401, or 403 is the API result</text>
+    <rect x="560" y="230" width="460" height="110" rx="8" fill="#fefce8" stroke="#a16207"/>
+    <text x="790" y="266" font-weight="700">Public catalog read</text>
+    <text x="790" y="290">GET /api/books/{id} without manage or edit</text>
+    <text x="790" y="312">mitigation: ALERT + public catalog read</text>
+    <rect x="180" y="390" width="740" height="60" rx="8" fill="#f8fafc" stroke="#64748b"/>
+    <text x="550" y="426">A model alert on a public read is not a BOLA vulnerability. The owner check is the demo API.</text>
+  </g>
+  <g stroke="#111827" fill="none">
+    <line x1="270" y1="110" x2="340" y2="110"/>
+    <line x1="590" y1="110" x2="660" y2="110"/>
+    <path d="M790 160 V200 H290 V230"/>
+    <path d="M960 160 V200 H790 V230"/>
+  </g>
+</svg>

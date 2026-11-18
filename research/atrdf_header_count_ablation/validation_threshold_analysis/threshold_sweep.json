@@ -1,0 +1,2324 @@
+{
+  "test_csv": "not read",
+  "split": "REQUEST_ONLY_train.csv train_test_split test_size=0.1 random_state=42 stratify=is_malicious",
+  "fit_rows_excluded_from_scoring": 131591,
+  "validation_rows": 14622,
+  "saved_probability_files": "none; probabilities recomputed from frozen models",
+  "production_split_note": "Production metadata records 124241 training and 21972 validation rows, so this 14622-row split is not that model's original holdout.",
+  "systems": {
+    "production": {
+      "validation_rows": 14622,
+      "score_min": 0.0,
+      "score_max": 1.0,
+      "max_benign_p_malicious": 0.28379954875719887,
+      "recommendation_from_validation_only": {
+        "criterion": "maximum validation attack recall subject to validation FPR 0; largest threshold with those decisions",
+        "max_benign_p_malicious": 0.28379954875719887,
+        "threshold": 0.49861489707420636,
+        "attacks_recoverable_at_fpr_0": 2944,
+        "attacks_not_separable_from_benign": 203
+      },
+      "validation_sweep": [
+        {
+          "threshold": 0.05,
+          "precision": 0.9454716389846443,
+          "recall": 0.9586908166507785,
+          "f1": 0.9520353423792994,
+          "false_positive_rate": 0.015163398692810458,
+          "confusion_matrix": {
+            "tn": 11301,
+            "fp": 174,
+            "fn": 130,
+            "tp": 3017
+          },
+          "benign_blocked": 174,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.5924764890282131,
+              "missed": 130
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.1,
+          "precision": 0.9936412315930389,
+          "recall": 0.9434381951064506,
+          "f1": 0.9678891605541973,
+          "false_positive_rate": 0.0016557734204793028,
+          "confusion_matrix": {
+            "tn": 11456,
+            "fp": 19,
+            "fn": 178,
+            "tp": 2969
+          },
+          "benign_blocked": 19,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.44200626959247646,
+              "missed": 178
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.15,
+          "precision": 0.9989854582346973,
+          "recall": 0.9386717508738481,
+          "f1": 0.9678899082568808,
+          "false_positive_rate": 0.00026143790849673205,
+          "confusion_matrix": {
+            "tn": 11472,
+            "fp": 3,
+            "fn": 193,
+            "tp": 2954
+          },
+          "benign_blocked": 3,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.3949843260188088,
+              "missed": 193
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.2,
+          "precision": 0.9996611318197222,
+          "recall": 0.9374006990784874,
+          "f1": 0.9675303378156772,
+          "false_positive_rate": 8.714596949891067e-05,
+          "confusion_matrix": {
+            "tn": 11474,
+            "fp": 1,
+            "fn": 197,
+            "tp": 2950
+          },
+          "benign_blocked": 1,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.3824451410658307,
+              "missed": 197
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.25,
+          "precision": 0.9996605566870332,
+          "recall": 0.9358118843342866,
+          "f1": 0.9666830789430495,
+          "false_positive_rate": 8.714596949891067e-05,
+          "confusion_matrix": {
+            "tn": 11474,
+            "fp": 1,
+            "fn": 202,
+            "tp": 2945
+          },
+          "benign_blocked": 1,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.3667711598746082,
+              "missed": 202
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.3,
+          "precision": 1.0,
+          "recall": 0.9354941213854464,
+          "f1": 0.9666721392218026,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.35,
+          "precision": 1.0,
+          "recall": 0.9354941213854464,
+          "f1": 0.9666721392218026,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.4,
+          "precision": 1.0,
+          "recall": 0.9354941213854464,
+          "f1": 0.9666721392218026,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.45,
+          "precision": 1.0,
+          "recall": 0.9354941213854464,
+          "f1": 0.9666721392218026,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.49861489707420636,
+          "precision": 1.0,
+          "recall": 0.9354941213854464,
+          "f1": 0.9666721392218026,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.5,
+          "precision": 1.0,
+          "recall": 0.9351763584366063,
+          "f1": 0.9665024630541872,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 204,
+            "tp": 2943
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.55,
+          "precision": 1.0,
+          "recall": 0.9351763584366063,
+          "f1": 0.9665024630541872,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 204,
+            "tp": 2943
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.6,
+          "precision": 1.0,
+          "recall": 0.9351763584366063,
+          "f1": 0.9665024630541872,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 204,
+            "tp": 2943
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.65,
+          "precision": 1.0,
+          "recall": 0.9348585954877662,
+          "f1": 0.966332731154541,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 205,
+            "tp": 2942
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.998371335504886,
+              "missed": 1
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.7,
+          "precision": 1.0,
+          "recall": 0.934540832538926,
+          "f1": 0.9661629434954008,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 206,
+            "tp": 2941
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.996742671009772,
+              "missed": 2
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.75,
+          "precision": 1.0,
+          "recall": 0.9335875436924055,
+          "f1": 0.9656532456861134,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 209,
+            "tp": 2938
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.3573667711598746,
+              "missed": 205
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.995114006514658,
+              "missed": 3
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.8,
+          "precision": 1.0,
+          "recall": 0.9319987289482047,
+          "f1": 0.9648026315789474,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 214,
+            "tp": 2933
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.34169278996865204,
+              "missed": 210
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.995114006514658,
+              "missed": 3
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.85,
+          "precision": 1.0,
+          "recall": 0.9304099142040038,
+          "f1": 0.9639506172839506,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 219,
+            "tp": 2928
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.32601880877742945,
+              "missed": 215
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.995114006514658,
+              "missed": 3
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.9,
+          "precision": 1.0,
+          "recall": 0.9294566253574833,
+          "f1": 0.9634387351778657,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 222,
+            "tp": 2925
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.3166144200626959,
+              "missed": 218
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.995114006514658,
+              "missed": 3
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.95,
+          "precision": 1.0,
+          "recall": 0.9218303145853194,
+          "f1": 0.9593253968253967,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 246,
+            "tp": 2901
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.2445141065830721,
+              "missed": 241
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.993421052631579,
+              "missed": 2
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.995114006514658,
+              "missed": 3
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        }
+      ],
+      "controlled_suite_diagnostic_not_used_for_selection": [
+        {
+          "threshold": 0.05,
+          "benign_cases_blocked": 35,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 1.0
+        },
+        {
+          "threshold": 0.1,
+          "benign_cases_blocked": 35,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 1.0
+        },
+        {
+          "threshold": 0.15,
+          "benign_cases_blocked": 35,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 1.0
+        },
+        {
+          "threshold": 0.2,
+          "benign_cases_blocked": 35,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 1.0
+        },
+        {
+          "threshold": 0.25,
+          "benign_cases_blocked": 35,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 1.0
+        },
+        {
+          "threshold": 0.3,
+          "benign_cases_blocked": 35,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 1.0
+        },
+        {
+          "threshold": 0.35,
+          "benign_cases_blocked": 35,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 1.0
+        },
+        {
+          "threshold": 0.4,
+          "benign_cases_blocked": 35,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 1.0
+        },
+        {
+          "threshold": 0.45,
+          "benign_cases_blocked": 35,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 1.0
+        },
+        {
+          "threshold": 0.49861489707420636,
+          "benign_cases_blocked": 35,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 1.0
+        },
+        {
+          "threshold": 0.5,
+          "benign_cases_blocked": 35,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 1.0
+        },
+        {
+          "threshold": 0.55,
+          "benign_cases_blocked": 29,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.8285714285714286
+        },
+        {
+          "threshold": 0.6,
+          "benign_cases_blocked": 20,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.5714285714285714
+        },
+        {
+          "threshold": 0.65,
+          "benign_cases_blocked": 13,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.37142857142857144
+        },
+        {
+          "threshold": 0.7,
+          "benign_cases_blocked": 9,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.2571428571428571
+        },
+        {
+          "threshold": 0.75,
+          "benign_cases_blocked": 9,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.2571428571428571
+        },
+        {
+          "threshold": 0.8,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.85,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.9,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.95,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        }
+      ]
+    },
+    "leave_overlap_out": {
+      "validation_rows": 14622,
+      "score_min": 0.0,
+      "score_max": 1.0,
+      "max_benign_p_malicious": 0.2065472576063678,
+      "recommendation_from_validation_only": {
+        "criterion": "maximum validation attack recall subject to validation FPR 0; largest threshold with those decisions",
+        "max_benign_p_malicious": 0.2065472576063678,
+        "threshold": 0.47264203198043175,
+        "attacks_recoverable_at_fpr_0": 2944,
+        "attacks_not_separable_from_benign": 203
+      },
+      "validation_sweep": [
+        {
+          "threshold": 0.05,
+          "precision": 0.9259491684970191,
+          "recall": 0.9377184620273276,
+          "f1": 0.9317966529838964,
+          "false_positive_rate": 0.02056644880174292,
+          "confusion_matrix": {
+            "tn": 11239,
+            "fp": 236,
+            "fn": 196,
+            "tp": 2951
+          },
+          "benign_blocked": 236,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.38557993730407525,
+              "missed": 196
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.1,
+          "precision": 0.9875880576987588,
+          "recall": 0.9354941213854464,
+          "f1": 0.9608355091383812,
+          "false_positive_rate": 0.003224400871459695,
+          "confusion_matrix": {
+            "tn": 11438,
+            "fp": 37,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 37,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.15,
+          "precision": 0.9956036523503551,
+          "recall": 0.9354941213854464,
+          "f1": 0.9646133682830931,
+          "false_positive_rate": 0.0011328976034858387,
+          "confusion_matrix": {
+            "tn": 11462,
+            "fp": 13,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 13,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.2,
+          "precision": 0.9986431478968792,
+          "recall": 0.9354941213854464,
+          "f1": 0.9660377358490566,
+          "false_positive_rate": 0.0003485838779956427,
+          "confusion_matrix": {
+            "tn": 11471,
+            "fp": 4,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 4,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.25,
+          "precision": 1.0,
+          "recall": 0.9354941213854464,
+          "f1": 0.9666721392218026,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.3,
+          "precision": 1.0,
+          "recall": 0.9354941213854464,
+          "f1": 0.9666721392218026,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.35,
+          "precision": 1.0,
+          "recall": 0.9354941213854464,
+          "f1": 0.9666721392218026,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.4,
+          "precision": 1.0,
+          "recall": 0.9354941213854464,
+          "f1": 0.9666721392218026,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.45,
+          "precision": 1.0,
+          "recall": 0.9354941213854464,
+          "f1": 0.9666721392218026,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.47264203198043175,
+          "precision": 1.0,
+          "recall": 0.9354941213854464,
+          "f1": 0.9666721392218026,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 203,
+            "tp": 2944
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.5,
+          "precision": 1.0,
+          "recall": 0.9351763584366063,
+          "f1": 0.9665024630541872,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 204,
+            "tp": 2943
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.55,
+          "precision": 1.0,
+          "recall": 0.9351763584366063,
+          "f1": 0.9665024630541872,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 204,
+            "tp": 2943
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.36363636363636365,
+              "missed": 203
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.6,
+          "precision": 1.0,
+          "recall": 0.9348585954877662,
+          "f1": 0.966332731154541,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 205,
+            "tp": 2942
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.3605015673981191,
+              "missed": 204
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.65,
+          "precision": 1.0,
+          "recall": 0.934540832538926,
+          "f1": 0.9661629434954008,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 206,
+            "tp": 2941
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.3605015673981191,
+              "missed": 204
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.998371335504886,
+              "missed": 1
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.7,
+          "precision": 1.0,
+          "recall": 0.9335875436924055,
+          "f1": 0.9656532456861134,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 209,
+            "tp": 2938
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.3573667711598746,
+              "missed": 205
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.995114006514658,
+              "missed": 3
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.75,
+          "precision": 1.0,
+          "recall": 0.9332697807435653,
+          "f1": 0.9654832347140039,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 210,
+            "tp": 2937
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.3542319749216301,
+              "missed": 206
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.995114006514658,
+              "missed": 3
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.8,
+          "precision": 1.0,
+          "recall": 0.9319987289482047,
+          "f1": 0.9648026315789474,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 214,
+            "tp": 2933
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.34169278996865204,
+              "missed": 210
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.995114006514658,
+              "missed": 3
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.85,
+          "precision": 1.0,
+          "recall": 0.9291388624086432,
+          "f1": 0.9632679953879097,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 223,
+            "tp": 2924
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.31347962382445144,
+              "missed": 219
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.995114006514658,
+              "missed": 3
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.9,
+          "precision": 1.0,
+          "recall": 0.9227836034318398,
+          "f1": 0.9598413485374317,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 243,
+            "tp": 2904
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.2507836990595611,
+              "missed": 239
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.995114006514658,
+              "missed": 3
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        },
+        {
+          "threshold": 0.95,
+          "precision": 1.0,
+          "recall": 0.9088020336828726,
+          "f1": 0.9522224071916098,
+          "false_positive_rate": 0.0,
+          "confusion_matrix": {
+            "tn": 11475,
+            "fp": 0,
+            "fn": 287,
+            "tp": 2860
+          },
+          "benign_blocked": 0,
+          "per_attack_recall": {
+            "Cookie Injection": {
+              "support": 614,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "Directory Traversal": {
+              "support": 323,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "LOG4J": {
+              "support": 319,
+              "recall": 0.11285266457680251,
+              "missed": 283
+            },
+            "Log Forging": {
+              "support": 304,
+              "recall": 0.9967105263157895,
+              "missed": 1
+            },
+            "RCE": {
+              "support": 333,
+              "recall": 1.0,
+              "missed": 0
+            },
+            "SQL Injection": {
+              "support": 614,
+              "recall": 0.995114006514658,
+              "missed": 3
+            },
+            "XSS": {
+              "support": 640,
+              "recall": 1.0,
+              "missed": 0
+            }
+          }
+        }
+      ],
+      "controlled_suite_diagnostic_not_used_for_selection": [
+        {
+          "threshold": 0.05,
+          "benign_cases_blocked": 14,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.4
+        },
+        {
+          "threshold": 0.1,
+          "benign_cases_blocked": 11,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.3142857142857143
+        },
+        {
+          "threshold": 0.15,
+          "benign_cases_blocked": 5,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.14285714285714285
+        },
+        {
+          "threshold": 0.2,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.25,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.3,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.35,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.4,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.45,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.47264203198043175,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.5,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.55,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.6,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.65,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.7,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.75,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.8,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.85,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.9,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        },
+        {
+          "threshold": 0.95,
+          "benign_cases_blocked": 0,
+          "cases": 35,
+          "false_positive_rate_on_this_suite_only": 0.0
+        }
+      ]
+    }
+  }
+}

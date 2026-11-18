@@ -1,0 +1,20 @@
+{
+  "target_fpr_validation": 0.01,
+  "random_seed": 42,
+  "atrdf_unique_rows": 91141,
+  "atrdf_split": {
+    "train": 63798,
+    "val": 13671,
+    "test": 13672
+  },
+  "atrdf_test_prevalence": 0.14189584552369808,
+  "spr_atrdf": {
+    "mix": 1.0,
+    "threshold": 0.2382952831401998
+  },
+  "spr_bola": {
+    "mix": 0.85,
+    "threshold": 0.7150326432895261
+  },
+  "note": "Production models/ joblib files were not overwritten."
+}

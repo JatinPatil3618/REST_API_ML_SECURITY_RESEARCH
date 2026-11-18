@@ -1,0 +1,182 @@
+{
+  "sklearn": "1.2.2",
+  "threshold": 0.5,
+  "features": [
+    "url_entropy",
+    "header_count",
+    "path_length",
+    "url_special_count",
+    "url_length",
+    "path_segment_count",
+    "cookie_present",
+    "query_length",
+    "url_digit_count",
+    "user_agent_entropy",
+    "query_parameter_count",
+    "request_body_entropy",
+    "request_body_digit_count",
+    "sql_structure",
+    "markup_script",
+    "path_traversal",
+    "command_chain",
+    "cookie_signal",
+    "log_control",
+    "jndi_lookup"
+  ],
+  "train_rows": 124241,
+  "validation_rows": 21972,
+  "held_out_test_csv": "not_opened",
+  "accuracy": 0.9878936828691062,
+  "precision": 1.0,
+  "recall": 0.9434162944054456,
+  "f1": 0.9708844133099824,
+  "false_positive_rate": 0.0,
+  "confusion": {
+    "tn": 17271,
+    "fp": 0,
+    "fn": 266,
+    "tp": 4435
+  },
+  "family_recall": {
+    "Cookie Injection": {
+      "rows": 968,
+      "binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "Directory Traversal": {
+      "rows": 464,
+      "binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "LOG4J": {
+      "rows": 435,
+      "binary_recall": 0.38850574712643676,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "Log Forging": {
+      "rows": 459,
+      "binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "RCE": {
+      "rows": 488,
+      "binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "SQL Injection": {
+      "rows": 956,
+      "binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    },
+    "XSS": {
+      "rows": 931,
+      "binary_recall": 1.0,
+      "multiclass_recall_when_detected": 1.0
+    }
+  },
+  "multiclass_accuracy_on_validation_attacks": 1.0,
+  "coverage_on_training_partition": {
+    "Benign": {
+      "sql_structure": 0,
+      "markup_script": 0,
+      "path_traversal": 0,
+      "command_chain": 0,
+      "cookie_signal": 0,
+      "log_control": 0,
+      "jndi_lookup": 0,
+      "rows": 114744
+    },
+    "Cookie Injection": {
+      "sql_structure": 0,
+      "markup_script": 0,
+      "path_traversal": 0,
+      "command_chain": 0,
+      "cookie_signal": 6194,
+      "log_control": 0,
+      "jndi_lookup": 0,
+      "rows": 6194
+    },
+    "Directory Traversal": {
+      "sql_structure": 0,
+      "markup_script": 0,
+      "path_traversal": 3151,
+      "command_chain": 0,
+      "cookie_signal": 0,
+      "log_control": 0,
+      "jndi_lookup": 0,
+      "rows": 3151
+    },
+    "LOG4J": {
+      "sql_structure": 0,
+      "markup_script": 0,
+      "path_traversal": 0,
+      "command_chain": 0,
+      "cookie_signal": 0,
+      "log_control": 0,
+      "jndi_lookup": 0,
+      "rows": 2986
+    },
+    "Log Forging": {
+      "sql_structure": 0,
+      "markup_script": 0,
+      "path_traversal": 0,
+      "command_chain": 0,
+      "cookie_signal": 235,
+      "log_control": 3230,
+      "jndi_lookup": 0,
+      "rows": 3230
+    },
+    "RCE": {
+      "sql_structure": 0,
+      "markup_script": 1600,
+      "path_traversal": 0,
+      "command_chain": 0,
+      "cookie_signal": 0,
+      "log_control": 0,
+      "jndi_lookup": 0,
+      "rows": 3155
+    },
+    "SQL Injection": {
+      "sql_structure": 6339,
+      "markup_script": 0,
+      "path_traversal": 0,
+      "command_chain": 0,
+      "cookie_signal": 0,
+      "log_control": 0,
+      "jndi_lookup": 0,
+      "rows": 6339
+    },
+    "XSS": {
+      "sql_structure": 0,
+      "markup_script": 3203,
+      "path_traversal": 0,
+      "command_chain": 0,
+      "cookie_signal": 0,
+      "log_control": 0,
+      "jndi_lookup": 0,
+      "rows": 6414
+    }
+  },
+  "binary_importances": {
+    "url_entropy": 0.0602333141647299,
+    "header_count": 0.2414070830445667,
+    "path_length": 0.03674357409323366,
+    "url_special_count": 0.16208729889948237,
+    "url_length": 0.06119005739544278,
+    "path_segment_count": 0.02991976547645818,
+    "cookie_present": 0.06342571403732375,
+    "query_length": 0.026677286001521326,
+    "url_digit_count": 0.025347049567384778,
+    "user_agent_entropy": 0.049233644713455774,
+    "query_parameter_count": 0.009421479130422338,
+    "request_body_entropy": 0.0052299782436008935,
+    "request_body_digit_count": 0.002173781813080367,
+    "sql_structure": 0.07735106675372555,
+    "markup_script": 0.029968366807000345,
+    "path_traversal": 0.009272054077167791,
+    "command_chain": 0.0,
+    "cookie_signal": 0.07204628379044978,
+    "log_control": 0.038272201990953804,
+    "jndi_lookup": 0.0
+  }
+}

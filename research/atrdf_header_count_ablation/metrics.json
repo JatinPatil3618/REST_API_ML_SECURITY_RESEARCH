@@ -1,0 +1,222 @@
+{
+  "sklearn": "1.2.2",
+  "numpy": "1.26.4",
+  "active_model_params": {
+    "n_estimators": 100,
+    "max_depth": 16,
+    "min_samples_split": 5,
+    "min_samples_leaf": 1,
+    "class_weight": null,
+    "max_features": "sqrt",
+    "random_state": 42
+  },
+  "candidate_params": {
+    "n_estimators": 100,
+    "max_depth": 16,
+    "min_samples_split": 5,
+    "min_samples_leaf": 1,
+    "class_weight": null,
+    "max_features": "sqrt",
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "inner_split": {
+    "source": "REQUEST_ONLY_train.csv only",
+    "test_csv": "not read",
+    "test_size": 0.1,
+    "random_state": 42,
+    "stratify": "is_malicious",
+    "train": {
+      "rows": 131591,
+      "benign": 103269,
+      "malicious": 28322,
+      "by_label": {
+        "Benign": 103269,
+        "XSS": 5774,
+        "RCE": 2822,
+        "Cookie Injection": 5580,
+        "Log Forging": 2926,
+        "SQL Injection": 5725,
+        "LOG4J": 2667,
+        "Directory Traversal": 2828
+      }
+    },
+    "validation": {
+      "rows": 14622,
+      "benign": 11475,
+      "malicious": 3147,
+      "by_label": {
+        "SQL Injection": 614,
+        "Benign": 11475,
+        "RCE": 333,
+        "LOG4J": 319,
+        "XSS": 640,
+        "Log Forging": 304,
+        "Cookie Injection": 614,
+        "Directory Traversal": 323
+      }
+    }
+  },
+  "candidate_a_validation": {
+    "threshold": 0.5,
+    "precision": 1.0,
+    "recall": 0.9351763584366063,
+    "f1": 0.9665024630541872,
+    "false_positive_rate": 0.0,
+    "roc_auc": 0.9781928080344873,
+    "confusion_matrix": {
+      "tn": 11475,
+      "fp": 0,
+      "fn": 204,
+      "tp": 2943
+    }
+  },
+  "candidate_b_validation": {
+    "threshold": 0.5,
+    "precision": 1.0,
+    "recall": 0.9046711153479504,
+    "f1": 0.94994994994995,
+    "false_positive_rate": 0.0,
+    "roc_auc": 0.9673165092043949,
+    "confusion_matrix": {
+      "tn": 11475,
+      "fp": 0,
+      "fn": 300,
+      "tp": 2847
+    }
+  },
+  "candidate_a_feature_importance": {
+    "url_entropy": 0.08022286118700386,
+    "header_count": 0.3020267597398968,
+    "path_length": 0.05039426823692611,
+    "url_special_count": 0.1680007563425385,
+    "url_length": 0.09145926167339327,
+    "path_segment_count": 0.04056416774996438,
+    "cookie_present": 0.08666044901454484,
+    "query_length": 0.050748627487404045,
+    "url_digit_count": 0.030084478277525077,
+    "user_agent_entropy": 0.07166695503046136,
+    "query_parameter_count": 0.012298533895048248,
+    "request_body_entropy": 0.011941855950767955,
+    "request_body_digit_count": 0.003931025414525685
+  },
+  "known_requests": {
+    "books": {
+      "url_entropy": 3.897587,
+      "path_length": 10,
+      "url_special_count": 9,
+      "url_length": 31,
+      "path_segment_count": 2,
+      "cookie_present": 0,
+      "query_length": 0,
+      "url_digit_count": 10,
+      "user_agent_entropy": 4.4522,
+      "query_parameter_count": 0,
+      "request_body_entropy": 0.0,
+      "request_body_digit_count": 0
+    },
+    "comments": {
+      "url_entropy": 4.091751,
+      "path_length": 22,
+      "url_special_count": 11,
+      "url_length": 43,
+      "path_segment_count": 4,
+      "cookie_present": 0,
+      "query_length": 0,
+      "url_digit_count": 13,
+      "user_agent_entropy": 4.4522,
+      "query_parameter_count": 0,
+      "request_body_entropy": 0.0,
+      "request_body_digit_count": 0
+    },
+    "missing": "exact header_count; live evidence is consistent with 2-6 and frozen scores were identical for 0-9"
+  },
+  "candidate_a_cases": [
+    {
+      "case": "books",
+      "header_count": 2,
+      "header_count_status": "unresolved_live_range",
+      "p_malicious": 0.52,
+      "decision_at_0.50": "MALICIOUS"
+    },
+    {
+      "case": "books",
+      "header_count": 3,
+      "header_count_status": "unresolved_live_range",
+      "p_malicious": 0.52,
+      "decision_at_0.50": "MALICIOUS"
+    },
+    {
+      "case": "books",
+      "header_count": 4,
+      "header_count_status": "unresolved_live_range",
+      "p_malicious": 0.52,
+      "decision_at_0.50": "MALICIOUS"
+    },
+    {
+      "case": "books",
+      "header_count": 5,
+      "header_count_status": "unresolved_live_range",
+      "p_malicious": 0.52,
+      "decision_at_0.50": "MALICIOUS"
+    },
+    {
+      "case": "books",
+      "header_count": 6,
+      "header_count_status": "unresolved_live_range",
+      "p_malicious": 0.52,
+      "decision_at_0.50": "MALICIOUS"
+    },
+    {
+      "case": "comments",
+      "header_count": 2,
+      "header_count_status": "unresolved_live_range",
+      "p_malicious": 0.6504747129507155,
+      "decision_at_0.50": "MALICIOUS"
+    },
+    {
+      "case": "comments",
+      "header_count": 3,
+      "header_count_status": "unresolved_live_range",
+      "p_malicious": 0.6504747129507155,
+      "decision_at_0.50": "MALICIOUS"
+    },
+    {
+      "case": "comments",
+      "header_count": 4,
+      "header_count_status": "unresolved_live_range",
+      "p_malicious": 0.6504747129507155,
+      "decision_at_0.50": "MALICIOUS"
+    },
+    {
+      "case": "comments",
+      "header_count": 5,
+      "header_count_status": "unresolved_live_range",
+      "p_malicious": 0.6504747129507155,
+      "decision_at_0.50": "MALICIOUS"
+    },
+    {
+      "case": "comments",
+      "header_count": 6,
+      "header_count_status": "unresolved_live_range",
+      "p_malicious": 0.6504747129507155,
+      "decision_at_0.50": "MALICIOUS"
+    }
+  ],
+  "candidate_b_cases": [
+    {
+      "case": "books",
+      "header_count": null,
+      "header_count_status": "feature_excluded",
+      "p_malicious": 0.02024001309910482,
+      "decision_at_0.50": "BENIGN"
+    },
+    {
+      "case": "comments",
+      "header_count": null,
+      "header_count_status": "feature_excluded",
+      "p_malicious": 0.021140631526040142,
+      "decision_at_0.50": "BENIGN"
+    }
+  ]
+}

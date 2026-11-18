@@ -1,0 +1,35 @@
+{
+  "profile": "pattern-reinforcement",
+  "atrdf_features": [
+    "url_entropy",
+    "header_count",
+    "path_length",
+    "url_special_count",
+    "url_length",
+    "path_segment_count",
+    "cookie_present",
+    "query_length",
+    "url_digit_count",
+    "user_agent_entropy",
+    "query_parameter_count",
+    "request_body_entropy",
+    "request_body_digit_count"
+  ],
+  "bola_features": [
+    "request_frequency",
+    "unique_objects_recent",
+    "object_switch",
+    "unique_owners_recent",
+    "owner_switch",
+    "cross_owner_count_recent",
+    "cross_owner_ratio_recent",
+    "same_owner_ratio_recent",
+    "same_object_repeat_ratio",
+    "time_since_previous_request",
+    "request_burst_rate",
+    "hour",
+    "session_length",
+    "request_index"
+  ],
+  "replaces_production": false
+}

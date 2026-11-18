@@ -1,0 +1,9 @@
+# Machine-Learning-Based Detection and Generalization of REST API Security Attacks Across Access-Control and Input-Manipulation Threats
+
+## Abstract
+
+REST APIs now form the main interface between clients and backend services, and a missed check on a request can expose private records or let hostile input reach application logic. Two failures dominate this setting. Broken object-level authorization often looks like a normal call that simply targets another user’s resource after login. Input manipulation, including injection, path traversal, command markers, cookie abuse, log forging, and lookup-style payloads, lives in the request text. Conventional scanners and a single malicious label treat these cases as one problem and therefore hide the difference. This research develops a dual-path API security gateway that detects the supported payload families before the application runs the request, scores BOLA from session behaviour, and still leaves the final object-access decision with the application.
+
+The laboratory uses a book-catalog front end, a review gateway, a machine-learning scoring service, and a demo API. Request-only features feed a Random Forest on the input path. A rolling session window feeds a second Random Forest on the authorization path, which raises an alert only. Offline scoring on the project datasets and live review checks through a local attack proxy show that payload detections can stop a request before the backend, while BOLA suspicion does not replace server-side JWT and owner checks. The contribution is a practical separation of family blocking, rule blocking, and backend ownership on one catalog application, rather than a claim of complete attack coverage.
+
+**Keywords:** REST API security, broken object-level authorization, Random Forest, API gateway, input manipulation, session-based detection.

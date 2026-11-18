@@ -1,0 +1,670 @@
+{
+  "suite": "controlled benign demo reads",
+  "not_population_metrics": true,
+  "threshold": 0.5,
+  "test_csv": "not read",
+  "cases": 35,
+  "extraction_errors": 0,
+  "candidate_a_false_positives": 34,
+  "candidate_b_false_positives": 3,
+  "candidate_a_false_positive_rate": 0.9714285714285714,
+  "candidate_b_false_positive_rate": 0.08571428571428572,
+  "results": [
+    {
+      "case_id": "C01",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H2",
+      "header_names": [
+        "Host",
+        "User-Agent"
+      ],
+      "extracted_header_count": 2,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.52,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.020240013099104823,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C02",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H2",
+      "header_names": [
+        "Host",
+        "User-Agent"
+      ],
+      "extracted_header_count": 2,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.6504747129507155,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.021140631526040142,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C03",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H2",
+      "header_names": [
+        "Host",
+        "User-Agent"
+      ],
+      "extracted_header_count": 2,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.58,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.06771282475119793,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C04",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.52,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.020240013099104823,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C05",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.6504747129507155,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.021140631526040142,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C06",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.58,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.06771282475119793,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C07",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H4",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language"
+      ],
+      "extracted_header_count": 4,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.52,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.020240013099104823,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C08",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H4",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language"
+      ],
+      "extracted_header_count": 4,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.6504747129507155,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.021140631526040145,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C09",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H4",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language"
+      ],
+      "extracted_header_count": 4,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.58,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.06771282475119794,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C10",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H5",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language",
+        "Accept-Encoding"
+      ],
+      "extracted_header_count": 5,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.52,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.020240013099104823,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C11",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H5",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language",
+        "Accept-Encoding"
+      ],
+      "extracted_header_count": 5,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.6504747129507155,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.021140631526040145,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C12",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H5",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language",
+        "Accept-Encoding"
+      ],
+      "extracted_header_count": 5,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.58,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.06771282475119791,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C13",
+      "route": "/api/books",
+      "query": null,
+      "header_profile": "H6",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language",
+        "Accept-Encoding",
+        "Connection"
+      ],
+      "extracted_header_count": 6,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.52,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.020240013099104823,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C14",
+      "route": "/api/comments/book/101",
+      "query": null,
+      "header_profile": "H6",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language",
+        "Accept-Encoding",
+        "Connection"
+      ],
+      "extracted_header_count": 6,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.6504747129507155,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.021140631526040142,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C15",
+      "route": "/api/health",
+      "query": null,
+      "header_profile": "H6",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language",
+        "Accept-Encoding",
+        "Connection"
+      ],
+      "extracted_header_count": 6,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.58,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.06771282475119793,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C16",
+      "route": "/",
+      "query": null,
+      "header_profile": "H2",
+      "header_names": [
+        "Host",
+        "User-Agent"
+      ],
+      "extracted_header_count": 2,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.695,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.8261666666666666,
+      "candidate_b_decision": "MALICIOUS",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C17",
+      "route": "/",
+      "query": null,
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.695,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.8261666666666666,
+      "candidate_b_decision": "MALICIOUS",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C18",
+      "route": "/",
+      "query": null,
+      "header_profile": "H6",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language",
+        "Accept-Encoding",
+        "Connection"
+      ],
+      "extracted_header_count": 6,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.695,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.8261666666666666,
+      "candidate_b_decision": "MALICIOUS",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C19",
+      "route": "/api/books",
+      "query": "search=protocol",
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.540846127302649,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.03660789470253611,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C20",
+      "route": "/api/books",
+      "query": "search=maths",
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.5506343101343102,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.03677737431773283,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C21",
+      "route": "/api/books",
+      "query": "category=Technology",
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.5206343101343102,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.05406295340311603,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C22",
+      "route": "/api/books",
+      "query": "category=Science",
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.5306343101343102,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.05270883185929913,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C23",
+      "route": "/api/books",
+      "query": "category=Engineering",
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.5206343101343102,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.05178754118483736,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C24",
+      "route": "/api/books",
+      "query": "category=Mathematics",
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.5206343101343102,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.041409899253334735,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C25",
+      "route": "/api/books",
+      "query": "category=Computer%20Science",
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.5703612996595936,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.06149636961822725,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C26",
+      "route": "/api/books",
+      "query": "search=gateway&category=Technology",
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.49017611447440834,
+      "candidate_a_decision": "BENIGN",
+      "candidate_b_p_malicious": 0.010995136174889343,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C27",
+      "route": "/api/books",
+      "query": "category=All",
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.5406343101343102,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.05208445510995415,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C28",
+      "route": "/api/comments/book/201",
+      "query": null,
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.6504747129507155,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.020209344439084353,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C29",
+      "route": "/api/comments/book/302",
+      "query": null,
+      "header_profile": "H3",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept"
+      ],
+      "extracted_header_count": 3,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.6407048824841891,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.020665149818577064,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C30",
+      "route": "/api/books",
+      "query": "search=protocol",
+      "header_profile": "H2",
+      "header_names": [
+        "Host",
+        "User-Agent"
+      ],
+      "extracted_header_count": 2,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.540846127302649,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.03660789470253611,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C31",
+      "route": "/api/books",
+      "query": "search=protocol",
+      "header_profile": "H6",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language",
+        "Accept-Encoding",
+        "Connection"
+      ],
+      "extracted_header_count": 6,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.540846127302649,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.03660789470253611,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C32",
+      "route": "/api/books",
+      "query": "category=Technology",
+      "header_profile": "H5",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language",
+        "Accept-Encoding"
+      ],
+      "extracted_header_count": 5,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.5206343101343102,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.05406295340311603,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C33",
+      "route": "/api/comments/book/201",
+      "query": null,
+      "header_profile": "H4",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language"
+      ],
+      "extracted_header_count": 4,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.6504747129507155,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.020209344439084353,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C34",
+      "route": "/api/comments/book/302",
+      "query": null,
+      "header_profile": "H6",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language",
+        "Accept-Encoding",
+        "Connection"
+      ],
+      "extracted_header_count": 6,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.6407048824841891,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.020665149818577064,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    },
+    {
+      "case_id": "C35",
+      "route": "/api/books",
+      "query": "search=anomaly",
+      "header_profile": "H4",
+      "header_names": [
+        "Host",
+        "User-Agent",
+        "Accept",
+        "Accept-Language"
+      ],
+      "extracted_header_count": 4,
+      "specification_label": "BENIGN",
+      "candidate_a_p_malicious": 0.5306343101343102,
+      "candidate_a_decision": "MALICIOUS",
+      "candidate_b_p_malicious": 0.039985050030224366,
+      "candidate_b_decision": "BENIGN",
+      "extraction_error": null
+    }
+  ]
+}
